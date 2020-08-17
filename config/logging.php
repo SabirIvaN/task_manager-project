@@ -99,13 +99,6 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
-
-        'rollbar' => [
-            'driver' => 'monolog',
-            'handler' => \Rollbar\Laravel\MonologHandler::class,
-            'access_token' => env('ROLLBAR_TOKEN', '7974e966128244d4b8ed911a057af172'),
-            'level' => 'debug',
-        ]
     ],
 
 ];
