@@ -134,8 +134,6 @@ return [
     |
     */
 
-    'rollbar_token' => env('ROLLBAR_TOKEN'),
-
     'providers' => [
 
         /*
