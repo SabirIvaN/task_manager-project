@@ -15,8 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeController@show');
+
+Route::resource('/tasks', 'TaskController');
+
+Route::resource('/statuses', 'StatusController');
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
