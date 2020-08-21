@@ -10,5 +10,5 @@ return [
     |
     */
 
-    'tasks' => 'Tasks',
+    'mainTitle' => 'Tasks',
 ];

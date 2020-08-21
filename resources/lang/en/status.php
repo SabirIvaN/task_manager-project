@@ -10,5 +10,14 @@ return [
     |
     */
 
-    'taskStatuses' => 'Task statuses',
+    'mainTitle' => 'Task statuses',
+    'adderTitle' => 'Add status',
+    'editorTitle' => 'Edit status',
+    'id' => 'Id',
+    'name' => 'Name',
+    'date' => 'Created at',
+    'add' => 'Add status',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+    'save' => 'Save',
 ];

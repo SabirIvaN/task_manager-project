@@ -34,10 +34,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('tasks.index') }}">{{ __('task.tasks') }}</a>
+                            <a class="nav-link" href="{{ route('task.index') }}">{{ __('task.mainTitle') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('statuses.index') }}">{{ __('status.taskStatuses') }}</a>
+                            <a class="nav-link" href="{{ route('status.index') }}">{{ __('status.mainTitle') }}</a>
                         </li>
                     </ul>
 

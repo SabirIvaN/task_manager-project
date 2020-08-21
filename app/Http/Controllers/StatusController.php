@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\Status;
 use Illuminate\Http\Request;
 
 class StatusController extends Controller
@@ -13,7 +15,8 @@ class StatusController extends Controller
      */
     public function index()
     {
-        return view('status.index');
+        $statuses = Status::all();
+        return view('status.index', ['statuses' => $statuses]);
     }
 
     /**
@@ -23,7 +26,10 @@ class StatusController extends Controller
      */
     public function create()
     {
-        //
+        if (Auth::user()) {
+            return view('status.create');
+        }
+        abort(404);
     }
 
     /**
@@ -34,7 +40,13 @@ class StatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (Auth::user()) {
+            $status = new Status();
+            $status->name = $request->post('name');
+            $status->save();
+            return redirect()->route('status.index');
+        }
+        abort(404);
     }
 
     /**
@@ -56,7 +68,11 @@ class StatusController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (Auth::user()) {
+            $status = Status::find($id);
+            return view('status.edit', ['status' => $status]);
+        }
+        abort(404);
     }
 
     /**
@@ -68,7 +84,13 @@ class StatusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (Auth::user()) {
+            $status = Status::find($id);
+            $status->name = $request->post('name');
+            $status->save();
+            return redirect()->route('status.index');
+        }
+        abort(404);
     }
 
     /**
@@ -79,6 +101,11 @@ class StatusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (Auth::user()) {
+            $status = Status::find($id);
+            $status->delete();
+            return redirect()->route('status.index');
+        }
+        abort(404);
     }
 }

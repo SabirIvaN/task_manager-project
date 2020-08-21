@@ -17,8 +17,8 @@ Auth::routes(['verify' => true]);
 
 Route::get('/', 'WelcomeController@show');
 
-Route::resource('/tasks', 'TaskController');
+Route::resource('/task', 'TaskController');
 
-Route::resource('/statuses', 'StatusController');
+Route::resource('/status', 'StatusController');
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
