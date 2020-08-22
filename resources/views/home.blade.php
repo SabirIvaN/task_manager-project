@@ -6,7 +6,7 @@
         <div class="col-md-8">
         @include('flash::message')
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('app.dashboard') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -15,7 +15,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('auth.logged') }}
                 </div>
             </div>
         </div>
