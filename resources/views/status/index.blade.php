@@ -26,6 +26,7 @@
                 <td>{{ $status->name }}</td>
                 <td>{{ $status->created_at }}</td>
                 @if(Auth::user())
+                @if(Auth::user()->email_verified_at != null)
                 <td>
                     <a class="btn btn-primary" href="{{ route('status.edit', $status->id) }}">{{ __('status.edit') }}</a>
                 </td>
@@ -36,6 +37,7 @@
                         <button class="btn btn-danger" type="submit">{{ __('status.delete') }}</button>
                     </form>
                 </td>
+                @endif
                 @endif
             </tr>
             @endforeach

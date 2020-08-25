@@ -27,7 +27,9 @@ class StatusController extends Controller
     public function create()
     {
         if (Auth::user()) {
-            return view('status.create');
+            if (!empty(Auth::user()->email_verified_at)) {
+                return view('status.create');
+            }
         }
         abort(404);
     }
