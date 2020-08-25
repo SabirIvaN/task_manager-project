@@ -27,7 +27,7 @@ class StatusController extends Controller
     public function create()
     {
         if (Auth::user()) {
-            if (!empty(Auth::user()->email_verified_at)) {
+            if (Auth::user()->hasVerifiedEmail()) {
                 return view('status.create');
             }
         }
@@ -43,10 +43,12 @@ class StatusController extends Controller
     public function store(Request $request)
     {
         if (Auth::user()) {
-            $status = new Status();
-            $status->name = $request->post('name');
-            $status->save();
-            return redirect()->route('status.index');
+            if (Auth::user()->hasVerifiedEmail()) {
+                $status = new Status();
+                $status->name = $request->post('name');
+                $status->save();
+                return redirect()->route('status.index');
+            }
         }
         abort(404);
     }
@@ -60,8 +62,10 @@ class StatusController extends Controller
     public function edit($id)
     {
         if (Auth::user()) {
-            $status = Status::find($id);
-            return view('status.edit', ['status' => $status]);
+            if (Auth::user()->hasVerifiedEmail()) {
+                $status = Status::find($id);
+                return view('status.edit', ['status' => $status]);
+            }
         }
         abort(404);
     }
@@ -76,10 +80,12 @@ class StatusController extends Controller
     public function update(Request $request, $id)
     {
         if (Auth::user()) {
-            $status = Status::find($id);
-            $status->name = $request->post('name');
-            $status->save();
-            return redirect()->route('status.index');
+            if (Auth::user()->hasVerifiedEmail()) {
+                $status = Status::find($id);
+                $status->name = $request->post('name');
+                $status->save();
+                return redirect()->route('status.index');
+            }
         }
         abort(404);
     }
@@ -93,9 +99,11 @@ class StatusController extends Controller
     public function destroy($id)
     {
         if (Auth::user()) {
-            $status = Status::find($id);
-            $status->delete();
-            return redirect()->route('status.index');
+            if (Auth::user()->hasVerifiedEmail()) {
+                $status = Status::find($id);
+                $status->delete();
+                return redirect()->route('status.index');
+            }
         }
         abort(404);
     }

@@ -15,7 +15,7 @@ class StatusTest extends TestCase
     {
         parent::setUp();
         Artisan::call('migrate');
-        $this->user = $this->createMock(User::class);
+        $this->user = factory(User::class)->create();
         $this->status = factory(Status::class)->create();
         $this->data = Arr::only(factory(Status::class)->make()->toArray(), ['name']);
     }
