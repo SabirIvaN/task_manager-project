@@ -47,6 +47,7 @@ class StatusController extends Controller
                 $status = new Status();
                 $status->name = $request->post('name');
                 $status->save();
+                flash(__('status.store'))->success()->important();
                 return redirect()->route('status.index');
             }
         }
@@ -84,6 +85,7 @@ class StatusController extends Controller
                 $status = Status::find($id);
                 $status->name = $request->post('name');
                 $status->save();
+                flash(__('status.update'))->important();
                 return redirect()->route('status.index');
             }
         }
@@ -102,6 +104,7 @@ class StatusController extends Controller
             if (Auth::user()->hasVerifiedEmail()) {
                 $status = Status::find($id);
                 $status->delete();
+                flash(__('status.destroy'))->error()->important();
                 return redirect()->route('status.index');
             }
         }

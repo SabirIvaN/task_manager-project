@@ -20,4 +20,7 @@ return [
     'edit' => 'Edit',
     'delete' => 'Delete',
     'save' => 'Save',
+    'store' => 'The status created.',
+    'update' => 'The status updated.',
+    'destroy' => 'The status deleted.',
 ];
