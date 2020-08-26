@@ -13,7 +13,7 @@ class TaskSeeder extends Seeder
     {
         $statuses = ['New', 'In work', 'On testing', 'Completed'];
         for ($i=0; $i < count($statuses); $i++) {
-            DB::table('statuses')->insert(['name' => $statuses[$i]]);
+            DB::table('statuses')->insert(['name' => $statuses[$i], 'created_at' => now()]);
         }
     }
 }
