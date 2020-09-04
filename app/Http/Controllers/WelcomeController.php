@@ -13,6 +13,6 @@ class WelcomeController extends Controller
      */
     public function show()
     {
-        return view('task.index');
+        return view('welcome');
     }
 }

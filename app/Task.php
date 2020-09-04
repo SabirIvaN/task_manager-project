@@ -2,10 +2,10 @@
 
 namespace App;
 
-use App\Task;
+use App\Status;
 use Illuminate\Database\Eloquent\Model;
 
-class Status extends Model
+class Task extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -13,11 +13,11 @@ class Status extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
+        'name', 'description', 'status_id', 'created_by_id', 'assigned_by_id',
     ];
 
-    public function tasks()
+    public function status()
     {
-      return $this->hasMany(Task::class);
+      return $this->belongsTo(Status::class);
     }
 }

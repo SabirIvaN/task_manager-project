@@ -16,7 +16,7 @@ return [
     'id' => 'Id',
     'name' => 'Name',
     'date' => 'Created at',
-    'add' => 'Add status',
+    'add' => 'Add',
     'edit' => 'Edit',
     'delete' => 'Delete',
     'save' => 'Save',

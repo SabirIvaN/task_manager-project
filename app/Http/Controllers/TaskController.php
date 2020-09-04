@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\User;
+use App\Task;
+use App\Status;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -13,7 +17,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return view('task.index');
+        $tasks = Task::all();
+        return view('task.index', ['tasks' => $tasks]);
     }
 
     /**
@@ -23,7 +28,13 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        if (Auth::user()) {
+            if(Auth::user()->hasVerifiedEmail()) {
+                $users = User::all();
+                $statuses = Status::all();
+                return view('task.create', ['statuses' => $statuses, 'users' => $users]);
+            }
+        }
     }
 
     /**
@@ -34,7 +45,19 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (Auth::user()) {
+            if (Auth::user()->hasVerifiedEmail()) {
+                $status = Status::find($request->post('status'));
+                $user = Auth::user();
+                $task = new Task();
+                $task->name = $request->post('name');
+                $task->description = $request->post('description');
+                $task->status_id = $request->post('status');
+                $task->created_by_id = Auth::user()->id;
+                $task->assigned_by_id = $request->post('asignee');
+                $user->createdTasks()->save($task);
+            }
+        }
     }
 
     /**
@@ -56,7 +79,14 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (Auth::user()) {
+            if (Auth::user()->hasVerifiedEmail()) {
+                $tasks = Task::find($id);
+                $users = User::all();
+                $statuses = Status::all();
+                return view('task.edit', ['task' => $task, 'statuses' => $statuses, 'users' => $users]);
+            }
+        }
     }
 
     /**

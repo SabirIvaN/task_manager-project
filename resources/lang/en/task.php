@@ -11,4 +11,17 @@ return [
     */
 
     'mainTitle' => 'Tasks',
+    'adderTitle' => 'Add task',
+    'editorTitle' => 'Edit task',
+    'id' => 'Id',
+    'name' => 'Name',
+    'status' => 'Status',
+    'creator' => 'Creator',
+    'asignee' => 'Asignee',
+    'date' => 'Created at',
+    'add' => 'Add status',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+    'save' => 'Save',
+    'description' => 'Description',
 ];
