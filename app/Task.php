@@ -22,13 +22,13 @@ class Task extends Model
       return $this->belongsTo(Status::class);
     }
 
-    public function createdBy()
+    public function creator()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by_id');
     }
 
-    public function assignedTo()
+    public function assigner()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'assigned_to_id');
     }
 }

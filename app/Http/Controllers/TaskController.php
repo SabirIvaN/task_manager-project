@@ -52,8 +52,8 @@ class TaskController extends Controller
                 $task->description = $request->post('description');
                 $task->status_id = $request->post('status');
                 Status::find($request->post('status'))->tasks()->save($task);
-                Auth::user()->creator()->save($task);
-                User::find($request->post('asignee'))->assigner()->save($task);
+                Auth::user()->createdBy()->save($task);
+                User::find($request->post('asignee'))->assignedTo()->save($task);
             }
         }
     }
