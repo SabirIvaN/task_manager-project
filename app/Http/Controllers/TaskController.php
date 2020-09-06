@@ -54,6 +54,7 @@ class TaskController extends Controller
                 Status::find($request->post('status'))->tasks()->save($task);
                 Auth::user()->createdBy()->save($task);
                 User::find($request->post('asignee'))->assignedTo()->save($task);
+                return redirect()->route('task.index');
             }
         }
     }
