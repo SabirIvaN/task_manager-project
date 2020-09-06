@@ -28,7 +28,7 @@
             <tr>
                 <th scope="row">{{ $task->id }}</th>
                 <td>{{ $task->name }}</td>
-                <td>{{ $task->creator }}</td>
+                <td>{{ $task->user_id }}</td>
                 <td>{{ $task->assigned }}</td>
                 <td>{{ $task->created_at }}</td>
                 @if(Auth::user())

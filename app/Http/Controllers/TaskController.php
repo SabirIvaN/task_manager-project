@@ -47,15 +47,13 @@ class TaskController extends Controller
     {
         if (Auth::user()) {
             if (Auth::user()->hasVerifiedEmail()) {
-                $status = Status::find($request->post('status'));
-                $user = Auth::user();
                 $task = new Task();
                 $task->name = $request->post('name');
                 $task->description = $request->post('description');
                 $task->status_id = $request->post('status');
-                $task->created_by_id = Auth::user()->id;
-                $task->assigned_by_id = $request->post('asignee');
-                $user->createdTasks()->save($task);
+                Status::find($request->post('status'))->tasks()->save($task);
+                Auth::user()->creator()->save($task);
+                User::find($request->post('asignee'))->assigner()->save($task);
             }
         }
     }

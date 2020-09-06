@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\User;
 use App\Status;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,5 +20,15 @@ class Task extends Model
     public function status()
     {
       return $this->belongsTo(Status::class);
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function assignedTo()
+    {
+        return $this->belongsTo(User::class);
     }
 }
