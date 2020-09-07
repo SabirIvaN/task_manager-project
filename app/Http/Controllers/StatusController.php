@@ -103,6 +103,7 @@ class StatusController extends Controller
         if (Auth::user()) {
             if (Auth::user()->hasVerifiedEmail()) {
                 $status = Status::find($id);
+                $status->tasks()->detach();
                 $status->delete();
                 flash(__('status.destroy'))->error()->important();
                 return redirect()->route('status.index');

@@ -19,6 +19,7 @@ return [
     'creator' => 'Creator',
     'asignee' => 'Asignee',
     'date' => 'Created at',
+    'status' => 'Status',
     'add' => 'Add status',
     'edit' => 'Edit',
     'delete' => 'Delete',

@@ -18,6 +18,8 @@
             <tr>
                 <th scope="col">{{ __('task.id') }}</th>
                 <th scope="col">{{ __('task.name') }}</th>
+                <th scope="col">{{ __('task.description') }}</th>
+                <th scope="col">{{ __('task.status') }}</th>
                 <th scope="col">{{ __('task.creator') }}</th>
                 <th scope="col">{{ __('task.asignee') }}</th>
                 <th scope="col" @if(Auth::user()) @if(Auth::user()->hasVerifiedEmail()) colspan="3" @endif @endif>{{ __('task.date') }}</th>
@@ -28,6 +30,8 @@
             <tr>
                 <th scope="row">{{ $task->id }}</th>
                 <td>{{ $task->name }}</td>
+                <td>{{ $task->description }}</td>
+                <td>{{ $task->status->name }}</td>
                 <td>{{ $task->creator->name }}</td>
                 <td>{{ $task->assigner->name }}</td>
                 <td>{{ $task->created_at }}</td>

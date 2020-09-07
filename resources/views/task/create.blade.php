@@ -10,6 +10,10 @@
             <input class="form-control" id="name" name="name" type="text">
         </div>
         <div class="form-group col-md-6">
+            <label for="description">{{ __('task.description') }}</label>
+            <input class="form-control" id="description" name="description" type="text">
+        </div>
+        <div class="form-group col-md-6">
             <label for="asignee">{{ __('task.asignee') }}</label>
             <select class="form-control" name="asignee" id="asignee">
                 @foreach($users as $user)
@@ -24,10 +28,6 @@
                 <option value="{{ $status->id }}">{{ $status->name }}</option>
                 @endforeach
             </select>
-        </div>
-        <div class="form-group col-md-12">
-            <label for="description">{{ __('task.description') }}</label>
-            <textarea class="form-control" name="description" id="description" cols="30" rows="10"></textarea>
         </div>
         <div class="form-group col-md-6">
             <button class="btn btn-primary" type="submit">{{ __('task.save') }}</button>
