@@ -2,19 +2,20 @@
 
 namespace Tests\Unit;
 
-use Artisan;
 use App\User;
 use App\Status;
 use Tests\TestCase;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class StatusTest extends TestCase
 {
+    use DatabaseMigrations;
+
     protected function setUp(): void
     {
         parent::setUp();
-        Artisan::call('migrate');
         $this->user = factory(User::class)->create();
         $this->status = factory(Status::class)->create();
         $this->data = Arr::only(factory(Status::class)->make()->toArray(), ['name']);
