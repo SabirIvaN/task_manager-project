@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('confirmation')->except('index');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -28,13 +32,9 @@ class TaskController extends Controller
      */
     public function create()
     {
-        if (Auth::user()) {
-            if(Auth::user()->hasVerifiedEmail()) {
-                $users = User::all();
-                $statuses = Status::all();
-                return view('task.create', ['statuses' => $statuses, 'users' => $users]);
-            }
-        }
+        $users = User::all();
+        $statuses = Status::all();
+        return view('task.create', ['statuses' => $statuses, 'users' => $users]);
     }
 
     /**
@@ -45,17 +45,13 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::user()) {
-            if (Auth::user()->hasVerifiedEmail()) {
-                $task = new Task();
-                $task->name = $request->post('name');
-                $task->description = $request->post('description');
-                Status::find($request->post('status'))->tasks()->save($task);
-                Auth::user()->createdBy()->save($task);
-                User::find($request->post('asignee'))->assignedTo()->save($task);
-                return redirect()->route('task.index');
-            }
-        }
+        $task = new Task();
+        $task->name = $request->post('name');
+        $task->description = $request->post('description');
+        Status::find($request->post('status'))->tasks()->save($task);
+        Auth::user()->createdBy()->save($task);
+        User::find($request->post('asignee'))->assignedTo()->save($task);
+        return redirect()->route('task.index');
     }
 
     /**
@@ -66,14 +62,10 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        if (Auth::user()) {
-            if (Auth::user()->hasVerifiedEmail()) {
-                $task = Task::find($id);
-                $users = User::all();
-                $statuses = Status::all();
-                return view('task.edit', ['task' => $task, 'statuses' => $statuses, 'users' => $users]);
-            }
-        }
+        $task = Task::find($id);
+        $users = User::all();
+        $statuses = Status::all();
+        return view('task.edit', ['task' => $task, 'statuses' => $statuses, 'users' => $users]);
     }
 
     /**
@@ -85,18 +77,14 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (Auth::user()) {
-            if (Auth::user()->hasVerifiedEmail()) {
-                $task = Task::find($id);
-                $task->status()->dissociate();
-                $task->assigner()->dissociate();
-                $task->name = $request->post('name');
-                $task->description = $request->post('description');
-                Status::find($request->post('status'))->tasks()->save($task);
-                User::find($request->post('asignee'))->assignedTo()->save($task);
-                return redirect()->route('task.index');
-            }
-        }
+        $task = Task::find($id);
+        $task->status()->dissociate();
+        $task->assigner()->dissociate();
+        $task->name = $request->post('name');
+        $task->description = $request->post('description');
+        Status::find($request->post('status'))->tasks()->save($task);
+        User::find($request->post('asignee'))->assignedTo()->save($task);
+        return redirect()->route('task.index');
     }
 
     /**
@@ -107,14 +95,10 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        if (Auth::user()) {
-            if (Auth::user()->hasVerifiedEmail()) {
-                $task = Task::find($id);
-                $task->status()->dissociate();
-                $task->creator()->dissociate();
-                $task->assigner()->dissociate();
-                $task->delete();
-            }
-        }
+        $task = Task::find($id);
+        $task->status()->dissociate();
+        $task->creator()->dissociate();
+        $task->assigner()->dissociate();
+        $task->delete();
     }
 }

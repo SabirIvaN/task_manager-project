@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class StatusController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('confirmation')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,12 +31,7 @@ class StatusController extends Controller
      */
     public function create()
     {
-        if (Auth::user()) {
-            if (Auth::user()->hasVerifiedEmail()) {
-                return view('status.create');
-            }
-        }
-        abort(404);
+        return view('status.create');
     }
 
     /**
@@ -42,16 +42,11 @@ class StatusController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::user()) {
-            if (Auth::user()->hasVerifiedEmail()) {
-                $status = new Status();
-                $status->name = $request->post('name');
-                $status->save();
-                flash(__('status.store'))->success()->important();
-                return redirect()->route('status.index');
-            }
-        }
-        abort(404);
+        $status = new Status();
+        $status->name = $request->post('name');
+        $status->save();
+        flash(__('status.store'))->success()->important();
+        return redirect()->route('status.index');
     }
 
     /**
@@ -62,13 +57,8 @@ class StatusController extends Controller
      */
     public function edit($id)
     {
-        if (Auth::user()) {
-            if (Auth::user()->hasVerifiedEmail()) {
-                $status = Status::find($id);
-                return view('status.edit', ['status' => $status]);
-            }
-        }
-        abort(404);
+        $status = Status::find($id);
+        return view('status.edit', ['status' => $status]);
     }
 
     /**
@@ -80,16 +70,11 @@ class StatusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (Auth::user()) {
-            if (Auth::user()->hasVerifiedEmail()) {
-                $status = Status::find($id);
-                $status->name = $request->post('name');
-                $status->save();
-                flash(__('status.update'))->important();
-                return redirect()->route('status.index');
-            }
-        }
-        abort(404);
+        $status = Status::find($id);
+        $status->name = $request->post('name');
+        $status->save();
+        flash(__('status.update'))->important();
+        return redirect()->route('status.index');
     }
 
     /**
@@ -100,15 +85,9 @@ class StatusController extends Controller
      */
     public function destroy($id)
     {
-        if (Auth::user()) {
-            if (Auth::user()->hasVerifiedEmail()) {
-                $status = Status::find($id);
-                $status->tasks()->detach();
-                $status->delete();
-                flash(__('status.destroy'))->error()->important();
-                return redirect()->route('status.index');
-            }
-        }
-        abort(404);
+        $status = Status::find($id);
+        $status->delete();
+        flash(__('status.destroy'))->error()->important();
+        return redirect()->route('status.index');
     }
 }
