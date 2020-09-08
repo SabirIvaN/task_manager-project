@@ -1,5 +1,8 @@
 install:
 	composer install
+	touch database/database.sqlite
+	php artisan migrate
+	cp .env.example .env
 lint:
 	composer run-script phpcs -- --standard=PSR12 app tests
 test:
