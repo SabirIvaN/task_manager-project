@@ -3,13 +3,14 @@
 namespace Tests\Unit;
 
 use App\User;
+use App\Task;
 use App\Status;
 use Tests\TestCase;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class StatusTest extends TestCase
+class TaskTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -17,8 +18,15 @@ class StatusTest extends TestCase
     {
         parent::setUp();
         $this->user = factory(User::class)->create();
+        $this->task = factory(Task::class)->create();
         $this->status = factory(Status::class)->create();
-        $this->data = Arr::only(factory(Status::class)->make()->toArray(), ['name']);
+        $this->data = Arr::only(factory(Task::class)->make()->toArray(), [
+            'name' => 'On testing',
+            'description' => 'Testing the functionality using',
+            'status_id' => $this->status->id,
+            'created_by_id' => $this->user->id,
+            'assigned_to_id' => $this->user->id,
+        ]);
     }
 
     /**
@@ -28,7 +36,7 @@ class StatusTest extends TestCase
      */
     public function testIndex()
     {
-        $response = $this->get(route('status.index'));
+        $response = $this->get(route('task.index'));
         $response->assertOk();
     }
 
@@ -40,20 +48,20 @@ class StatusTest extends TestCase
     public function testCreate()
     {
         $response = $this->actingAs($this->user)
-            ->get(route('status.create'));
+            ->get(route('task.create'));
         $response->assertOk();
     }
 
     /**
-     * A basic unit test create.
+     * A basic unit test store.
      *
      * @return void
      */
     public function testStore()
     {
         $this->actingAs($this->user)
-            ->post(route('status.store'), $this->data);
-        $this->assertDatabaseHas('statuses', $this->data);
+            ->post(route('task.store'), $this->data);
+        $this->assertDatabaseHas('tasks', $this->data);
     }
 
     /**
@@ -64,7 +72,7 @@ class StatusTest extends TestCase
     public function testEdit()
     {
         $response = $this->actingAs($this->user)
-            ->get(route('status.edit', $this->status));
+            ->get(route('task.edit', $this->task));
         $response->assertOk();
     }
 
@@ -76,8 +84,8 @@ class StatusTest extends TestCase
     public function testUpdate()
     {
         $this->actingAs($this->user)
-            ->patch(route('status.update', $this->status), $this->data);
-        $this->assertDatabaseHas('statuses', $this->data);
+            ->patch(route('task.update', $this->task), $this->data);
+        $this->assertDatabaseHas('tasks', $this->data);
     }
 
     /**
@@ -88,7 +96,7 @@ class StatusTest extends TestCase
     public function testDelete()
     {
         $this->actingAs($this->user)
-            ->delete(route('status.destroy', $this->status));
-        $this->assertDeleted('statuses', ['id' => $this->status]);
+            ->delete(route('task.destroy', $this->task));
+        $this->assertDeleted('tasks', ['id' => $this->task]);
     }
 }

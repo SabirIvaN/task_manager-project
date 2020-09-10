@@ -1,7 +1,9 @@
 install:
+	php -r "file_exists('.env') || copy('.env.example', '.env');"
 	composer install
 	touch database/database.sqlite
-	php artisan migrate
+	php artisan key:generate
+	chmod -R 777 storage bootstrap/cache
 lint:
 	composer run-script phpcs -- --standard=PSR12 app tests
 test:
