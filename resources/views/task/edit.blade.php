@@ -31,6 +31,16 @@
             </select>
         </div>
         <div class="form-group col-md-6">
+            <label for="label">{{ __('task.label') }}</label>
+            <select class="chosen-select" id="label" name="label[]" multiple>
+                @foreach($labels as $label)
+                @foreach($task->labels as $taskLabel)
+                <option value="{{ $label->id }}" @if($label->id == $taskLabel->id) selected @endif>{{ $label->name }}</option>
+                @endforeach
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group col-md-12">
             <button class="btn btn-primary" type="submit">{{ __('task.save') }}</button>
         </div>
     </form>

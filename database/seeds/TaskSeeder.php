@@ -11,9 +11,18 @@ class TaskSeeder extends Seeder
      */
     public function run()
     {
-        $statuses = ['New', 'In work', 'On testing', 'Completed'];
-        for ($i=0; $i < count($statuses); $i++) {
-            DB::table('statuses')->insert(['name' => $statuses[$i], 'created_at' => now()]);
+        $taskName = ['Project', 'Dishes', 'Homework', 'Exercise'];
+        $taskDescription = ['Work on projects', 'Wash the dishes', 'Do your homework', 'Do morning exercise'];
+        for ($i = 0; $i < count($taskName); $i++) {
+            DB::table('tasks')->insert([
+                'name' => $taskName[$i],
+                'description' => $taskDescription[$i],
+                'status_id' => rand(0, 5),
+                'created_by_id' => rand(0, 5),
+                'assigned_to_id' => rand(0, 5),
+                'created_at' => now(),
+            ]);
         }
+
     }
 }

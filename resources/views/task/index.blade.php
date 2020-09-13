@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    @include("flash::message")
     <div class="d-flex justify-content-between align-items-center flex-wrap mt-1 mb-3">
         <h2>{{ __('task.mainTitle') }}</h2>
         @if(Auth::user())
@@ -20,6 +21,7 @@
                 <th scope="col">{{ __('task.name') }}</th>
                 <th scope="col">{{ __('task.description') }}</th>
                 <th scope="col">{{ __('task.status') }}</th>
+                <th scope="col">{{ __('task.label') }}</th>
                 <th scope="col">{{ __('task.creator') }}</th>
                 <th scope="col">{{ __('task.asignee') }}</th>
                 <th scope="col" @if(Auth::user()) @if(Auth::user()->hasVerifiedEmail()) colspan="3" @endif @endif>{{ __('task.date') }}</th>
@@ -32,6 +34,11 @@
                 <td>{{ $task->name }}</td>
                 <td>{{ $task->description }}</td>
                 <td>{{ $task->status->name }}</td>
+                <td>
+                @foreach($task->labels as $label)
+                {{ $label->name .  " "}}
+                @endforeach
+                </td>
                 <td>{{ $task->creator->name }}</td>
                 <td>{{ $task->assigner->name }}</td>
                 <td>{{ $task->created_at }}</td>

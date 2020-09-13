@@ -5,7 +5,7 @@ namespace App;
 use App\Task;
 use Illuminate\Database\Eloquent\Model;
 
-class Status extends Model
+class Label extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -17,10 +17,10 @@ class Status extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function tasks()
     {
-        return $this->hasMany(Task::class);
+        return $this->belongsToMany(Task::class);
     }
 }
