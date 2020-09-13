@@ -21,7 +21,6 @@ class TaskTest extends TestCase
         $this->user = factory(User::class)->create();
         $this->task = factory(Task::class)->create();
         $this->status = factory(Status::class)->create();
-        $this->label = factory(Label::class)->create();
         $this->data = Arr::only(factory(Task::class)->make()->toArray(), [
             'name' => 'On testing',
             'description' => 'Testing the functionality using',
