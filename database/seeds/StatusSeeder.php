@@ -1,5 +1,6 @@
 <?php
 
+use App\Status;
 use Illuminate\Database\Seeder;
 
 class StatusSeeder extends Seeder
@@ -11,9 +12,6 @@ class StatusSeeder extends Seeder
      */
     public function run()
     {
-        $statuses = ['New', 'In work', 'On testing', 'Completed'];
-        for ($i=0; $i < count($statuses); $i++) {
-            DB::table('statuses')->insert(['name' => $statuses[$i], 'created_at' => now()]);
-        }
+        factory(Status::class, 5)->create();
     }
 }
