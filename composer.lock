@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d8c37973e8b6f93cdd187224c241ae8f",
+    "content-hash": "bcd200c8d716ff2ee090c913c8b9aa59",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -794,16 +794,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v7.28.1",
+            "version": "v7.28.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "f7493ab717ca2a9598b1db2d6a3bae8ac8c755e8"
+                "reference": "0956b0688d96565044074b77f521a653d9fce5fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/f7493ab717ca2a9598b1db2d6a3bae8ac8c755e8",
-                "reference": "f7493ab717ca2a9598b1db2d6a3bae8ac8c755e8",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/0956b0688d96565044074b77f521a653d9fce5fb",
+                "reference": "0956b0688d96565044074b77f521a653d9fce5fb",
                 "shasum": ""
             },
             "require": {
@@ -948,7 +948,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2020-09-09T15:02:46+00:00"
+            "time": "2020-09-15T14:48:02+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -1016,27 +1016,27 @@
         },
         {
             "name": "laravel/ui",
-            "version": "v2.3.0",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/ui.git",
-                "reference": "2ccaa3b821ea8ac7e05393b946d0578bdb46099b"
+                "reference": "f5398544a9cd4804a42d09ce51735e37cd51ea2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/ui/zipball/2ccaa3b821ea8ac7e05393b946d0578bdb46099b",
-                "reference": "2ccaa3b821ea8ac7e05393b946d0578bdb46099b",
+                "url": "https://api.github.com/repos/laravel/ui/zipball/f5398544a9cd4804a42d09ce51735e37cd51ea2d",
+                "reference": "f5398544a9cd4804a42d09ce51735e37cd51ea2d",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "^7.0|^8.0",
-                "illuminate/filesystem": "^7.0|^8.0",
-                "illuminate/support": "^7.0|^8.0",
+                "illuminate/console": "^7.0",
+                "illuminate/filesystem": "^7.0",
+                "illuminate/support": "^7.0",
                 "php": "^7.2.5"
             },
             "require-dev": {
                 "mockery/mockery": "^1.0",
-                "phpunit/phpunit": "^8.0|^9.0"
+                "phpunit/phpunit": "^8.0"
             },
             "type": "library",
             "extra": {
@@ -1067,20 +1067,20 @@
                 "laravel",
                 "ui"
             ],
-            "time": "2020-09-09T12:07:59+00:00"
+            "time": "2020-09-11T15:31:52+00:00"
         },
         {
             "name": "league/commonmark",
-            "version": "1.5.4",
+            "version": "1.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "21819c989e69bab07e933866ad30c7e3f32984ba"
+                "reference": "45832dfed6007b984c0d40addfac48d403dc6432"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/21819c989e69bab07e933866ad30c7e3f32984ba",
-                "reference": "21819c989e69bab07e933866ad30c7e3f32984ba",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/45832dfed6007b984c0d40addfac48d403dc6432",
+                "reference": "45832dfed6007b984c0d40addfac48d403dc6432",
                 "shasum": ""
             },
             "require": {
@@ -1092,7 +1092,7 @@
             },
             "require-dev": {
                 "cebe/markdown": "~1.0",
-                "commonmark/commonmark.js": "0.29.1",
+                "commonmark/commonmark.js": "0.29.2",
                 "erusev/parsedown": "~1.0",
                 "ext-json": "*",
                 "github/gfm": "0.29.0",
@@ -1162,7 +1162,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-08-18T01:19:12+00:00"
+            "time": "2020-09-13T14:44:46+00:00"
         },
         {
             "name": "league/flysystem",
@@ -1399,16 +1399,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.39.2",
+            "version": "2.40.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "326efde1bc09077a26cb77f6e2e32e13f06c27f2"
+                "reference": "6c7646154181013ecd55e80c201b9fd873c6ee5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/326efde1bc09077a26cb77f6e2e32e13f06c27f2",
-                "reference": "326efde1bc09077a26cb77f6e2e32e13f06c27f2",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/6c7646154181013ecd55e80c201b9fd873c6ee5d",
+                "reference": "6c7646154181013ecd55e80c201b9fd873c6ee5d",
                 "shasum": ""
             },
             "require": {
@@ -1484,7 +1484,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-09-10T12:16:42+00:00"
+            "time": "2020-09-11T19:00:58+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -2063,16 +2063,16 @@
         },
         {
             "name": "ramsey/collection",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/collection.git",
-                "reference": "044184884e3c803e4cbb6451386cb71562939b18"
+                "reference": "24d93aefb2cd786b7edd9f45b554aea20b28b9b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/collection/zipball/044184884e3c803e4cbb6451386cb71562939b18",
-                "reference": "044184884e3c803e4cbb6451386cb71562939b18",
+                "url": "https://api.github.com/repos/ramsey/collection/zipball/24d93aefb2cd786b7edd9f45b554aea20b28b9b1",
+                "reference": "24d93aefb2cd786b7edd9f45b554aea20b28b9b1",
                 "shasum": ""
             },
             "require": {
@@ -2128,7 +2128,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-08-11T00:57:21+00:00"
+            "time": "2020-09-10T20:58:17+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -2343,6 +2343,72 @@
                 "rollbar"
             ],
             "time": "2020-03-03T20:09:19+00:00"
+        },
+        {
+            "name": "spatie/laravel-query-builder",
+            "version": "3.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-query-builder.git",
+                "reference": "e0bfb70056e9b337d0026af33ef2be8b8ba6d0bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-query-builder/zipball/e0bfb70056e9b337d0026af33ef2be8b8ba6d0bc",
+                "reference": "e0bfb70056e9b337d0026af33ef2be8b8ba6d0bc",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^6.0|^7.0|^8.0",
+                "illuminate/http": "^6.0|^7.0|^8.0",
+                "illuminate/support": "^6.0|^7.0|^8.0",
+                "php": "^7.3"
+            },
+            "require-dev": {
+                "ext-json": "*",
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "laravel/legacy-factories": "^1.0.4",
+                "orchestra/testbench": "^4.0|^5.0|^6.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\QueryBuilder\\QueryBuilderServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\QueryBuilder\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Vanderbist",
+                    "email": "alex@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Easily build Eloquent queries from API requests",
+            "homepage": "https://github.com/spatie/laravel-query-builder",
+            "keywords": [
+                "laravel-query-builder",
+                "spatie"
+            ],
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                }
+            ],
+            "time": "2020-09-09T16:31:48+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -5671,16 +5737,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "9.1.8",
+            "version": "9.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "f98f8466126d83b55b924a94d2244c53c216b8fb"
+                "reference": "cf6582906d4b2502c5f4c6be6a3d0b4cd5b3ef7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/f98f8466126d83b55b924a94d2244c53c216b8fb",
-                "reference": "f98f8466126d83b55b924a94d2244c53c216b8fb",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/cf6582906d4b2502c5f4c6be6a3d0b4cd5b3ef7f",
+                "reference": "cf6582906d4b2502c5f4c6be6a3d0b4cd5b3ef7f",
                 "shasum": ""
             },
             "require": {
@@ -5688,7 +5754,7 @@
                 "ext-libxml": "*",
                 "ext-xmlwriter": "*",
                 "nikic/php-parser": "^4.8",
-                "php": "^7.3 || ^8.0",
+                "php": ">=7.3",
                 "phpunit/php-file-iterator": "^3.0.3",
                 "phpunit/php-text-template": "^2.0.2",
                 "sebastian/code-unit-reverse-lookup": "^2.0.2",
@@ -5740,7 +5806,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-09-07T08:07:10+00:00"
+            "time": "2020-09-15T06:14:11+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -5969,16 +6035,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.3.8",
+            "version": "9.3.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "93d78d8e2a06393a0d0c1ead6fe9984f1af1f88c"
+                "reference": "919333f2d046a89f9238f15d09f17a8f0baa5cc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/93d78d8e2a06393a0d0c1ead6fe9984f1af1f88c",
-                "reference": "93d78d8e2a06393a0d0c1ead6fe9984f1af1f88c",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/919333f2d046a89f9238f15d09f17a8f0baa5cc2",
+                "reference": "919333f2d046a89f9238f15d09f17a8f0baa5cc2",
                 "shasum": ""
             },
             "require": {
@@ -5992,7 +6058,7 @@
                 "myclabs/deep-copy": "^1.10.1",
                 "phar-io/manifest": "^2.0.1",
                 "phar-io/version": "^3.0.2",
-                "php": "^7.3 || ^8.0",
+                "php": ">=7.3",
                 "phpspec/prophecy": "^1.11.1",
                 "phpunit/php-code-coverage": "^9.1.5",
                 "phpunit/php-file-iterator": "^3.0.4",
@@ -6064,7 +6130,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-08-27T06:30:58+00:00"
+            "time": "2020-09-12T09:34:39+00:00"
         },
         {
             "name": "scrivo/highlight.php",

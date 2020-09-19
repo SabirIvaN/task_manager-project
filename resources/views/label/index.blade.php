@@ -5,12 +5,10 @@
     @include("flash::message")
     <div class="d-flex justify-content-between align-items-center flex-wrap mt-1 mb-3">
         <h2>{{ __('label.mainTitle') }}</h2>
-        @if(Auth::user())
-        @if(Auth::user()->hasVerifiedEmail())
+        @if(confirmation())
         <div class="btn-toolbar">
             <a class="btn btn-success" href="{{ route('label.create') }}">{{ __('label.add') }}</a>
         </div>
-        @endif
         @endif
     </div>
     @if($labels->count() > 0)
@@ -19,7 +17,7 @@
             <tr>
                 <th scope="col">{{ __('label.id') }}</th>
                 <th scope="col">{{ __('label.name') }}</th>
-                <th scope="col" @if(Auth::user()) @if(Auth::user()->hasVerifiedEmail()) colspan="3" @endif @endif>{{ __('label.date') }}</th>
+                <th scope="col" @if(confirmation()) colspan="3" @endif>{{ __('label.date') }}</th>
             </tr>
         </thead>
         <tbody>

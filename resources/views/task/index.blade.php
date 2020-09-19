@@ -3,16 +3,27 @@
 @section('content')
 <div class="container">
     @include("flash::message")
-    <div class="d-flex justify-content-between align-items-center flex-wrap mt-1 mb-3">
+    <div class="d-flex justify-content-between align-items-center flex-wrap mt-1 mb-1">
         <h2>{{ __('task.mainTitle') }}</h2>
-        @if(Auth::user())
-        @if(Auth::user()->hasVerifiedEmail())
+        @if(confirmation())
         <div class="btn-toolbar">
             <a class="btn btn-success" href="{{ route('task.create') }}">{{ __('task.add') }}</a>
         </div>
         @endif
-        @endif
     </div>
+    <form class="form-row" action="{{ route('task.index') }}" method="GET">
+        <div class="form-group col-md-2">
+            <select class="form-control" name="filter[status_id]" id="filter">
+                <option value="all">All</option>
+                @foreach($filters as $filter)
+                <option value="{{ $filter->status_id }}">{{ $filter->status->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group col-md-1">
+            <button class="btn btn-primary" type="submit">Apply</button>
+        </div>
+    </form>
     @if($tasks->count() > 0)
     <table class="table">
         <thead>
@@ -24,7 +35,7 @@
                 <th scope="col">{{ __('task.label') }}</th>
                 <th scope="col">{{ __('task.creator') }}</th>
                 <th scope="col">{{ __('task.asignee') }}</th>
-                <th scope="col" @if(Auth::user()) @if(Auth::user()->hasVerifiedEmail()) colspan="3" @endif @endif>{{ __('task.date') }}</th>
+                <th scope="col" @if(confirmation()) colspan="3" @endif>{{ __('task.date') }}</th>
             </tr>
         </thead>
         <tbody>

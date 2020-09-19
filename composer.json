@@ -19,7 +19,8 @@
         "laravel/framework": "^7.24",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
-        "rollbar/rollbar-laravel": "^6.0"
+        "rollbar/rollbar-laravel": "^6.0",
+        "spatie/laravel-query-builder": "^3.2"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

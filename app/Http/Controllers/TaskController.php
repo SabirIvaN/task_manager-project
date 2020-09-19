@@ -8,6 +8,8 @@ use App\Task;
 use App\Label;
 use App\Status;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
 
 class TaskController extends Controller
 {
@@ -20,10 +22,19 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::all();
-        return view('task.index', ['tasks' => $tasks]);
+        $tasks = QueryBuilder::for(Task::class)
+        ->allowedFilters([AllowedFilter::exact('status_id')])
+        ->get();
+        $request = $request->post('filter');
+        if (isset($request)) {
+            if ($request['status_id'] == 'all') {
+                $tasks = Task::all();
+            }
+        }
+        $filters = Task::all();
+        return view('task.index', ['tasks' => $tasks, 'filters' => $filters]);
     }
 
     /**
