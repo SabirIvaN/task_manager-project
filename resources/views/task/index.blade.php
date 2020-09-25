@@ -13,10 +13,26 @@
     </div>
     <form class="form-row" action="{{ route('task.index') }}" method="GET">
         <div class="form-group col-md-2">
-            <select class="form-control" name="filter[status_id]" id="filter">
-                <option value="all">All</option>
+            <select class="form-control" name="filter[status_id]" id="filterStatuses">
+                <option value="all_statuses">All statuses</option>
                 @foreach($filters as $filter)
-                <option value="{{ $filter->status_id }}" @if($filter->status->id == $requst['status_id']) selected @endif>{{ $filter->status->name }}</option>
+                <option value="{{ $filter->status_id }}" @if(isset($request)) @if($filter->status_id == $request['status_id']) selected @endif @endif>{{ $filter->status->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+            <select class="form-control" name="filter[created_by_id]" id="filterCreators">
+                <option value="all_creators">All creators</option>
+                @foreach($filters as $filter)
+                <option value="{{ $filter->created_by_id }}" @if(isset($request)) @if($filter->created_by_id == $request['created_by_id']) selected @endif @endif>{{ $filter->creator->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+            <select class="form-control" name="filter[assigned_to_id]" id="filterAssigner">
+                <option value="all_assigners">All assigner</option>
+                @foreach($filters as $filter)
+                <option value="{{ $filter->assigned_to_id }}" @if(isset($request)) @if($filter->assigned_to_id == $request['assigned_to_id']) selected @endif @endif>{{ $filter->assigner->name }}</option>
                 @endforeach
             </select>
         </div>
