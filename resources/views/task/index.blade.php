@@ -16,7 +16,7 @@
             <select class="form-control" name="filter[status_id]" id="filter">
                 <option value="all">All</option>
                 @foreach($filters as $filter)
-                <option value="{{ $filter->status_id }}">{{ $filter->status->name }}</option>
+                <option value="{{ $filter->status_id }}" @if($filter->status->id == $requst['status_id']) selected @endif>{{ $filter->status->name }}</option>
                 @endforeach
             </select>
         </div>

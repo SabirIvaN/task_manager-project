@@ -17,10 +17,10 @@ Auth::routes(['verify' => true]);
 
 Route::get('/', 'WelcomeController@show');
 
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+
 Route::resource('/task', 'TaskController');
 
 Route::resource('/label', 'LabelController');
 
 Route::resource('/status', 'StatusController');
-
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');

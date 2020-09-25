@@ -34,7 +34,7 @@ class TaskController extends Controller
             }
         }
         $filters = Task::all();
-        return view('task.index', ['tasks' => $tasks, 'filters' => $filters]);
+        return view('task.index', ['tasks' => $tasks, 'filters' => $filters, 'request' => $request]);
     }
 
     /**
