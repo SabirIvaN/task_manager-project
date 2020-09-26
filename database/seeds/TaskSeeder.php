@@ -16,7 +16,7 @@ class TaskSeeder extends Seeder
         $task = factory(Task::class, 5)->create();
         $labels = factory(Label::class, 5)->create();
         $task->each(function (Task $task) use ($labels) {
-            $task->labels()->attach($labels->random(rand(0, 5))->pluck('id')->toArray());
+            $task->labels()->attach($labels->random(rand(1, 5))->pluck('id')->toArray());
         });
     }
 }
