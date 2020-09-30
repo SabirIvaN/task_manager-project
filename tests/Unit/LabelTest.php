@@ -5,8 +5,6 @@ namespace Tests\Unit;
 use App\User;
 use App\Label;
 use Tests\TestCase;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\App;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class LabelTest extends TestCase
@@ -18,7 +16,7 @@ class LabelTest extends TestCase
         parent::setUp();
         $this->user = factory(User::class)->create();
         $this->label = factory(Label::class)->create();
-        $this->data = Arr::only(factory(Label::class)->make()->toArray(), ['name']);
+        $this->data = ['name' => $this->label->name];
     }
 
     /**
@@ -52,7 +50,8 @@ class LabelTest extends TestCase
     public function testStore()
     {
         $this->actingAs($this->user)
-            ->post(route('label.store'), $this->data);
+            ->post(route('label.store'), $this->data)
+            ->assertRedirect();
         $this->assertDatabaseHas('labels', $this->data);
     }
 
@@ -76,7 +75,8 @@ class LabelTest extends TestCase
     public function testUpdate()
     {
         $this->actingAs($this->user)
-            ->patch(route('label.update', $this->label), $this->data);
+            ->patch(route('label.update', $this->label), $this->data)
+            ->assertRedirect();
         $this->assertDatabaseHas('labels', $this->data);
     }
 
@@ -88,7 +88,8 @@ class LabelTest extends TestCase
     public function testDelete()
     {
         $this->actingAs($this->user)
-            ->delete(route('label.destroy', $this->label));
-        $this->assertDeleted('labels', ['id' => $this->label]);
+            ->delete(route('label.destroy', $this->label))
+            ->assertRedirect();
+        $this->assertDeleted('labels', $this->data);
     }
 }

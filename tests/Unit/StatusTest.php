@@ -5,8 +5,6 @@ namespace Tests\Unit;
 use App\User;
 use App\Status;
 use Tests\TestCase;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\App;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class StatusTest extends TestCase
@@ -18,7 +16,7 @@ class StatusTest extends TestCase
         parent::setUp();
         $this->user = factory(User::class)->create();
         $this->status = factory(Status::class)->create();
-        $this->data = Arr::only(factory(Status::class)->make()->toArray(), ['name']);
+        $this->data = ['name' => $this->status->name];
     }
 
     /**
@@ -52,7 +50,8 @@ class StatusTest extends TestCase
     public function testStore()
     {
         $this->actingAs($this->user)
-            ->post(route('status.store'), $this->data);
+            ->post(route('status.store'), $this->data)
+            ->assertRedirect();
         $this->assertDatabaseHas('statuses', $this->data);
     }
 
@@ -76,7 +75,8 @@ class StatusTest extends TestCase
     public function testUpdate()
     {
         $this->actingAs($this->user)
-            ->patch(route('status.update', $this->status), $this->data);
+            ->patch(route('status.update', $this->status), $this->data)
+            ->assertRedirect();
         $this->assertDatabaseHas('statuses', $this->data);
     }
 
@@ -88,7 +88,8 @@ class StatusTest extends TestCase
     public function testDelete()
     {
         $this->actingAs($this->user)
-            ->delete(route('status.destroy', $this->status));
-        $this->assertDeleted('statuses', ['id' => $this->status]);
+            ->delete(route('status.destroy', $this->status))
+            ->assertRedirect();
+        $this->assertDeleted('statuses', $this->data);
     }
 }

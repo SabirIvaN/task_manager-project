@@ -19,15 +19,15 @@ class TaskTest extends TestCase
     {
         parent::setUp();
         $this->user = factory(User::class)->create();
-        $this->task = factory(Task::class)->create();
         $this->status = factory(Status::class)->create();
-        $this->data = Arr::only(factory(Task::class)->make()->toArray(), [
-            'name' => 'On testing',
-            'description' => 'Testing the functionality using',
-            'status_id' => $this->status->id,
-            'created_by_id' => $this->user->id,
-            'assigned_to_id' => $this->user->id,
-        ]);
+        $this->task = factory(Task::class)->create();
+        $this->data = [
+            'name' => $this->task->name,
+            'description' => $this->task->description,
+            'status_id' => $this->task->status_id,
+            'created_by_id' => $this->task->created_by_id,
+            'assigned_to_id' => $this->task->assigned_to_id,
+        ];
     }
 
     /**
@@ -97,7 +97,8 @@ class TaskTest extends TestCase
     public function testDelete()
     {
         $this->actingAs($this->user)
-            ->delete(route('task.destroy', $this->task));
+            ->delete(route('task.destroy', $this->task))
+            ->assertRedirect();
         $this->assertDeleted('tasks', ['id' => $this->task]);
     }
 }
