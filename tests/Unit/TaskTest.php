@@ -49,8 +49,7 @@ class TaskTest extends TestCase
             'created_by_id' => $task->created_by_id,
             'assigned_to_id' => $task->assigned_to_id,
         ];
-        $this->post(route('task.store'), $data)
-            ->assertRedirect();
+        $this->post(route('task.store'), $data);
         $this->assertDatabaseHas('tasks', $data);
     }
 

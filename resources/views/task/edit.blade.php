@@ -16,9 +16,9 @@
         </div>
         <div class="form-group col-md-6">
             <label for="asignee">{{ __('task.asignee') }}</label>
-            <select class="form-control" name="asignee" id="asignee">
-                @foreach($users as $user)
-                <option value="{{ $user->id }}" @if($user->id == $task->creator->id) selected @endif>{{ $user->name }}</option>
+            <select class="form-control" name="assignee" id="assignee">
+                @foreach($assigners as $assigner)
+                <option value="{{ $assigner->id }}" @if($assigner->id == $task->assigned_to_id) selected @endif>{{ $assigner->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -26,7 +26,7 @@
             <label for="status">{{ __('task.status') }}</label>
             <select class="form-control mr-2" id="status" name="status">
                 @foreach($statuses as $status)
-                <option value="{{ $status->id }}" @if($user->id == $task->status->id) selected @endif>{{ $status->name }}</option>
+                <option value="{{ $status->id }}" @if($status->id == $task->status_id) selected @endif>{{ $status->name }}</option>
                 @endforeach
             </select>
         </div>
