@@ -7,6 +7,7 @@ use App\User;
 use App\Task;
 use App\Label;
 use App\Status;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -65,14 +66,14 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
         $task = new Task();
-        $task->name = $request->post('name');
-        $task->description = $request->post('description');
-        $task->status()->associate(Status::find($request->post('status')));
+        $task->fill($data);
+        $task->status()->associate(Arr::get($data, 'status'));
         $task->creator()->associate(Auth::user());
-        $task->assigner()->associate(User::find($request->post('assignee')));
+        $task->assigner()->associate(Arr::get($data, 'assignee'));
         $task->save();
-        $task->labels()->sync(Label::find($request->post('label')));
+        $task->labels()->sync(Arr::get($data, 'label', []));
         flash(__('task.store'))->success()->important();
         return redirect()->route('task.index');
     }
@@ -104,18 +105,14 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Task $task)
     {
-        $task = Task::find($id);
-        $task->status()->dissociate();
-        $task->assigner()->dissociate();
-        $task->labels()->detach();
-        $task->name = $request->post('name');
-        $task->description = $request->post('description');
-        $task->status()->associate(Status::find($request->post('status')));
-        $task->assigner()->associate(User::find($request->post('assignee')));
+        $data = $request->all();
+        $task->fill($data);
+        $task->status()->associate(Arr::get($data, 'status'));
+        $task->assigner()->associate(Arr::get($data, 'assignee'));
         $task->save();
-        $task->labels()->sync(Label::find($request->post('label')));
+        $task->labels()->sync(Arr::get($data, 'label', []));
         flash(__('task.update'))->important();
         return redirect()->route('task.index');
     }
@@ -126,9 +123,8 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Task $task)
     {
-        $task = Task::find($id);
         $task->status()->dissociate();
         $task->creator()->dissociate();
         $task->assigner()->dissociate();

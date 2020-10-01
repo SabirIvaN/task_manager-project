@@ -1,7 +1,3 @@
-<?php
-
-namespace Tests\Unit;
-
 use App\Task;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -49,7 +45,8 @@ class TaskTest extends TestCase
             'created_by_id' => $task->created_by_id,
             'assigned_to_id' => $task->assigned_to_id,
         ];
-        $this->post(route('task.store'), $data);
+        $this->post(route('task.store'), $data)
+            ->assertRedirect;
         $this->assertDatabaseHas('tasks', $data);
     }
 
@@ -95,7 +92,7 @@ class TaskTest extends TestCase
         $task = factory(Task::class)->create();
         $task->creator()->associate(auth()->user());
         $task->save();
-        $this->delete(route('task.destroy', $task));
-        $this->assertDeleted('tasks', ['id' => $task->id]);
+        $response = $this->delete(route('task.destroy', $task));
+        $this->assertDatabaseMissing('tasks', ['id' => $task->id]);
     }
 }
