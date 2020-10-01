@@ -11,9 +11,8 @@ class WelcomeTest extends TestCase
      *
      * @return void
      */
-    public function testIndex()
+    public function testindex()
     {
-        $response = $this->get('/');
-        $response->assertOk();
+        $this->get('/')->assertOk();
     }
 }

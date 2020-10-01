@@ -5,19 +5,13 @@ namespace Tests\Unit;
 use App\User;
 use App\Label;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class LabelTest extends TestCase
 {
+    use WithoutMiddleware;
     use DatabaseMigrations;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->user = factory(User::class)->create();
-        $this->label = factory(Label::class)->create();
-        $this->data = ['name' => $this->label->name];
-    }
 
     /**
      * A basic unit test index.
@@ -26,8 +20,8 @@ class LabelTest extends TestCase
      */
     public function testIndex()
     {
-        $response = $this->get(route('label.index'));
-        $response->assertOk();
+        $this->get(route('label.index'))
+            ->assertOk();
     }
 
     /**
@@ -37,9 +31,8 @@ class LabelTest extends TestCase
      */
     public function testCreate()
     {
-        $response = $this->actingAs($this->user)
-            ->get(route('label.create'));
-        $response->assertOk();
+        $this->get(route('label.create'))
+            ->assertOk();
     }
 
     /**
@@ -49,10 +42,11 @@ class LabelTest extends TestCase
      */
     public function testStore()
     {
-        $this->actingAs($this->user)
-            ->post(route('label.store'), $this->data)
+        $label = factory(Label::class)->create();
+        $data = ['name' => $label->name];
+        $this->post(route('label.store'), $data)
             ->assertRedirect();
-        $this->assertDatabaseHas('labels', $this->data);
+        $this->assertDatabaseHas('labels', $data);
     }
 
     /**
@@ -62,9 +56,9 @@ class LabelTest extends TestCase
      */
     public function testEdit()
     {
-        $response = $this->actingAs($this->user)
-            ->get(route('label.edit', $this->label));
-        $response->assertOk();
+        $label = factory(Label::class)->create();
+        $this->get(route('label.edit', $label))
+            ->assertOk();
     }
 
     /**
@@ -74,10 +68,11 @@ class LabelTest extends TestCase
      */
     public function testUpdate()
     {
-        $this->actingAs($this->user)
-            ->patch(route('label.update', $this->label), $this->data)
+        $label = factory(Label::class)->create();
+        $data = ['name' => $label->name];
+        $this->patch(route('label.update', $label), $data)
             ->assertRedirect();
-        $this->assertDatabaseHas('labels', $this->data);
+        $this->assertDatabaseHas('labels', $data);
     }
 
     /**
@@ -87,9 +82,12 @@ class LabelTest extends TestCase
      */
     public function testDelete()
     {
-        $this->actingAs($this->user)
-            ->delete(route('label.destroy', $this->label))
+        $label = factory(Label::class)->create();
+        $data = ['name' => $label->name];
+        $this->post(route('label.store'), $data)
             ->assertRedirect();
-        $this->assertDeleted('labels', $this->data);
+        $this->delete(route('label.destroy', $label))
+            ->assertRedirect();
+        $this->assertDatabaseHas('labels', $data);
     }
 }

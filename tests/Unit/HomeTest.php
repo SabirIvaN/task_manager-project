@@ -17,14 +17,14 @@ class HomeTest extends TestCase
     }
 
     /**
-     * A basic unit test index.
+     * A basic unit test example.
      *
      * @return void
      */
-    public function testIndex()
+    public function testExample()
     {
-        $response = $this->actingAs($this->user)
-            ->get('/home');
-        $response->assertOk();
+        $this->actingAs($this->user)
+            ->get('/home')
+            ->assertOk();
     }
 }

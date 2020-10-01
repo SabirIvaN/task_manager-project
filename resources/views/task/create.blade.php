@@ -15,7 +15,7 @@
         </div>
         <div class="form-group col-md-6">
             <label for="asignee">{{ __('task.asignee') }}</label>
-            <select class="form-control" name="asignee" id="asignee">
+            <select class="form-control" name="assignee" id="assignee">
                 @foreach($users as $user)
                 <option value="{{ $user->id }}">{{ $user->name }}</option>
                 @endforeach

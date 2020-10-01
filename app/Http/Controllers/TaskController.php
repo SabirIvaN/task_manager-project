@@ -25,12 +25,12 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         $tasks = QueryBuilder::for(Task::class)
-        ->allowedFilters([
-            AllowedFilter::exact('status_id')->ignore('all_statuses'),
-            AllowedFilter::exact('created_by_id')->ignore('all_creators'),
-            AllowedFilter::exact('assigned_to_id')->ignore('all_assigners'),
-        ])
-        ->get();
+            ->allowedFilters([
+                AllowedFilter::exact('status_id')->ignore('all_statuses'),
+                AllowedFilter::exact('created_by_id')->ignore('all_creators'),
+                AllowedFilter::exact('assigned_to_id')->ignore('all_assigners'),
+            ])
+            ->get();
         $request = $request->post('filter');
         $filters = Task::all();
         return view('task.index', ['tasks' => $tasks, 'filters' => $filters, 'request' => $request]);
@@ -60,11 +60,11 @@ class TaskController extends Controller
         $task = new Task();
         $task->name = $request->post('name');
         $task->description = $request->post('description');
-        $labels = Label::find($request->post('label'));
-        Status::find($request->post('status'))->tasks()->save($task);
-        Auth::user()->createdBy()->save($task);
-        User::find($request->post('asignee'))->assignedTo()->save($task);
-        $task->labels()->attach($labels);
+        $task->status()->associate(Status::find($request->post('status')));
+        $task->creator()->associate(Auth::user());
+        $task->assigner()->associate(User::find($request->post('assignee')));
+        $task->save();
+        $task->labels()->sync(Label::find($request->post('label')));
         flash(__('task.store'))->success()->important();
         return redirect()->route('task.index');
     }
@@ -99,10 +99,9 @@ class TaskController extends Controller
         $task->labels()->detach();
         $task->name = $request->post('name');
         $task->description = $request->post('description');
-        $labels = Label::find($request->post('label'));
         Status::find($request->post('status'))->tasks()->save($task);
         User::find($request->post('asignee'))->assignedTo()->save($task);
-        $task->labels()->attach($labels);
+        $task->labels()->attach(Label::find($request->post('label')));
         flash(__('task.update'))->important();
         return redirect()->route('task.index');
     }

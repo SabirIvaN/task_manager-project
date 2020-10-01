@@ -2,22 +2,15 @@
 
 namespace Tests\Unit;
 
-use App\User;
 use App\Status;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class StatusTest extends TestCase
 {
+    use WithoutMiddleware;
     use DatabaseMigrations;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->user = factory(User::class)->create();
-        $this->status = factory(Status::class)->create();
-        $this->data = ['name' => $this->status->name];
-    }
 
     /**
      * A basic unit test index.
@@ -26,8 +19,8 @@ class StatusTest extends TestCase
      */
     public function testIndex()
     {
-        $response = $this->get(route('status.index'));
-        $response->assertOk();
+        $this->get(route('status.index'))
+            ->assertOk();
     }
 
     /**
@@ -37,22 +30,22 @@ class StatusTest extends TestCase
      */
     public function testCreate()
     {
-        $response = $this->actingAs($this->user)
-            ->get(route('status.create'));
-        $response->assertOk();
+        $this->get(route('status.create'))
+            ->assertOk();
     }
 
     /**
-     * A basic unit test create.
+     * A basic unit test store.
      *
      * @return void
      */
     public function testStore()
     {
-        $this->actingAs($this->user)
-            ->post(route('status.store'), $this->data)
+        $status = factory(Status::class)->create();
+        $data = ['name' => $status->name];
+        $this->post(route('status.store'), $data)
             ->assertRedirect();
-        $this->assertDatabaseHas('statuses', $this->data);
+        $this->assertDatabaseHas('statuses', $data);
     }
 
     /**
@@ -62,22 +55,23 @@ class StatusTest extends TestCase
      */
     public function testEdit()
     {
-        $response = $this->actingAs($this->user)
-            ->get(route('status.edit', $this->status));
-        $response->assertOk();
+        $status = factory(Status::class)->create();
+        $this->get(route('status.edit', $status))
+            ->assertOk();
     }
 
     /**
-     * A basic unit test update.
+     * A basic unit test udpate.
      *
      * @return void
      */
     public function testUpdate()
     {
-        $this->actingAs($this->user)
-            ->patch(route('status.update', $this->status), $this->data)
+        $status = factory(Status::class)->create();
+        $data = ['name' => $status->name];
+        $this->patch(route('status.update', $status), $data)
             ->assertRedirect();
-        $this->assertDatabaseHas('statuses', $this->data);
+        $this->assertDatabaseHas('statuses', $data);
     }
 
     /**
@@ -87,9 +81,10 @@ class StatusTest extends TestCase
      */
     public function testDelete()
     {
-        $this->actingAs($this->user)
-            ->delete(route('status.destroy', $this->status))
+        $status = factory(Status::class)->create();
+        $data = ['name' => $status->name];
+        $this->delete(route('status.destroy', $status))
             ->assertRedirect();
-        $this->assertDeleted('statuses', $this->data);
+        $this->assertDeleted('statuses', $data);
     }
 }

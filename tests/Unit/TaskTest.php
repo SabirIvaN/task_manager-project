@@ -2,33 +2,15 @@
 
 namespace Tests\Unit;
 
-use App\User;
 use App\Task;
-use App\Label;
-use App\Status;
 use Tests\TestCase;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\App;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class TaskTest extends TestCase
 {
+    use WithoutMiddleware;
     use DatabaseMigrations;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->user = factory(User::class)->create();
-        $this->status = factory(Status::class)->create();
-        $this->task = factory(Task::class)->create();
-        $this->data = [
-            'name' => $this->task->name,
-            'description' => $this->task->description,
-            'status_id' => $this->task->status_id,
-            'created_by_id' => $this->task->created_by_id,
-            'assigned_to_id' => $this->task->assigned_to_id,
-        ];
-    }
 
     /**
      * A basic unit test index.
@@ -37,8 +19,8 @@ class TaskTest extends TestCase
      */
     public function testIndex()
     {
-        $response = $this->get(route('task.index'));
-        $response->assertOk();
+        $this->get(route('task.index'))
+            ->assertOk();
     }
 
     /**
@@ -48,9 +30,8 @@ class TaskTest extends TestCase
      */
     public function testCreate()
     {
-        $response = $this->actingAs($this->user)
-            ->get(route('task.create'));
-        $response->assertOk();
+        $this->get(route('task.create'))
+            ->assertOk();
     }
 
     /**
@@ -60,9 +41,17 @@ class TaskTest extends TestCase
      */
     public function testStore()
     {
-        $this->actingAs($this->user)
-            ->post(route('task.store'), $this->data);
-        $this->assertDatabaseHas('tasks', $this->data);
+        $task = factory(Task::class)->create();
+        $data = [
+            'name' => $task->name,
+            'description' => $task->description,
+            'status_id' => $task->status_id,
+            'created_by_id' => $task->created_by_id,
+            'assigned_to_id' => $task->assigned_to_id,
+        ];
+        $this->post(route('task.store'), $data)
+            ->assertRedirect();
+        $this->assertDatabaseHas('tasks', $data);
     }
 
     /**
@@ -72,9 +61,9 @@ class TaskTest extends TestCase
      */
     public function testEdit()
     {
-        $response = $this->actingAs($this->user)
-            ->get(route('task.edit', $this->task));
-        $response->assertOk();
+        $task = factory(Task::class)->create();
+        $this->get(route('task.edit', $task))
+            ->assertOk();
     }
 
     /**
@@ -84,9 +73,17 @@ class TaskTest extends TestCase
      */
     public function testUpdate()
     {
-        $this->actingAs($this->user)
-            ->patch(route('task.update', $this->task), $this->data);
-        $this->assertDatabaseHas('tasks', $this->data);
+        $task = factory(Task::class)->create();
+        $data = [
+            'name' => $task->name,
+            'description' => $task->description,
+            'status_id' => $task->status_id,
+            'created_by_id' => $task->created_by_id,
+            'assigned_to_id' => $task->assigned_to_id,
+        ];
+        $task = factory(Task::class)->create();
+        $this->patch(route('task.update', $task), $data);
+        $this->assertDatabaseHas('tasks', $data);
     }
 
     /**
@@ -96,9 +93,16 @@ class TaskTest extends TestCase
      */
     public function testDelete()
     {
-        $this->actingAs($this->user)
-            ->delete(route('task.destroy', $this->task))
-            ->assertRedirect();
-        $this->assertDeleted('tasks', ['id' => $this->task]);
+        $task = factory(Task::class)->create();
+        $data = [
+            'name' => $task->name,
+            'description' => $task->description,
+            'status_id' => $task->status_id,
+            'created_by_id' => $task->created_by_id,
+            'assigned_to_id' => $task->assigned_to_id,
+        ];
+        $this->post(route('task.store'), $data);
+        $this->delete(route('task.destroy', $task));
+        $this->assertDeleted('tasks', $data);
     }
 }
