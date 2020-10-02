@@ -5,12 +5,10 @@ namespace Tests\Unit;
 use App\Task;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class TaskTest extends TestCase
 {
     use WithoutMiddleware;
-    use DatabaseMigrations;
 
     /**
      * A basic unit test index.
@@ -42,14 +40,9 @@ class TaskTest extends TestCase
     public function testStore()
     {
         $task = factory(Task::class)->create();
-        $data = [
-            'name' => $task->name,
-            'description' => $task->description,
-            'status_id' => $task->status_id,
-            'created_by_id' => $task->created_by_id,
-            'assigned_to_id' => $task->assigned_to_id,
-        ];
-        $this->post(route('task.store'), $data);
+        $data = ['id' => $task->id];
+        $this->post(route('task.store'), $data)
+            ->assertSee('task');
         $this->assertDatabaseHas('tasks', $data);
     }
 
@@ -73,15 +66,9 @@ class TaskTest extends TestCase
     public function testUpdate()
     {
         $task = factory(Task::class)->create();
-        $data = [
-            'name' => $task->name,
-            'description' => $task->description,
-            'status_id' => $task->status_id,
-            'created_by_id' => $task->created_by_id,
-            'assigned_to_id' => $task->assigned_to_id,
-        ];
-        $task = factory(Task::class)->create();
-        $this->patch(route('task.update', $task), $data);
+        $data = ['id' => $task->id];
+        $this->patch(route('task.update', $task), $data)
+            ->assertSee('task');
         $this->assertDatabaseHas('tasks', $data);
     }
 
@@ -93,9 +80,9 @@ class TaskTest extends TestCase
     public function testDelete()
     {
         $task = factory(Task::class)->create();
-        $task->creator()->associate(auth()->user());
-        $task->save();
-        $this->delete(route('task.destroy', $task));
-        $this->assertDeleted('tasks', ['id' => $task->id]);
+        $data = ['id' => $task->id];
+        $this->delete(route('task.destroy', $task))
+            ->assertSee('task');
+        $this->assertSoftDeleted('tasks', $data);
     }
 }

@@ -6,12 +6,10 @@ use App\User;
 use App\Label;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class LabelTest extends TestCase
 {
     use WithoutMiddleware;
-    use DatabaseMigrations;
 
     /**
      * A basic unit test index.
@@ -83,11 +81,9 @@ class LabelTest extends TestCase
     public function testDelete()
     {
         $label = factory(Label::class)->create();
-        $data = ['name' => $label->name];
-        $this->post(route('label.store'), $data)
-            ->assertRedirect();
+        $data = ['name' => $label->id];
         $this->delete(route('label.destroy', $label))
             ->assertRedirect();
-        $this->assertDatabaseHas('labels', $data);
+        $this->assertDeleted('labels', $data);
     }
 }

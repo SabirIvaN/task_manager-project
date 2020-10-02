@@ -5,12 +5,10 @@ namespace Tests\Unit;
 use App\Status;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class StatusTest extends TestCase
 {
     use WithoutMiddleware;
-    use DatabaseMigrations;
 
     /**
      * A basic unit test index.
@@ -82,7 +80,7 @@ class StatusTest extends TestCase
     public function testDelete()
     {
         $status = factory(Status::class)->create();
-        $data = ['name' => $status->name];
+        $data = ['name' => $status->id];
         $this->delete(route('status.destroy', $status))
             ->assertRedirect();
         $this->assertDeleted('statuses', $data);
