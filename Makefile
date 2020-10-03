@@ -1,9 +1,11 @@
 install:
-	php -r "file_exists('.env') || copy('.env.example', '.env');"
 	composer install
-	touch database/database.sqlite
+	php -r "file_exists('.env') || copy('.env.example', '.env');"
 	php artisan key:generate
+	touch database/database.sqlite
 	chmod -R 777 storage bootstrap/cache
+seed:
+	php artisan db:seed
 lint:
 	composer run-script phpcs -- --standard=PSR12 app tests
 test:
