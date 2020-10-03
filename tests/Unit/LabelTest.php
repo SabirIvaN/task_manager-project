@@ -5,10 +5,12 @@ namespace Tests\Unit;
 use App\User;
 use App\Label;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class LabelTest extends TestCase
 {
+    use RefreshDatabase;
     use WithoutMiddleware;
 
     /**
@@ -43,7 +45,7 @@ class LabelTest extends TestCase
         $label = factory(Label::class)->create();
         $data = ['name' => $label->name];
         $this->post(route('label.store'), $data)
-            ->assertRedirect();
+            ->assertSee('label');
         $this->assertDatabaseHas('labels', $data);
     }
 
@@ -69,7 +71,7 @@ class LabelTest extends TestCase
         $label = factory(Label::class)->create();
         $data = ['name' => $label->name];
         $this->patch(route('label.update', $label), $data)
-            ->assertRedirect();
+            ->assertSee('label');
         $this->assertDatabaseHas('labels', $data);
     }
 
@@ -83,7 +85,7 @@ class LabelTest extends TestCase
         $label = factory(Label::class)->create();
         $data = ['name' => $label->id];
         $this->delete(route('label.destroy', $label))
-            ->assertRedirect();
+            ->assertSee('label');
         $this->assertDeleted('labels', $data);
     }
 }

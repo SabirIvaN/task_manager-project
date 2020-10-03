@@ -17,7 +17,9 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('description')->nullable();
-            $table->unsignedInteger('status_id')->default(1);
+            $table->unsignedInteger('status_id')
+                ->nullable()
+                ->default(1);
             $table->foreign('status_id')
                 ->references('id')
                 ->on('statuses')

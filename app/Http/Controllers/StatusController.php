@@ -42,8 +42,9 @@ class StatusController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
         $status = new Status();
-        $status->name = $request->post('name');
+        $status->fill($data);
         $status->save();
         flash(__('status.store'))->success()->important();
         return redirect()->route('status.index');
@@ -65,13 +66,13 @@ class StatusController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Status  $status
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Status $status)
     {
-        $status = Status::find($id);
-        $status->name = $request->post('name');
+        $data = $request->all();
+        $status->fill($data);
         $status->save();
         flash(__('status.update'))->important();
         return redirect()->route('status.index');
@@ -80,12 +81,16 @@ class StatusController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Status  $status
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Status $status)
     {
-        $status = Status::find($id);
+        $tasks = $status->tasks;
+        foreach ($tasks as $task) {
+            $task->status()->dissociate();
+            $task->save();
+        }
         $status->delete();
         flash(__('status.destroy'))->error()->important();
         return redirect()->route('status.index');

@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Str;
 
-$herokuDbUrl = parse_url(env('DATABASE_URL', 'postgres://jstbdazpduuggw:ef301311293d4729e48e5e4deaf5163b2d1ab73c64c99c8fdb129c243bd19041@ec2-54-247-71-245.eu-west-1.compute.amazonaws.com:5432/d2c83iivb0ahvc'));
+$herokuUrl = 'postgres://jstbdazpduuggw:ef301311293d4729e48e5e4deaf5163b2d1ab73c64c99c8fdb129c243bd19041@ec2-54-247-71-245.eu-west-1.compute.amazonaws.com:5432/d2c83iivb0ahvc';
+$herokuDbUrl = parse_url(env('DATABASE_URL', $herokuUrl));
 
 return [
 
@@ -125,7 +126,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_'),
         ],
 
         'default' => [

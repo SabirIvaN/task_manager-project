@@ -4,10 +4,12 @@ namespace Tests\Unit;
 
 use App\Task;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class TaskTest extends TestCase
 {
+    use RefreshDatabase;
     use WithoutMiddleware;
 
     /**

@@ -4,10 +4,12 @@ namespace Tests\Unit;
 
 use App\Status;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class StatusTest extends TestCase
 {
+    use RefreshDatabase;
     use WithoutMiddleware;
 
     /**
@@ -42,7 +44,7 @@ class StatusTest extends TestCase
         $status = factory(Status::class)->create();
         $data = ['name' => $status->name];
         $this->post(route('status.store'), $data)
-            ->assertRedirect();
+            ->assertSee('status');
         $this->assertDatabaseHas('statuses', $data);
     }
 
@@ -68,7 +70,7 @@ class StatusTest extends TestCase
         $status = factory(Status::class)->create();
         $data = ['name' => $status->name];
         $this->patch(route('status.update', $status), $data)
-            ->assertRedirect();
+            ->assertSee('status');
         $this->assertDatabaseHas('statuses', $data);
     }
 
@@ -82,7 +84,7 @@ class StatusTest extends TestCase
         $status = factory(Status::class)->create();
         $data = ['name' => $status->id];
         $this->delete(route('status.destroy', $status))
-            ->assertRedirect();
+            ->assertSee('status');
         $this->assertDeleted('statuses', $data);
     }
 }

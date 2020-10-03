@@ -16,7 +16,9 @@
             <select class="form-control" name="filter[status_id]" id="filterStatuses">
                 <option value="all_statuses">All statuses</option>
                 @foreach($filters as $filter)
+                @if(isset($filter->status_id))
                 <option value="{{ $filter->status_id }}" @if(isset($request)) @if($filter->status_id == $request['status_id']) selected @endif @endif>{{ $filter->status->name }}</option>
+                @endif
                 @endforeach
             </select>
         </div>
@@ -24,7 +26,9 @@
             <select class="form-control" name="filter[created_by_id]" id="filterCreators">
                 <option value="all_creators">All creators</option>
                 @foreach($filters as $filter)
+                @if(isset($filter->created_by_id))
                 <option value="{{ $filter->created_by_id }}" @if(isset($request)) @if($filter->created_by_id == $request['created_by_id']) selected @endif @endif>{{ $filter->creator->name }}</option>
+                @endif
                 @endforeach
             </select>
         </div>
@@ -32,7 +36,9 @@
             <select class="form-control" name="filter[assigned_to_id]" id="filterAssigner">
                 <option value="all_assigners">All assigner</option>
                 @foreach($filters as $filter)
+                @if(isset($filter->assigned_to_id))
                 <option value="{{ $filter->assigned_to_id }}" @if(isset($request)) @if($filter->assigned_to_id == $request['assigned_to_id']) selected @endif @endif>{{ $filter->assigner->name }}</option>
+                @endif
                 @endforeach
             </select>
         </div>
@@ -60,14 +66,26 @@
                 <th scope="row">{{ $task->id }}</th>
                 <td>{{ $task->name }}</td>
                 <td>{{ $task->description }}</td>
-                <td>{{ $task->status->name }}</td>
+                <td>
+                @if(isset($task->status->name))
+                {{ $task->status->name }}
+                @endif
+                </td>
                 <td>
                 @foreach($task->labels as $label)
                 {{ $label->name .  " "}}
                 @endforeach
                 </td>
-                <td>{{ $task->creator->name }}</td>
-                <td>{{ $task->assigner->name }}</td>
+                <td>
+                @if(isset($task->creator->name))
+                {{ $task->creator->name }}
+                @endif
+                </td>
+                <td>
+                @if(isset($task->assigner->name))
+                {{ $task->assigner->name }}
+                @endif
+                </td>
                 <td>{{ $task->created_at }}</td>
                 @if(Auth::user())
                 @if(Auth::user()->hasVerifiedEmail())

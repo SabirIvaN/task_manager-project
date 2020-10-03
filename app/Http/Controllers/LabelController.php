@@ -41,8 +41,9 @@ class LabelController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
         $label = new Label();
-        $label->name = $request->post('name');
+        $label->fill($data);
         $label->save();
         flash(__('label.store'))->success()->important();
         return redirect()->route('label.index');
@@ -64,13 +65,13 @@ class LabelController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Label  $label
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Label $label)
     {
-        $label = Label::find($id);
-        $label->name = $request->post('name');
+        $data = $request->all();
+        $label->fill($data);
         $label->save();
         flash(__('label.update'))->important();
         return redirect()->route('label.index');
@@ -79,12 +80,11 @@ class LabelController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Label  $label
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Label $label)
     {
-        $label = Label::find($id);
         $label->tasks()->detach();
         $label->delete();
         flash(__('label.destroy'))->error()->important();
