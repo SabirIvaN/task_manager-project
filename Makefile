@@ -5,6 +5,7 @@ install:
 	touch database/database.sqlite
 	chmod -R 777 storage bootstrap/cache
 seed:
+	php artisan migrate:fresh
 	php artisan db:seed
 lint:
 	composer run-script phpcs -- --standard=PSR12 app tests
