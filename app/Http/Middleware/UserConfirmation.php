@@ -12,7 +12,6 @@ class UserConfirmation
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
-     * @return mixed
      */
     public function handle($request, Closure $next)
     {
@@ -21,6 +20,6 @@ class UserConfirmation
                 return $next($request);
             }
         }
-        return abort(404);
+        abort(404);
     }
 }

@@ -16,7 +16,7 @@ class StatusController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -27,7 +27,7 @@ class StatusController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -38,7 +38,7 @@ class StatusController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -54,7 +54,7 @@ class StatusController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
@@ -67,7 +67,7 @@ class StatusController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Status  $status
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Status $status)
     {
@@ -82,7 +82,7 @@ class StatusController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Status  $status
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Status $status)
     {

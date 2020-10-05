@@ -3,7 +3,7 @@
 /**
  * user confirmation
  *
- * @return true\false
+ * @return true|false
  */
 function confirmation()
 {

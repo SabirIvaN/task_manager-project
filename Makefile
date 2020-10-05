@@ -7,6 +7,8 @@ install:
 seed:
 	php artisan migrate:fresh
 	php artisan db:seed
+analyse:
+	./vendor/bin/phpstan analyse --memory-limit=2G
 lint:
 	composer run-script phpcs -- --standard=PSR12 app tests
 test:
