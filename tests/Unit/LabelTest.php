@@ -45,7 +45,8 @@ class LabelTest extends TestCase
         $label = factory(Label::class)->create();
         $data = ['name' => $label->name];
         $this->post(route('label.store'), $data)
-            ->assertSee('label');
+            ->assertSessionHasNoErrors()
+            ->assertRedirect();
         $this->assertDatabaseHas('labels', $data);
     }
 
@@ -71,7 +72,8 @@ class LabelTest extends TestCase
         $label = factory(Label::class)->create();
         $data = ['name' => $label->name];
         $this->patch(route('label.update', $label), $data)
-            ->assertSee('label');
+            ->assertSessionHasNoErrors()
+            ->assertRedirect();
         $this->assertDatabaseHas('labels', $data);
     }
 
@@ -85,7 +87,8 @@ class LabelTest extends TestCase
         $label = factory(Label::class)->create();
         $data = ['name' => $label->id];
         $this->delete(route('label.destroy', $label))
-            ->assertSee('label');
+            ->assertSessionHasNoErrors()
+            ->assertRedirect();
         $this->assertDeleted('labels', $data);
     }
 }

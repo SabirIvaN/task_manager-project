@@ -44,7 +44,8 @@ class StatusTest extends TestCase
         $status = factory(Status::class)->create();
         $data = ['name' => $status->name];
         $this->post(route('status.store'), $data)
-            ->assertSee('status');
+            ->assertSessionHasNoErrors()
+            ->assertRedirect();
         $this->assertDatabaseHas('statuses', $data);
     }
 
@@ -70,7 +71,8 @@ class StatusTest extends TestCase
         $status = factory(Status::class)->create();
         $data = ['name' => $status->name];
         $this->patch(route('status.update', $status), $data)
-            ->assertSee('status');
+            ->assertSessionHasNoErrors()
+            ->assertRedirect();
         $this->assertDatabaseHas('statuses', $data);
     }
 
@@ -84,7 +86,8 @@ class StatusTest extends TestCase
         $status = factory(Status::class)->create();
         $data = ['name' => $status->id];
         $this->delete(route('status.destroy', $status))
-            ->assertSee('status');
+            ->assertSessionHasNoErrors()
+            ->assertRedirect();
         $this->assertDeleted('statuses', $data);
     }
 }

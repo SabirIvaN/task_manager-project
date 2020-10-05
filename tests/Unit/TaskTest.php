@@ -44,7 +44,8 @@ class TaskTest extends TestCase
         $task = factory(Task::class)->create();
         $data = ['id' => $task->id];
         $this->post(route('task.store'), $data)
-            ->assertSee('task');
+            ->assertSessionHasNoErrors()
+            ->assertRedirect();
         $this->assertDatabaseHas('tasks', $data);
     }
 
@@ -70,7 +71,8 @@ class TaskTest extends TestCase
         $task = factory(Task::class)->create();
         $data = ['id' => $task->id];
         $this->patch(route('task.update', $task), $data)
-            ->assertSee('task');
+            ->assertSessionHasNoErrors()
+            ->assertRedirect();
         $this->assertDatabaseHas('tasks', $data);
     }
 
@@ -84,7 +86,8 @@ class TaskTest extends TestCase
         $task = factory(Task::class)->create();
         $data = ['id' => $task->id];
         $this->delete(route('task.destroy', $task))
-            ->assertSee('task');
+            ->assertSessionHasNoErrors()
+            ->assertRedirect();
         $this->assertSoftDeleted('tasks', $data);
     }
 }
