@@ -88,6 +88,6 @@ class TaskTest extends TestCase
         $this->delete(route('task.destroy', $task))
             ->assertSessionHasNoErrors()
             ->assertRedirect();
-        $this->assertSoftDeleted('tasks', $data);
+        $this->assertDeleted('tasks', $data);
     }
 }
