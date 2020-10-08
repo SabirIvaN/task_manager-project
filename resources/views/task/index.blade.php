@@ -27,7 +27,7 @@
                 <option value="all_creators">All creators</option>
                 @foreach($filters as $filter)
                 @if(isset($filter->created_by_id))
-                <option value="{{ $filter->created_by_id }}" @if(isset($request)) @if($filter->created_by_id == $request['created_by_id']) selected @endif @endif>{{ $filter->creator->name }}</option>
+                <option value="{{ $filter->created_by_id }}" @if(isset($request)) @if($filter->created_by_id == $request['created_by_id']) selected @endif @endif>{{ $filter->createdBy->name }}</option>
                 @endif
                 @endforeach
             </select>
@@ -37,7 +37,7 @@
                 <option value="all_assigners">All assigner</option>
                 @foreach($filters as $filter)
                 @if(isset($filter->assigned_to_id))
-                <option value="{{ $filter->assigned_to_id }}" @if(isset($request)) @if($filter->assigned_to_id == $request['assigned_to_id']) selected @endif @endif>{{ $filter->assigner->name }}</option>
+                <option value="{{ $filter->assigned_to_id }}" @if(isset($request)) @if($filter->assigned_to_id == $request['assigned_to_id']) selected @endif @endif>{{ $filter->assignedTo->name }}</option>
                 @endif
                 @endforeach
             </select>

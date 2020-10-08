@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Status;
 use Tests\TestCase;
+use Illuminate\Support\Arr;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
@@ -41,8 +42,8 @@ class StatusTest extends TestCase
      */
     public function testStore()
     {
-        $status = factory(Status::class)->create();
-        $data = ['name' => $status->name];
+        $status = factory(Status::class)->make()->toArray();
+        $data = Arr::only($status, ['name']);
         $this->post(route('status.store'), $data)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
@@ -69,8 +70,9 @@ class StatusTest extends TestCase
     public function testUpdate()
     {
         $status = factory(Status::class)->create();
-        $data = ['name' => $status->name];
-        $this->patch(route('status.update', $status), $data)
+        $factoryData = factory(Status::class)->make()->toArray();
+        $data = Arr::only($factoryData, ['name']);
+        $this->put(route('status.update', $status), $data)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
         $this->assertDatabaseHas('statuses', $data);
@@ -84,7 +86,8 @@ class StatusTest extends TestCase
     public function testDelete()
     {
         $status = factory(Status::class)->create();
-        $data = ['name' => $status->id];
+        $factoryData = factory(Status::class)->make()->toArray();
+        $data = Arr::only($factoryData, ['name']);
         $this->delete(route('status.destroy', $status))
             ->assertSessionHasNoErrors()
             ->assertRedirect();

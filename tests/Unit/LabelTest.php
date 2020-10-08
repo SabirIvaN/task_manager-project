@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
-use App\User;
 use App\Label;
 use Tests\TestCase;
+use Illuminate\Support\Arr;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
@@ -42,8 +42,8 @@ class LabelTest extends TestCase
      */
     public function testStore()
     {
-        $label = factory(Label::class)->create();
-        $data = ['name' => $label->name];
+        $label = factory(Label::class)->make()->toArray();
+        $data = Arr::only($label, ['name']);
         $this->post(route('label.store'), $data)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
@@ -70,8 +70,9 @@ class LabelTest extends TestCase
     public function testUpdate()
     {
         $label = factory(Label::class)->create();
-        $data = ['name' => $label->name];
-        $this->patch(route('label.update', $label), $data)
+        $factoryData = factory(Label::class)->make()->toArray();
+        $data = Arr::only($factoryData, ['name']);
+        $this->put(route('label.update', $label), $data)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
         $this->assertDatabaseHas('labels', $data);
@@ -85,7 +86,8 @@ class LabelTest extends TestCase
     public function testDelete()
     {
         $label = factory(Label::class)->create();
-        $data = ['name' => $label->id];
+        $factoryData = factory(Label::class)->make()->toArray();
+        $data = Arr::only($factoryData, ['name']);
         $this->delete(route('label.destroy', $label))
             ->assertSessionHasNoErrors()
             ->assertRedirect();

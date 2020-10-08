@@ -67,14 +67,12 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
         $task = new Task();
+        $data = $request->all();
         $task->fill($data);
-        $task->status()->associate(Arr::get($data, 'status'));
-        $task->creator()->associate(Auth::user());
-        $task->assigner()->associate(Arr::get($data, 'assignee'));
+        $task->createdBy()->associate(Auth::user());
         $task->save();
-        $task->labels()->sync(Arr::get($data, 'label', []));
+        $task->labels()->attach(Arr::get($data, 'label_id', []));
         flash(__('task.store'))->success()->important();
         return redirect()->route('task.index');
     }
@@ -126,9 +124,6 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        $task->status()->dissociate();
-        $task->creator()->dissociate();
-        $task->assigner()->dissociate();
         $task->labels()->detach();
         $task->delete();
         flash(__('task.destroy'))->error()->important();

@@ -15,7 +15,7 @@
         </div>
         <div class="form-group col-md-6">
             <label for="asignee">{{ __('task.asignee') }}</label>
-            <select class="form-control" name="assignee" id="assignee">
+            <select class="form-control" name="assigned_to_id" id="assigned_to_id">
                 @foreach($users as $user)
                 <option value="{{ $user->id }}">{{ $user->name }}</option>
                 @endforeach
@@ -23,7 +23,7 @@
         </div>
         <div class="form-group col-md-6">
             <label for="status">{{ __('task.status') }}</label>
-            <select class="form-control" id="status" name="status">
+            <select class="form-control" id="status_id" name="status_id">
                 @foreach($statuses as $status)
                 <option value="{{ $status->id }}">{{ $status->name }}</option>
                 @endforeach
@@ -31,7 +31,7 @@
         </div>
         <div class="form-group col-md-6">
             <label for="label">{{ __('task.label') }}</label>
-            <select class="chosen-select" id="label" name="label[]" multiple>
+            <select class="chosen-select" id="label_id" name="label_id[]" multiple>
                 @foreach($labels as $label)
                 <option value="{{ $label->id }}">{{ $label->name }}</option>
                 @endforeach

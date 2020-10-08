@@ -42,9 +42,8 @@ class StatusController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
         $status = new Status();
-        $status->fill($data);
+        $status->fill($request->all());
         $status->save();
         flash(__('status.store'))->success()->important();
         return redirect()->route('status.index');
@@ -71,8 +70,7 @@ class StatusController extends Controller
      */
     public function update(Request $request, Status $status)
     {
-        $data = $request->all();
-        $status->fill($data);
+        $status->fill($request->all());
         $status->save();
         flash(__('status.update'))->important();
         return redirect()->route('status.index');
