@@ -7,6 +7,7 @@ use App\User;
 use App\Task;
 use App\Label;
 use App\Status;
+use App\Http\Request\TaskRequest;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -71,6 +72,7 @@ class TaskController extends Controller
         $data = $request->all();
         $task->fill($data);
         $task->createdBy()->associate(Auth::user());
+        var_dump($task);
         $task->save();
         $task->labels()->attach(Arr::get($data, 'label_id', []));
         flash(__('task.store'))->success()->important();

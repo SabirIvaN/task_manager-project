@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Task;
+use App\User;
 use Tests\TestCase;
 use Illuminate\Support\Arr;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -42,14 +43,13 @@ class TaskTest extends TestCase
      */
     public function testStore()
     {
-        /*
+        $user = factory(User::class)->create();
         $task = factory(Task::class)->make()->toArray();
-        $data = Arr::only($task, ['name']);
-        $this->post(route('task.store'), $data)
+        $data = Arr::only($task, ['name', 'description', 'status_id', 'created_by_id', 'assigned_to_id']);
+        $this->actingAs($user)
+            ->post(route('task.store'), $data)
             ->assertSessionHasNoErrors();
         $this->assertDatabaseHas('tasks', $data);
-        */
-        $this->assertTrue(true);
     }
 
     /**
