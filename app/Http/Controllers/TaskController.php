@@ -109,7 +109,7 @@ class TaskController extends Controller
         $data = $request->all();
         $task->fill($data);
         $task->status()->associate(Arr::get($data, 'status'));
-        $task->assigner()->associate(Arr::get($data, 'assignee'));
+        $task->assignedTo()->associate(Arr::get($data, 'assignee'));
         $task->save();
         $task->labels()->sync(Arr::get($data, 'label', []));
         flash(__('task.update'))->important();
