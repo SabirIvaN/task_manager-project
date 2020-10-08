@@ -77,13 +77,13 @@
                 @endforeach
                 </td>
                 <td>
-                @if(isset($task->creator->name))
-                {{ $task->creator->name }}
+                @if(isset($task->createdBy->name))
+                {{ $task->createdBy->name }}
                 @endif
                 </td>
                 <td>
-                @if(isset($task->assigner->name))
-                {{ $task->assigner->name }}
+                @if(isset($task->assignedTo->name))
+                {{ $task->assignedTo->name }}
                 @endif
                 </td>
                 <td>{{ $task->created_at }}</td>

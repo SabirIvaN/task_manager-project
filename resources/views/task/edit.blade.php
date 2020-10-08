@@ -16,7 +16,7 @@
         </div>
         <div class="form-group col-md-6">
             <label for="asignee">{{ __('task.asignee') }}</label>
-            <select class="form-control" name="assignee" id="assignee">
+            <select class="form-control" name="assigned_to_id" id="assigned_to_id">
                 @foreach($assigners as $assigner)
                 <option value="{{ $assigner->id }}" @if($assigner->id == $task->assigned_to_id) selected @endif>{{ $assigner->name }}</option>
                 @endforeach
@@ -24,7 +24,7 @@
         </div>
         <div class="form-group col-md-6">
             <label for="status">{{ __('task.status') }}</label>
-            <select class="form-control mr-2" id="status" name="status">
+            <select class="form-control mr-2" id="status_id" name="status_id">
                 @foreach($statuses as $status)
                 <option value="{{ $status->id }}" @if($status->id == $task->status_id) selected @endif>{{ $status->name }}</option>
                 @endforeach
@@ -32,11 +32,13 @@
         </div>
         <div class="form-group col-md-6">
             <label for="label">{{ __('task.label') }}</label>
-            <select class="chosen-select" id="label" name="label[]" multiple>
-                @foreach($labels as $label)
-                @foreach($task->labels as $taskLabel)
-                <option value="{{ $label->id }}" @if($label->id == $taskLabel->id) selected @endif>{{ $label->name }}</option>
+            <select class="chosen-select" id="label_id" name="label_id[]" multiple>
+                @foreach($labels as $key => $label)
+                <option value="{{ $label->id }}"
+                @foreach($task->labels as $labelTask)
+                @if($label->id === $labelTask->id) selected @endif
                 @endforeach
+                >{{ $label->name }}</option>
                 @endforeach
             </select>
         </div>
