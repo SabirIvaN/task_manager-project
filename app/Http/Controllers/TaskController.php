@@ -69,7 +69,14 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $task = new Task();
-        $data = $request->all();
+        $data = $request->validate([
+            'name' => 'required|max:50',
+            'description' => 'max:500',
+            'status_id' => 'required|exists:statuses,id',
+            'assigned_to_id' => 'required|exists:users,id',
+            'label_id' => 'array',
+            'label_id.*' => 'exists:labels,id',
+        ]);
         $task->fill($data);
         $task->createdBy()->associate(Auth::user());
         var_dump($task);
