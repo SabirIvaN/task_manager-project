@@ -15,11 +15,11 @@ class CreateLabelTaskTable extends Migration
     {
         Schema::create('label_task', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('label_id');
+            $table->bigInteger('label_id');
             $table->foreign('label_id')
                 ->references('id')
                 ->on('labels');
-            $table->unsignedInteger('task_id');
+            $table->bigInteger('task_id');
             $table->foreign('task_id')
                 ->references('id')
                 ->on('tasks');

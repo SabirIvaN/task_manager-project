@@ -79,7 +79,6 @@ class TaskController extends Controller
         ]);
         $task->fill($data);
         $task->createdBy()->associate(Auth::user());
-        var_dump($task);
         $task->save();
         $task->labels()->attach(Arr::get($data, 'label_id', []));
         flash(__('task.store'))->success()->important();

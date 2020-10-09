@@ -44,12 +44,19 @@ class TaskTest extends TestCase
     public function testStore()
     {
         $user = factory(User::class)->create();
-        $task = factory(Task::class)->make()->toArray();
-        $data = Arr::only($task, ['name', 'description', 'status_id', 'created_by_id', 'assigned_to_id']);
+        $task = factory(Task::class)->make();
+        $data = [
+            'name' => $task->name,
+            'description' => $task->description,
+            'status_id' => $task->status_id,
+            'assigned_to_id' => $user->id,
+        ];
+        $check = array_merge($data, ['created_by_id' => $user->id]);
         $this->actingAs($user)
             ->post(route('task.store'), $data)
-            ->assertSessionHasNoErrors();
-        $this->assertDatabaseHas('tasks', $data);
+            ->assertSessionHasNoErrors()
+            ->assertRedirect();
+        $this->assertDatabaseHas('tasks', $check);
     }
 
     /**
@@ -71,13 +78,10 @@ class TaskTest extends TestCase
      */
     public function testUpdate()
     {
-        /*
         $this->patch(route('task.update', $this->task), $this->data)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
         $this->assertDatabaseHas('tasks', $this->data);
-        */
-        $this->assertTrue(true);
     }
 
     /**
@@ -87,12 +91,9 @@ class TaskTest extends TestCase
      */
     public function testDelete()
     {
-        /*
         $response = $this->delete(route('task.destroy', $this->task))
             ->assertSessionHasNoErrors()
             ->assertRedirect();
         $this->assertDeleted('tasks', $this->data);
-        */
-        $this->assertTrue(true);
     }
 }
