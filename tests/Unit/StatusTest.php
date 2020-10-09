@@ -4,12 +4,9 @@ namespace Tests\Unit;
 
 use App\Status;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StatusTest extends TestCase
 {
-    use RefreshDatabase;
-
     /**
      * A basic unit test index.
      *

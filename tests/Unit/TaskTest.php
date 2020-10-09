@@ -5,12 +5,9 @@ namespace Tests\Unit;
 use App\Task;
 use App\User;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TaskTest extends TestCase
 {
-    use RefreshDatabase;
-
     /**
      * A basic unit test index.
      *
