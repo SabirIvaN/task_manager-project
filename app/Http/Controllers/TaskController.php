@@ -111,7 +111,6 @@ class TaskController extends Controller
     {
         $data = $request->all();
         $task->fill($data);
-        var_dump($data);
         $task->save();
         $task->labels()->sync(Arr::get($data, 'label_id', []));
         flash(__('task.update'))->important();

@@ -5,14 +5,11 @@ namespace Tests\Unit;
 use App\Task;
 use App\User;
 use Tests\TestCase;
-use Illuminate\Support\Arr;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class TaskTest extends TestCase
 {
     use RefreshDatabase;
-    use WithoutMiddleware;
 
     /**
      * A basic unit test index.
@@ -100,9 +97,17 @@ class TaskTest extends TestCase
      */
     public function testDelete()
     {
-        $response = $this->delete(route('task.destroy', $this->task))
+        $task = factory(Task::class)->create();
+        $data = [
+            'name' => $task->name,
+            'description' => $task->description,
+            'status_id' => $task->status_is,
+            'created_by_id' => $task->created_by_id,
+            'assigned_to_id' => $task->assigned_to_id,
+        ];
+        $this->delete(route('task.destroy', $task))
             ->assertSessionHasNoErrors()
             ->assertRedirect();
-        $this->assertDeleted('tasks', $this->data);
+        $this->assertDeleted('tasks', $data);
     }
 }

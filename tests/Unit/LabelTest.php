@@ -6,12 +6,10 @@ use App\User;
 use App\Label;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class LabelTest extends TestCase
 {
     use RefreshDatabase;
-    use WithoutMiddleware;
 
     /**
      * A basic unit test index.

@@ -4,14 +4,11 @@ namespace Tests\Unit;
 
 use App\Status;
 use Tests\TestCase;
-use Illuminate\Support\Arr;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class StatusTest extends TestCase
 {
     use RefreshDatabase;
-    use WithoutMiddleware;
 
     /**
      * A basic unit test index.
