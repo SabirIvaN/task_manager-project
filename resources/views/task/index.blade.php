@@ -5,11 +5,9 @@
     @include("flash::message")
     <div class="d-flex justify-content-between align-items-center flex-wrap mt-1 mb-1">
         <h2>{{ __('task.mainTitle') }}</h2>
-        @if(confirmation())
         <div class="btn-toolbar">
             <a class="btn btn-success" href="{{ route('task.create') }}">{{ __('task.add') }}</a>
         </div>
-        @endif
     </div>
     <form class="form-row" action="{{ route('task.index') }}" method="GET">
         <div class="form-group col-md-2">
@@ -57,7 +55,7 @@
                 <th scope="col">{{ __('task.label') }}</th>
                 <th scope="col">{{ __('task.creator') }}</th>
                 <th scope="col">{{ __('task.asignee') }}</th>
-                <th scope="col" @if(confirmation()) colspan="3" @endif>{{ __('task.date') }}</th>
+                <th scope="col" colspan="3">{{ __('task.date') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -87,8 +85,6 @@
                 @endif
                 </td>
                 <td>{{ $task->created_at }}</td>
-                @if(Auth::user())
-                @if(Auth::user()->hasVerifiedEmail())
                 <td>
                     <a class="btn btn-primary" href="{{ route('task.edit', $task->id) }}">{{ __('task.edit') }}</a>
                 </td>
@@ -99,8 +95,6 @@
                         <button class="btn btn-danger" type="submit">{{ __('task.delete') }}</button>
                     </form>
                 </td>
-                @endif
-                @endif
             </tr>
             @endforeach
         </tbody>

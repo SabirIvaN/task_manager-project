@@ -42,8 +42,8 @@ class StatusTest extends TestCase
      */
     public function testStore()
     {
-        $status = factory(Status::class)->make()->toArray();
-        $data = Arr::only($status, ['name']);
+        $status = factory(Status::class)->make();
+        $data = ['name' => $status->name];
         $this->post(route('status.store'), $data)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
@@ -70,8 +70,8 @@ class StatusTest extends TestCase
     public function testUpdate()
     {
         $status = factory(Status::class)->create();
-        $factoryData = factory(Status::class)->make()->toArray();
-        $data = Arr::only($factoryData, ['name']);
+        $factoryData = factory(Status::class)->make();
+        $data = ['name' => $factoryData->name];
         $this->put(route('status.update', $status), $data)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
@@ -86,8 +86,8 @@ class StatusTest extends TestCase
     public function testDelete()
     {
         $status = factory(Status::class)->create();
-        $factoryData = factory(Status::class)->make()->toArray();
-        $data = Arr::only($factoryData, ['name']);
+        $factoryData = factory(Status::class)->make();
+        $data = ['name' => $factoryData->name];
         $this->delete(route('status.destroy', $status))
             ->assertSessionHasNoErrors()
             ->assertRedirect();

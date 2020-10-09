@@ -15,11 +15,6 @@ use Spatie\QueryBuilder\AllowedFilter;
 
 class TaskController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('confirmation')->except('index');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -116,8 +111,9 @@ class TaskController extends Controller
     {
         $data = $request->all();
         $task->fill($data);
+        var_dump($data);
         $task->save();
-        $task->labels()->attach(Arr::get($data, 'label_id', []));
+        $task->labels()->sync(Arr::get($data, 'label_id', []));
         flash(__('task.update'))->important();
         return redirect()->route('task.index');
     }

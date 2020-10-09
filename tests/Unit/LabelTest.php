@@ -5,12 +5,13 @@ namespace Tests\Unit;
 use App\User;
 use App\Label;
 use Tests\TestCase;
-use Illuminate\Support\Arr;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class LabelTest extends TestCase
 {
     use RefreshDatabase;
+    use WithoutMiddleware;
 
     /**
      * A basic unit test index.
@@ -41,12 +42,9 @@ class LabelTest extends TestCase
      */
     public function testStore()
     {
-        $user = factory(User::class)->create();
         $label = factory(Label::class)->make();
         $data = ['name' => $label->name];
-        var_dump($user->hasVerifiedEmail());
-        $this->actingAs($user)
-            ->post(route('label.store'), $data)
+        $this->post(route('label.store'), $data)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
         $this->assertDatabaseHas('labels', $data);
@@ -72,8 +70,8 @@ class LabelTest extends TestCase
     public function testUpdate()
     {
         $label = factory(Label::class)->create();
-        $factoryData = factory(Label::class)->make()->toArray();
-        $data = Arr::only($factoryData, ['name']);
+        $factoryData = factory(Label::class)->make();
+        $data = ['name' => $label->name];
         $this->put(route('label.update', $label), $data)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
@@ -88,8 +86,8 @@ class LabelTest extends TestCase
     public function testDelete()
     {
         $label = factory(Label::class)->create();
-        $factoryData = factory(Label::class)->make()->toArray();
-        $data = Arr::only($factoryData, ['name']);
+        $factoryData = factory(Label::class)->make();
+        $data = ['name' => $factoryData->name];
         $this->delete(route('label.destroy', $label))
             ->assertSessionHasNoErrors()
             ->assertRedirect();

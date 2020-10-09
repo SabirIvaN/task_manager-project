@@ -2,16 +2,12 @@
 
 namespace Tests\Unit;
 
-use App\User;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class HomeTest extends TestCase
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->user = factory(User::class)->create();
-    }
+    use WithoutMiddleware;
 
     /**
      * A basic unit test index.
@@ -20,8 +16,7 @@ class HomeTest extends TestCase
      */
     public function testIndex()
     {
-        $this->actingAs($this->user)
-            ->get('/home')
+        $this->get('/home')
             ->assertOk();
     }
 }

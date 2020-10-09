@@ -5,11 +5,9 @@
     @include("flash::message")
     <div class="d-flex justify-content-between align-items-center flex-wrap mt-1 mb-3">
         <h2>{{ __('status.mainTitle') }}</h2>
-        @if(confirmation())
         <div class="btn-toolbar">
             <a class="btn btn-success" href="{{ route('status.create') }}">{{ __('status.add') }}</a>
         </div>
-        @endif
     </div>
     @if($statuses->count() > 0)
     <table class="table">
@@ -17,7 +15,7 @@
             <tr>
                 <th scope="col">{{ __('status.id') }}</th>
                 <th scope="col">{{ __('status.name') }}</th>
-                <th scope="col" @if(confirmation()) colspan="3" @endif>{{ __('status.date') }}</th>
+                <th scope="col" colspan="3">{{ __('status.date') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -26,7 +24,6 @@
                 <th scope="row">{{ $status->id }}</th>
                 <td>{{ $status->name }}</td>
                 <td>{{ $status->created_at }}</td>
-                @if(confirmation())
                 <td>
                     <a class="btn btn-primary" href="{{ route('status.edit', $status->id) }}">{{ __('status.edit') }}</a>
                 </td>
@@ -37,7 +34,6 @@
                         <button class="btn btn-danger" type="submit">{{ __('status.delete') }}</button>
                     </form>
                 </td>
-                @endif
             </tr>
             @endforeach
         </tbody>

@@ -78,10 +78,19 @@ class TaskTest extends TestCase
      */
     public function testUpdate()
     {
-        $this->patch(route('task.update', $this->task), $this->data)
+        $oldTask = factory(Task::class)->create();
+        $newTask = factory(Task::class)->make();
+        $data = [
+            'name' => $newTask->name,
+            'description' => $newTask->description,
+            'status_id' => $newTask->status_id,
+            'created_by_id' => $newTask->created_by_id,
+            'assigned_to_id' => $newTask->assigned_to_id,
+        ];
+        $this->patch(route('task.update', $oldTask), $data)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
-        $this->assertDatabaseHas('tasks', $this->data);
+        $this->assertDatabaseHas('tasks', $data);
     }
 
     /**

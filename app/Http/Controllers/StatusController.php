@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class StatusController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('confirmation')->except('index');
-    }
-
     /**
      * Display a listing of the resource.
      *

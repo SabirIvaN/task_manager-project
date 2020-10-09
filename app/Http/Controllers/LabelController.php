@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 
 class LabelController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('confirmation')->except('index');
-    }
-
     /**
      * Display a listing of the resource.
      *
