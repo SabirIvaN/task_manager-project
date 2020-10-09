@@ -2,16 +2,15 @@
 
 namespace Tests\Unit;
 
+use App\User;
 use App\Label;
 use Tests\TestCase;
 use Illuminate\Support\Arr;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class LabelTest extends TestCase
 {
     use RefreshDatabase;
-    use WithoutMiddleware;
 
     /**
      * A basic unit test index.
@@ -42,9 +41,12 @@ class LabelTest extends TestCase
      */
     public function testStore()
     {
-        $label = factory(Label::class)->make()->toArray();
-        $data = Arr::only($label, ['name']);
-        $this->post(route('label.store'), $data)
+        $user = factory(User::class)->create();
+        $label = factory(Label::class)->make();
+        $data = ['name' => $label->name];
+        var_dump($user->hasVerifiedEmail());
+        $this->actingAs($user)
+            ->post(route('label.store'), $data)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
         $this->assertDatabaseHas('labels', $data);
