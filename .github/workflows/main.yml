@@ -17,5 +17,7 @@ jobs:
       run: make install
     - name: Linting
       run: make lint
+    - name: Analysing
+      run: make analyse
     - name: Testing
       run: make test

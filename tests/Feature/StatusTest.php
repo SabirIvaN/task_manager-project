@@ -1,12 +1,11 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Feature;
 
-use App\User;
-use App\Label;
+use App\Status;
 use Tests\TestCase;
 
-class LabelTest extends TestCase
+class StatusTest extends TestCase
 {
     /**
      * A basic unit test index.
@@ -15,7 +14,7 @@ class LabelTest extends TestCase
      */
     public function testIndex()
     {
-        $this->get(route('label.index'))
+        $this->get(route('status.index'))
             ->assertOk();
     }
 
@@ -26,7 +25,7 @@ class LabelTest extends TestCase
      */
     public function testCreate()
     {
-        $this->get(route('label.create'))
+        $this->get(route('status.create'))
             ->assertOk();
     }
 
@@ -37,12 +36,12 @@ class LabelTest extends TestCase
      */
     public function testStore()
     {
-        $label = factory(Label::class)->make();
-        $data = ['name' => $label->name];
-        $this->post(route('label.store'), $data)
+        $status = factory(Status::class)->make();
+        $data = ['name' => $status->name];
+        $this->post(route('status.store'), $data)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
-        $this->assertDatabaseHas('labels', $data);
+        $this->assertDatabaseHas('statuses', $data);
     }
 
     /**
@@ -52,25 +51,25 @@ class LabelTest extends TestCase
      */
     public function testEdit()
     {
-        $label = factory(Label::class)->create();
-        $this->get(route('label.edit', $label))
+        $status = factory(Status::class)->create();
+        $this->get(route('status.edit', $status))
             ->assertOk();
     }
 
     /**
-     * A basic unit test update.
+     * A basic unit test udpate.
      *
      * @return void
      */
     public function testUpdate()
     {
-        $label = factory(Label::class)->create();
-        $factoryData = factory(Label::class)->make();
-        $data = ['name' => $label->name];
-        $this->put(route('label.update', $label), $data)
+        $status = factory(Status::class)->create();
+        $factoryData = factory(Status::class)->make();
+        $data = ['name' => $factoryData->name];
+        $this->put(route('status.update', $status), $data)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
-        $this->assertDatabaseHas('labels', $data);
+        $this->assertDatabaseHas('statuses', $data);
     }
 
     /**
@@ -80,12 +79,12 @@ class LabelTest extends TestCase
      */
     public function testDelete()
     {
-        $label = factory(Label::class)->create();
-        $factoryData = factory(Label::class)->make();
+        $status = factory(Status::class)->create();
+        $factoryData = factory(Status::class)->make();
         $data = ['name' => $factoryData->name];
-        $this->delete(route('label.destroy', $label))
+        $this->delete(route('status.destroy', $status))
             ->assertSessionHasNoErrors()
             ->assertRedirect();
-        $this->assertDeleted('labels', $data);
+        $this->assertDeleted('statuses', $data);
     }
 }
