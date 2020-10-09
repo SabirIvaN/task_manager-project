@@ -41,7 +41,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function createdBy()
+    public function creator()
     {
         return $this->hasMany(Task::class, 'created_by_id');
     }
@@ -49,7 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function assignedTo()
+    public function assigner()
     {
         return $this->hasMany(Task::class, 'assigned_to_id');
     }

@@ -3,11 +3,11 @@
 @section('content')
 <div class="container">
     <div class="jumbotron">
-        <h1>Task manager</h1>
-        <p class="lead">Simple implementation of typical task manager</p>
+        <h1>{{ __('welcome.title') }}</h1>
+        <p class="lead">{{ __('welcome.description') }}</p>
         <hr>
-        <p class="lead">Hexlet Project</p>
-        <a class="btn btn-primary btn-lg" href="https://ru.hexlet.io/professions/php/projects/57">Learn more</a>
+        <p class="lead">{{ __('welcome.subtitle') }}</p>
+        <a class="btn btn-primary btn-lg" href="https://ru.hexlet.io/professions/php/projects/57">{{ __('welcome.link') }}</a>
     </div>
 </div>
 @endsection

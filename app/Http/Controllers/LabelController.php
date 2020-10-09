@@ -36,8 +36,11 @@ class LabelController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->validate([
+            'name' => 'required|max:50',
+        ]);
         $label = new Label();
-        $label->fill($request->all());
+        $label->fill($data);
         $label->save();
         flash(__('label.store'))->success()->important();
         return redirect()->route('label.index');
@@ -64,7 +67,10 @@ class LabelController extends Controller
      */
     public function update(Request $request, Label $label)
     {
-        $label->fill($request->all());
+        $data = $request->validate([
+            'name' => 'required|max:50',
+        ]);
+        $label->fill($data);
         $label->save();
         flash(__('label.update'))->important();
         return redirect()->route('label.index');

@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container">
-    @include("flash::message")
     <div class="d-flex justify-content-between align-items-center flex-wrap mt-1 mb-3">
         <h2>{{ __('status.mainTitle') }}</h2>
         <div class="btn-toolbar">

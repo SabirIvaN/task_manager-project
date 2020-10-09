@@ -109,8 +109,14 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        $data = $request->all();
-        $task->fill($data);
+        $data = $request->validate([
+            'name' => 'required|max:50',
+            'description' => 'max:500',
+            'status_id' => 'required|exists:statuses,id',
+            'assigned_to_id' => 'required|exists:users,id',
+            'label_id' => 'array',
+            'label_id.*' => 'exists:labels,id',
+        ]);
         $task->save();
         $task->labels()->sync(Arr::get($data, 'label_id', []));
         flash(__('task.update'))->important();
