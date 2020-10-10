@@ -1,25 +1,43 @@
 {
-    "private": true,
-    "scripts": {
-        "dev": "npm run development",
-        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "watch": "npm run development -- --watch",
-        "watch-poll": "npm run watch -- --watch-poll",
-        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
-    },
-    "devDependencies": {
-        "axios": "^0.19",
-        "bootstrap": "^4.0.0",
-        "cross-env": "^7.0",
-        "jquery": "^3.2",
-        "laravel-mix": "^5.0.1",
-        "lodash": "^4.17.19",
-        "popper.js": "^1.12",
-        "resolve-url-loader": "^3.1.0",
-        "sass": "^1.15.2",
-        "sass-loader": "^8.0.0",
-        "vue-template-compiler": "^2.6.11"
-    }
+  "private": true,
+  "scripts": {
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "npm run development -- --watch",
+    "watch-poll": "npm run watch -- --watch-poll",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "devDependencies": {
+    "axios": "^0.19",
+    "bootstrap": "^4.0.0",
+    "cross-env": "^7.0",
+    "jquery": "^3.2",
+    "laravel-mix": "^5.0.6",
+    "lodash": "^4.17.19",
+    "popper.js": "^1.12",
+    "resolve-url-loader": "^3.1.0",
+    "sass": "^1.15.2",
+    "sass-loader": "^8.0.0",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "name": "php-project-lvl4",
+  "description": "[![GitHub Actions](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fatrox%2Fsync-dotenv%2Fbadge&label=build&logo=none)](https://github.com/SabirIvaN/php-project-lvl4.git) [![Maintainability](https://api.codeclimate.com/v1/badges/32431424f554ce147185/maintainability)](https://codeclimate.com/github/SabirIvaN/php-project-lvl4/maintainability)",
+  "version": "1.0.0",
+  "main": "webpack.mix.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SabirIvaN/php-project-lvl4.git"
+  },
+  "author": "Ivan Sabirov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SabirIvaN/php-project-lvl4/issues"
+  },
+  "homepage": "https://github.com/SabirIvaN/php-project-lvl4#readme"
 }
