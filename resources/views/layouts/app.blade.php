@@ -11,30 +11,17 @@
     <title>{{ config('app.name', 'Task manager') }}</title>
 
     <!-- Scripts -->
-    @if(Request::secure())
     <script src="{{ secure_asset('js/app.js') }}" defer></script>
     <script src="{{ secure_asset('chosen/chosen.jquery.min.js') }}" defer></script>
     <script src="{{ secure_asset('js/main.js') }}" defer></script>
-    @endif
-    @if(!Request::secure())
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('chosen/chosen.jquery.min.js') }}" defer></script>
-    <script src="{{ asset('js/main.js') }}" defer></script>
-    @endif
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    @if(Request::secure())
     <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ secure_asset('chosen/chosen.min.css') }}" rel="stylesheet">
-    @endif
-    @if(!Request::secure())
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('chosen/chosen.min.css') }}" rel="stylesheet">
-    @endif
 </head>
 <body>
     <div id="app">
