@@ -2,9 +2,6 @@
 
 use Illuminate\Support\Str;
 
-$herokuUrl = 'postgres://jstbdazpduuggw:ef301311293d4729e48e5e4deaf5163b2d1ab73c64c99c8fdb129c243bd19041@ec2-54-247-71-245.eu-west-1.compute.amazonaws.com:5432/d2c83iivb0ahvc';
-$herokuDbUrl = parse_url(env('DATABASE_URL', $herokuUrl));
-
 return [
 
     /*
@@ -18,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'pgsql'),
+    'default' => env('DB_CONNECTION', 'sqlite'),
 
     /*
     |--------------------------------------------------------------------------

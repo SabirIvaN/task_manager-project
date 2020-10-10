@@ -4,6 +4,7 @@ install:
 	php artisan key:generate
 	touch database/database.sqlite
 	chmod -R 777 storage bootstrap/cache
+	php artisan migrate
 seed:
 	php artisan migrate:fresh
 	php artisan db:seed
