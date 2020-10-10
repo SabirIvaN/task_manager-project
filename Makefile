@@ -9,9 +9,9 @@ seed:
 	php artisan migrate:fresh
 	php artisan db:seed
 analyse:
-	./vendor/bin/phpstan analyse --memory-limit=2G
+	./vendor/bin/phpstan analyse --memory-limit=2G app config tests
 lint:
-	composer run-script phpcs -- --standard=PSR12 app tests
+	composer run-script phpcs -- --standard=PSR12 app config tests
 test:
 	composer run-script phpunit tests
 test-coverage:
