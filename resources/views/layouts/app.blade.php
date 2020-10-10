@@ -15,7 +15,8 @@
     <script src="{{ secure_asset('js/app.js') }}" defer></script>
     <script src="{{ secure_asset('chosen/chosen.jquery.min.js') }}" defer></script>
     <script src="{{ secure_asset('js/main.js') }}" defer></script>
-    @else
+    @endif
+    @if(!Request::secure())
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('chosen/chosen.jquery.min.js') }}" defer></script>
     <script src="{{ asset('js/main.js') }}" defer></script>
@@ -29,7 +30,8 @@
     @if(Request::secure())
     <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ secure_asset('chosen/chosen.min.css') }}" rel="stylesheet">
-    @else
+    @endif
+    @if(!Request::secure())
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('chosen/chosen.min.css') }}" rel="stylesheet">
     @endif
