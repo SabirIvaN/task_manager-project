@@ -13,6 +13,8 @@ lint:
 	composer run-script phpcs -- --standard=PSR12 app tests
 test:
 	composer run-script phpunit tests
+test-coverage:
+	composer phpunit tests -- --coverage-clover build/logs/clover.xml
 run:
 	php -S localhost:8000 -t public
 logs:
