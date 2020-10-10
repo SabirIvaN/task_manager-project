@@ -14,4 +14,5 @@ return [
     'subtitle' => 'Hexlet Project',
     'description' => 'Simple implementation of typical task manager',
     'link' => 'Learn more',
+    'verification' => 'You have successfully verified your account',
 ];

@@ -75,7 +75,7 @@ class TaskController extends Controller
         $task->fill($data);
         $task->createdBy()->associate(Auth::user());
         $task->save();
-        $task->labels()->attach(Arr::get($data, 'label_id', []));
+        $task->labels()->sync(Arr::get($data, 'label_id', []));
         flash(__('task.store'))->success()->important();
         return redirect()->route('task.index');
     }
@@ -117,6 +117,7 @@ class TaskController extends Controller
             'label_id' => 'array',
             'label_id.*' => 'exists:labels,id',
         ]);
+        $task->fill($data);
         $task->save();
         $task->labels()->sync(Arr::get($data, 'label_id', []));
         flash(__('task.update'))->important();
