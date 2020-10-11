@@ -27,11 +27,11 @@
                     <a class="btn btn-primary" href="{{ route('label.edit', $label->id) }}">{{ __('label.edit') }}</a>
                 </td>
                 <td>
-                    <form action="{{ route('label.destroy', $label->id) }}" method="POST">
-                        @method('DELETE')
-                        @csrf
-                        <button class="btn btn-danger">{{ __('label.delete') }}</button>
-                    </form>
+                    {{ Form::model($label, ['url' => route('label.destroy', $label->id)]) }}
+                    @method('DELETE')
+                    @csrf
+                    {{ Form::submit(__('label.delete'), ['class' => 'btn btn-danger']) }}
+                    {{ Form::close() }}
                 </td>
             </tr>
             @endforeach

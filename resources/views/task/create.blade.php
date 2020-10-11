@@ -3,43 +3,43 @@
 @section('content')
 <div class="container">
     <h2 class="mt-1 mb-3">{{ __('task.adderTitle') }}</h2>
-    <form class="form-row" action="{{ route('task.store') }}" method="POST">
-        @csrf
-        <div class="form-group col-md-6">
-            <label for="name">{{ __('task.name') }}</label>
-            <input class="form-control" id="name" name="name" type="text">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="description">{{ __('task.description') }}</label>
-            <input class="form-control" id="description" name="description" type="text">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="asignee">{{ __('task.asignee') }}</label>
-            <select class="form-control" name="assigned_to_id" id="assigned_to_id">
-                @foreach($users as $user)
-                <option value="{{ $user->id }}">{{ $user->name }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group col-md-6">
-            <label for="status">{{ __('task.status') }}</label>
-            <select class="form-control" id="status_id" name="status_id">
-                @foreach($statuses as $status)
-                <option value="{{ $status->id }}">{{ $status->name }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group col-md-6">
-            <label for="label">{{ __('task.label') }}</label>
-            <select class="chosen-select" id="label_id" name="label_id[]" multiple>
-                @foreach($labels as $label)
-                <option value="{{ $label->id }}">{{ $label->name }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group col-md-12">
-            <button class="btn btn-primary" type="submit">{{ __('task.save') }}</button>
-        </div>
-    </form>
+    {{ Form::model($task, ['url' => route('task.store'), 'class' => 'form-row']) }}
+    @csrf
+    <div class="form-group col-md-6">
+        {{ Form::label('name', __('task.name')) }}
+        {{ Form::text('name', null, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : '')]) }}
+        @error('name')
+        <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+    <div class="form-group col-md-6">
+        {{ Form::label('description', __('task.description')) }}
+        {{ Form::text('description', null, ['class' => 'form-control' . ($errors->has('description') ? ' is-invalid' : '')]) }}
+        @error('description')
+        <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+    <div class="form-group col-md-6">
+        {{ Form::label('assigned_to_id', __('task.assignee')) }}
+        {{ Form::select('assigned_to_id', $users->mapWithKeys(function ($user) {
+            return [$user->id => $user->name];
+        }), null, ['class' => 'form-control']) }}
+    </div>
+    <div class="form-group col-md-6">
+        {{ Form::label('status_id', __('task.status')) }}
+        {{ Form::select('status_id', $statuses->mapWithKeys(function ($status) {
+            return [$status->id => $status->name];
+        }), null, ['class' => 'form-control']) }}
+    </div>
+    <div class="form-group col-md-6">
+        {{ Form::label('label_id', __('task.label')) }}
+        {{ Form::select('label_id[]', $labels->mapWithKeys(function ($label) {
+            return [$label->id => $label->name];
+        }), null, ['class' => 'chosen-select', 'multiple' => true]) }}
+    </div>
+    <div class="form-group col-md-12">
+        {{ Form::submit(__('task.save'), ['class' => 'btn btn-primary']) }}
+    </div>
+    {{ Form::close() }}
 </div>
 @endsection

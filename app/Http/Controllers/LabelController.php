@@ -30,7 +30,8 @@ class LabelController extends Controller
      */
     public function create()
     {
-        return view('label.create');
+        $label = new Label();
+        return view('label.create', ['label' => $label]);
     }
 
     /**

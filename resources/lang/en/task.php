@@ -19,7 +19,7 @@ return [
     'status' => 'Status',
     'label' => 'Labels',
     'creator' => 'Creator',
-    'asignee' => 'Asignee',
+    'assignee' => 'Asignee',
     'date' => 'Created at',
     'status' => 'Status',
     'label' => 'Labels',

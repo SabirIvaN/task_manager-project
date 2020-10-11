@@ -50,13 +50,15 @@ class TaskController extends Controller
      */
     public function create()
     {
+        $task = new Task();
         $users = User::all();
         $statuses = Status::all();
         $labels = Label::all();
         return view('task.create', [
             'statuses' => $statuses,
             'users' => $users,
-            'labels' => $labels
+            'labels' => $labels,
+            'task' => $task,
         ]);
     }
 
@@ -97,14 +99,14 @@ class TaskController extends Controller
         if (Auth::user()->id != $task->createdBy->id) {
             return redirect()->route('task.index');
         }
-        $assigners = User::all();
+        $users = User::all();
         $labels = Label::all();
         $statuses = Status::all();
         return view('task.edit', [
-            'task' => $task,
             'statuses' => $statuses,
-            'assigners' => $assigners,
+            'users' => $users,
             'labels' => $labels,
+            'task' => $task,
         ]);
     }
 
