@@ -15,6 +15,11 @@ use Spatie\QueryBuilder\AllowedFilter;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -89,6 +94,9 @@ class TaskController extends Controller
     public function edit($id)
     {
         $task = Task::find($id);
+        if (Auth::user()->id != $task->createdBy->id) {
+            return redirect()->route('task.index');
+        }
         $assigners = User::all();
         $labels = Label::all();
         $statuses = Status::all();
@@ -109,6 +117,9 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
+        if (Auth::user()->id != $task->createdBy->id) {
+            return redirect()->route('task.index');
+        }
         $data = $request->validate([
             'name' => 'required|max:50',
             'description' => 'max:500',
@@ -132,6 +143,9 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
+        if (Auth::user()->id != $task->createdBy->id) {
+            return redirect()->route('task.index');
+        }
         $task->labels()->detach();
         $task->delete();
         flash(__('task.destroy'))->error()->important();

@@ -26,7 +26,9 @@ class LabelTest extends TestCase
      */
     public function testCreate()
     {
-        $this->get(route('label.create'))
+        $user = factory(User::class)->create();
+        $this->actingAs($user)
+            ->get(route('label.create'))
             ->assertOk();
     }
 
@@ -37,9 +39,11 @@ class LabelTest extends TestCase
      */
     public function testStore()
     {
+        $user = factory(User::class)->create();
         $label = factory(Label::class)->make();
         $data = ['name' => $label->name];
-        $this->post(route('label.store'), $data)
+        $this->actingAs($user)
+            ->post(route('label.store'), $data)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
         $this->assertDatabaseHas('labels', $data);
@@ -52,8 +56,10 @@ class LabelTest extends TestCase
      */
     public function testEdit()
     {
+        $user = factory(User::class)->create();
         $label = factory(Label::class)->create();
-        $this->get(route('label.edit', $label))
+        $this->actingAs($user)
+            ->get(route('label.edit', $label))
             ->assertOk();
     }
 
@@ -64,10 +70,12 @@ class LabelTest extends TestCase
      */
     public function testUpdate()
     {
+        $user = factory(User::class)->create();
         $label = factory(Label::class)->create();
         $factoryData = factory(Label::class)->make();
         $data = ['name' => $label->name];
-        $this->put(route('label.update', $label), $data)
+        $this->actingAs($user)
+            ->put(route('label.update', $label), $data)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
         $this->assertDatabaseHas('labels', $data);
@@ -80,10 +88,12 @@ class LabelTest extends TestCase
      */
     public function testDelete()
     {
+        $user = factory(User::class)->create();
         $label = factory(Label::class)->create();
         $factoryData = factory(Label::class)->make();
         $data = ['name' => $factoryData->name];
-        $this->delete(route('label.destroy', $label))
+        $this->actingAs($user)
+            ->delete(route('label.destroy', $label))
             ->assertSessionHasNoErrors()
             ->assertRedirect();
         $this->assertDeleted('labels', $data);

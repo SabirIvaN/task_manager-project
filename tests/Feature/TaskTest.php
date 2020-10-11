@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Task;
 use App\User;
+use App\Task;
 use Tests\TestCase;
 
 class TaskTest extends TestCase
@@ -26,7 +26,9 @@ class TaskTest extends TestCase
      */
     public function testCreate()
     {
-        $this->get(route('task.create'))
+        $user = factory(User::class)->create();
+        $this->actingAs($user)
+            ->get(route('task.create'))
             ->assertOk();
     }
 
@@ -61,7 +63,9 @@ class TaskTest extends TestCase
     public function testEdit()
     {
         $task = factory(Task::class)->create();
-        $this->get(route('task.edit', $task))
+        $user = User::find($task->created_by_id);
+        $this->actingAs($user)
+            ->get(route('task.edit', $task))
             ->assertOk();
     }
 
@@ -73,6 +77,7 @@ class TaskTest extends TestCase
     public function testUpdate()
     {
         $oldTask = factory(Task::class)->create();
+        $user = User::find($oldTask->created_by_id);
         $newTask = factory(Task::class)->make();
         $data = [
             'name' => $newTask->name,
@@ -81,7 +86,8 @@ class TaskTest extends TestCase
             'assigned_to_id' => $newTask->assigned_to_id,
         ];
         $check = array_merge($data, ['created_by_id' => $oldTask->created_by_id]);
-        $this->patch(route('task.update', $oldTask), $data)
+        $this->actingAs($user)
+            ->patch(route('task.update', $oldTask), $data)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
         $this->assertDatabaseHas('tasks', $check);
@@ -95,6 +101,7 @@ class TaskTest extends TestCase
     public function testDelete()
     {
         $task = factory(Task::class)->create();
+        $user = User::find($task->created_by_id);
         $data = [
             'name' => $task->name,
             'description' => $task->description,
@@ -102,7 +109,8 @@ class TaskTest extends TestCase
             'created_by_id' => $task->created_by_id,
             'assigned_to_id' => $task->assigned_to_id,
         ];
-        $this->delete(route('task.destroy', $task))
+        $this->actingAs($user)
+            ->delete(route('task.destroy', $task))
             ->assertSessionHasNoErrors()
             ->assertRedirect();
         $this->assertDeleted('tasks', $data);

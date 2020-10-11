@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\User;
 use App\Status;
 use Tests\TestCase;
 
@@ -25,7 +26,9 @@ class StatusTest extends TestCase
      */
     public function testCreate()
     {
-        $this->get(route('status.create'))
+        $user = factory(User::class)->create();
+        $this->actingAs($user)
+            ->get(route('status.create'))
             ->assertOk();
     }
 
@@ -36,9 +39,11 @@ class StatusTest extends TestCase
      */
     public function testStore()
     {
+        $user = factory(User::class)->create();
         $status = factory(Status::class)->make();
         $data = ['name' => $status->name];
-        $this->post(route('status.store'), $data)
+        $this->actingAs($user)
+            ->post(route('status.store'), $data)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
         $this->assertDatabaseHas('statuses', $data);
@@ -51,8 +56,10 @@ class StatusTest extends TestCase
      */
     public function testEdit()
     {
+        $user = factory(User::class)->create();
         $status = factory(Status::class)->create();
-        $this->get(route('status.edit', $status))
+        $this->actingAs($user)
+            ->get(route('status.edit', $status))
             ->assertOk();
     }
 
@@ -63,10 +70,12 @@ class StatusTest extends TestCase
      */
     public function testUpdate()
     {
+        $user = factory(User::class)->create();
         $status = factory(Status::class)->create();
         $factoryData = factory(Status::class)->make();
         $data = ['name' => $factoryData->name];
-        $this->put(route('status.update', $status), $data)
+        $this->actingAs($user)
+            ->put(route('status.update', $status), $data)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
         $this->assertDatabaseHas('statuses', $data);
@@ -79,10 +88,12 @@ class StatusTest extends TestCase
      */
     public function testDelete()
     {
+        $user = factory(User::class)->create();
         $status = factory(Status::class)->create();
         $factoryData = factory(Status::class)->make();
         $data = ['name' => $factoryData->name];
-        $this->delete(route('status.destroy', $status))
+        $this->actingAs($user)
+            ->delete(route('status.destroy', $status))
             ->assertSessionHasNoErrors()
             ->assertRedirect();
         $this->assertDeleted('statuses', $data);

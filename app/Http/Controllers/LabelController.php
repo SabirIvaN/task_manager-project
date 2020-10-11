@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class LabelController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -84,6 +89,9 @@ class LabelController extends Controller
      */
     public function destroy(Label $label)
     {
+        if (count($label->tasks) != 0) {
+            return redirect()->route('label.index');
+        }
         $label->tasks()->detach();
         $label->delete();
         flash(__('label.destroy'))->error()->important();

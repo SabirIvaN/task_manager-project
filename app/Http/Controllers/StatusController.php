@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class StatusController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -85,6 +90,9 @@ class StatusController extends Controller
      */
     public function destroy(Status $status)
     {
+        if (count($status->tasks) != 0) {
+            return redirect()->route('status.index');
+        }
         $tasks = $status->tasks;
         foreach ($tasks as $task) {
             $task->status()->dissociate();
