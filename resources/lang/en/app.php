@@ -12,5 +12,4 @@ return [
     */
 
     'dashboard' => 'Dashboard',
-    'error' => 'Oops! Something went wrong...',
 ];

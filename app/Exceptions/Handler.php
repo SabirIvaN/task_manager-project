@@ -50,10 +50,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        if (env('APP_DEBUG') == false) {
-            flash(__('app.error'))->error()->important();
-            return response()->view('welcome');
-        }
         return parent::render($request, $exception);
     }
 }

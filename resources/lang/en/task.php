@@ -30,4 +30,5 @@ return [
     'store' => 'The task created.',
     'update' => 'The task updated.',
     'destroy' => 'The task deleted.',
+    'confirm' => 'Are you sure you want to delete task',
 ];

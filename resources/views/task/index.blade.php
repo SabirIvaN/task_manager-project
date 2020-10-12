@@ -8,41 +8,26 @@
             <a class="btn btn-success" href="{{ route('task.create') }}">{{ __('task.add') }}</a>
         </div>
     </div>
-    <form class="form-row" action="{{ route('task.index') }}" method="GET">
-        <div class="form-group col-md-2">
-            <select class="form-control" name="filter[status_id]" id="filterStatuses">
-                <option value="all_statuses">All statuses</option>
-                @foreach($filters as $filter)
-                @if(isset($filter->status_id))
-                <option value="{{ $filter->status_id }}" @if(isset($request)) @if($filter->status_id == $request['status_id']) selected @endif @endif>{{ $filter->status->name }}</option>
-                @endif
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group col-md-2">
-            <select class="form-control" name="filter[created_by_id]" id="filterCreators">
-                <option value="all_creators">All creators</option>
-                @foreach($filters as $filter)
-                @if(isset($filter->created_by_id))
-                <option value="{{ $filter->created_by_id }}" @if(isset($request)) @if($filter->created_by_id == $request['created_by_id']) selected @endif @endif>{{ $filter->createdBy->name }}</option>
-                @endif
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group col-md-2">
-            <select class="form-control" name="filter[assigned_to_id]" id="filterAssigner">
-                <option value="all_assigners">All assigner</option>
-                @foreach($filters as $filter)
-                @if(isset($filter->assigned_to_id))
-                <option value="{{ $filter->assigned_to_id }}" @if(isset($request)) @if($filter->assigned_to_id == $request['assigned_to_id']) selected @endif @endif>{{ $filter->assignedTo->name }}</option>
-                @endif
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group col-md-1">
-            <button class="btn btn-primary" type="submit">Apply</button>
-        </div>
-    </form>
+    {{ Form::open(['url' => route('task.index'), 'method' => 'GET', 'class' => 'form-row']) }}
+    <div class="form-group col-md-2">
+    {{ Form::select('filter[status_id]', $statuses->mapWithKeys(function ($status) {
+        return [$status->id => $status->name];
+    }), $filter['status_id'] ?? null, ['class' => 'form-control', 'placeholder' => 'All statuses'])  }}
+    </div>
+    <div class="form-group col-md-2">
+    {{ Form::select('filter[created_by_id]', $users->mapWithKeys(function ($creator) {
+        return [$creator->id => $creator->name];
+    }), $filter['created_by_id'] ?? null, ['class' => 'form-control', 'placeholder' => 'All creators'])  }}
+    </div>
+    <div class="form-group col-md-2">
+    {{ Form::select('filter[assigned_to_id]', $users->mapWithKeys(function ($assigner) {
+        return [$assigner->id => $assigner->name];
+    }), $filter['assigned_to_id'] ?? null, ['class' => 'form-control', 'placeholder' => ' All assigners'])  }}
+    </div>
+    <div class="form-group col-md-1">
+        <button class="btn btn-primary" type="submit">Apply</button>
+    </div>
+    {{ Form::close() }}
     @if($tasks->count() > 0)
     <table class="table">
         <thead>
@@ -63,36 +48,22 @@
                 <th scope="row">{{ $task->id }}</th>
                 <td>{{ $task->name }}</td>
                 <td>{{ $task->description }}</td>
-                <td>
-                @if(isset($task->status->name))
-                {{ $task->status->name }}
-                @endif
-                </td>
+                <td>{{ $task->status->name }}</td>
                 <td>
                 @foreach($task->labels as $label)
                 {{ $label->name .  " "}}
                 @endforeach
                 </td>
-                <td>
-                @if(isset($task->createdBy->name))
-                {{ $task->createdBy->name }}
-                @endif
-                </td>
-                <td>
-                @if(isset($task->assignedTo->name))
-                {{ $task->assignedTo->name }}
-                @endif
-                </td>
+                <td>{{ $task->createdBy->name }}</td>
+                <td>{{ $task->assignedTo->name }}</td>
                 <td>{{ $task->created_at }}</td>
                 <td>
                     <a class="btn btn-primary" href="{{ route('task.edit', $task->id) }}">{{ __('task.edit') }}</a>
                 </td>
                 <td>
-                    <form action="{{ route('task.destroy', $task->id) }}" method="POST">
-                        @method('DELETE')
-                        @csrf
-                        <button class="btn btn-danger" type="submit">{{ __('task.delete') }}</button>
-                    </form>
+                {{ Form::open(['url' => route('task.destroy', $task->id), 'method' => 'delete']) }}
+                {{ Form::submit(__('task.delete'), ['class' => 'btn btn-danger']) }}
+                {{ Form::close() }}
                 </td>
             </tr>
             @endforeach

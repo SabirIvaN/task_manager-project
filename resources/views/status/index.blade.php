@@ -27,11 +27,9 @@
                     <a class="btn btn-primary" href="{{ route('status.edit', $status->id) }}">{{ __('status.edit') }}</a>
                 </td>
                 <td>
-                    {{ Form::model($status, ['url' => route('status.destroy', $status->id)]) }}
-                    @method('DELETE')
-                    @csrf
-                    {{ Form::submit(__('status.delete'), ['class' => 'btn btn-danger']) }}
-                    {{ Form::close() }}
+                {{ Form::open(['url' => route('status.destroy', $status->id), 'method' => 'delete']) }}
+                {{ Form::submit(__('status.delete'), ['class' => 'btn btn-danger']) }}
+                {{ Form::close() }}
                 </td>
             </tr>
             @endforeach

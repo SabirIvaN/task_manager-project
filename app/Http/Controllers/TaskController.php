@@ -29,17 +29,19 @@ class TaskController extends Controller
     {
         $tasks = QueryBuilder::for(Task::class)
             ->allowedFilters([
-                AllowedFilter::exact('status_id')->ignore('all_statuses'),
-                AllowedFilter::exact('created_by_id')->ignore('all_creators'),
-                AllowedFilter::exact('assigned_to_id')->ignore('all_assigners'),
+                AllowedFilter::exact('status_id'),
+                AllowedFilter::exact('created_by_id'),
+                AllowedFilter::exact('assigned_to_id'),
             ])
             ->get();
-        $request = $request->post('filter');
-        $filters = Task::all();
+        $filter = $request->get('filter');
+        $users = User::all();
+        $statuses = Status::all();
         return view('task.index', [
             'tasks' => $tasks,
-            'filters' => $filters,
-            'request' => $request
+            'users' => $users,
+            'filter' => $filter,
+            'statuses' => $statuses,
         ]);
     }
 
