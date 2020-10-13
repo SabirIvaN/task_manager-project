@@ -8,16 +8,26 @@
                 <div class="card-header">{{ __('auth.reset') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
+                    {{ Form::open(['method' => 'POST', 'url' => route('password.update')]) }}
 
-                        <input type="hidden" name="token" value="{{ $token }}">
+                    {{ Form::macro('tokenField', function ($token){
+                        return "<input type='hidden' name='token' value='" . $token . "'>";
+                    }) }}
+
+                    {!! Form::tokenField($token) !!}
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('auth.email') }}</label>
+                            {{ Form::label('email', __('auth.email'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+                                {{ Form::email('email', $email ?? old('email'), [
+                                        'class' => 'form-control' . ($errors->has('email') ? ' is-invalid' : null),
+                                        'required' => true,
+                                        'autocomplete' => 'email',
+                                        'autofocus' => true,
+                                        'id' => 'email',
+                                    ])
+                                }}
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -28,10 +38,16 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('auth.password') }}</label>
+                            {{ Form::label('password', __('auth.password'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                {{ Form::password('password', [
+                                        'class' => 'form-control' . ($errors->has('password') ? ' is-invalid' : null),
+                                        'required' => true,
+                                        'autocomplete' => 'new-password',
+                                        'id' => 'password',
+                                    ])
+                                }}
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -42,21 +58,25 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('auth.confirm') }}</label>
+                            {{ Form::label('password-confirm', __('auth.confirm'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                {{ Form::password('password_confirmation', [
+                                        'class' => 'form-control',
+                                        'required' => true,
+                                        'autocomplete' => 'new-password',
+                                        'id' => 'password-confirm',
+                                    ])
+                                }}
                             </div>
                         </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('auth.reset') }}
-                                </button>
+                                {{ Form::submit(__('auth.reset'), ['class' => 'btn btn-primary']) }}
                             </div>
                         </div>
-                    </form>
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>

@@ -10,14 +10,20 @@
                 <div class="card-body">
                     {{ __('auth.please') }}
 
-                    <form method="POST" action="{{ route('password.confirm') }}">
-                        @csrf
+                    {{ Form::open(['method' => 'POST', 'url' => route('password.confirm')]) }}
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('auth.password') }}</label>
+                            {{ Form::label('password', __('auth.password'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                {{ Form::password('password', [
+                                        'class' => 'form-control' . ($errors->has('password') ? ' is-invalid' : null),
+                                        'required' => true,
+                                        'autocomplete' => 'current-password',
+                                        'autofocus' => true,
+                                        'id' => 'password',
+                                    ])
+                                }}
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -29,9 +35,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('auth.confirm') }}
-                                </button>
+                                {{ Form::submit(__('auth.confirm'), ['class' => 'btn btn-primary']) }}
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
@@ -40,7 +44,7 @@
                                 @endif
                             </div>
                         </div>
-                    </form>
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>

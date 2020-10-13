@@ -14,14 +14,20 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
+                    {{ Form::open(['method' => 'POST', 'url' => route('password.email')]) }}
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('auth.email') }}</label>
+                            {{ Form::label('email', __('auth.email'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                {{ Form::email('email', old('email'), [
+                                        'class' => 'form-control' . ($errors->has('email') ? ' is-invalid' : null),
+                                        'required' => true,
+                                        'autocomplete' => 'email',
+                                        'autofocus' => true,
+                                        'id' => 'email',
+                                    ])
+                                }}
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -33,12 +39,10 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('auth.send') }}
-                                </button>
+                                {{ Form::submit(__('auth.send'), ['class' => 'btn btn-primary']) }}
                             </div>
                         </div>
-                    </form>
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>

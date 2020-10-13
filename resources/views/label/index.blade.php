@@ -8,7 +8,6 @@
             <a class="btn btn-success" href="{{ route('label.create') }}">{{ __('label.add') }}</a>
         </div>
     </div>
-    @if($labels->count() > 0)
     <table class="table">
         <thead>
             <tr>
@@ -35,6 +34,5 @@
             @endforeach
         </tbody>
     </table>
-    @endif
 </div>
 @endsection

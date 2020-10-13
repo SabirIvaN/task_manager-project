@@ -28,7 +28,6 @@
         <button class="btn btn-primary" type="submit">Apply</button>
     </div>
     {{ Form::close() }}
-    @if($tasks->count() > 0)
     <table class="table">
         <thead>
             <tr>
@@ -38,7 +37,7 @@
                 <th scope="col">{{ __('task.status') }}</th>
                 <th scope="col">{{ __('task.label') }}</th>
                 <th scope="col">{{ __('task.creator') }}</th>
-                <th scope="col">{{ __('task.asignee') }}</th>
+                <th scope="col">{{ __('task.assignee') }}</th>
                 <th scope="col" colspan="3">{{ __('task.date') }}</th>
             </tr>
         </thead>
@@ -69,6 +68,5 @@
             @endforeach
         </tbody>
     </table>
-    @endif
 </div>
 @endsection

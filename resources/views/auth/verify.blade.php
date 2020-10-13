@@ -16,10 +16,9 @@
 
                     {{ __('auth.check') }}
                     {{ __('auth.receive') }},
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('auth.click') }}</button>.
-                    </form>
+                    {{ Form::open(['method' => 'POST', 'url' => route('verification.resend'), 'class' => 'd-inline']) }}
+                        {{ Form::submit(__('auth.click'), ['class' => 'btn btn-link p-0 m-0 align-baseline']) }}.
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>
