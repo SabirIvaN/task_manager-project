@@ -27,6 +27,7 @@ return [
     'edit' => 'Edit',
     'delete' => 'Delete',
     'save' => 'Save',
+    'apply' => 'Apply',
     'store' => 'The task created.',
     'update' => 'The task updated.',
     'destroy' => 'The task deleted.',

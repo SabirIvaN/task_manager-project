@@ -41,6 +41,7 @@ class TaskController extends Controller
             'tasks' => $tasks,
             'users' => $users,
             'statuses' => $statuses,
+            'filter' => $filter,
         ]);
     }
 

@@ -4,6 +4,7 @@
 <div class="container">
     <div class="d-flex justify-content-between align-items-center flex-wrap mt-1 mb-3">
         <h2>{{ __('label.mainTitle') }}</h2>
+
         <div class="btn-toolbar">
             <a class="btn btn-success" href="{{ route('label.create') }}">{{ __('label.add') }}</a>
         </div>
@@ -26,9 +27,11 @@
                     <a class="btn btn-primary" href="{{ route('label.edit', $label->id) }}">{{ __('label.edit') }}</a>
                 </td>
                 <td>
-                {{ Form::open(['url' => route('label.destroy', $label->id), 'method' => 'delete']) }}
-                {{ Form::submit(__('label.delete'), ['class' => 'btn btn-danger']) }}
-                {{ Form::close() }}
+                    {{ Form::open(['url' => route('label.destroy', $label->id), 'method' => 'delete']) }}
+
+                    {{ Form::submit(__('label.delete'), ['class' => 'btn btn-danger']) }}
+
+                    {{ Form::close() }}
                 </td>
             </tr>
             @endforeach
