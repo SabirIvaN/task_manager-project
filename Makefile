@@ -3,8 +3,10 @@ install:
 	npm install
 	php -r "file_exists('.env') || copy('.env.example', '.env');"
 	php artisan key:generate
-	touch database/database.sqlite
 	chmod -R 777 storage bootstrap/cache
+	php artisan migrate
+db:
+	touch database/database.sqlite
 	php artisan migrate
 seed:
 	php artisan migrate:fresh
