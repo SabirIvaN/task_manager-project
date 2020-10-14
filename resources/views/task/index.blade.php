@@ -62,7 +62,11 @@
                     @endforeach
                 </td>
                 <td>{{ $task->createdBy->name }}</td>
-                <td>{{ $task->assignedTo->name }}</td>
+                <td>
+                    @if($task->assignedTo != null)
+                    {{ $task->assignedTo->name }}
+                    @endif
+                </td>
                 <td>{{ $task->created_at }}</td>
                 <td>
                     <a class="btn btn-primary" href="{{ route('task.edit', $task) }}">{{ __('task.edit') }}</a>

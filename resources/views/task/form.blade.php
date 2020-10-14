@@ -21,14 +21,18 @@
 
     {{ Form::select('assigned_to_id', $users->mapWithKeys(function ($user) {
         return [$user->id => $user->name];
-    }), $task->assigned_to_id ?? null, ['class' => 'form-control']) }}
+    }), $task->assigned_to_id ?? null, ['class' => 'form-control', 'placeholder' => 'All assigners']) }}
 </div>
 <div class="form-group col-md-6">
     {{ Form::label('status_id', __('task.status')) }}
 
     {{ Form::select('status_id', $statuses->mapWithKeys(function ($status) {
         return [$status->id => $status->name];
-    }), $task->status_id ?? null, ['class' => 'form-control']) }}
+    }), $task->status_id ?? null, ['class' => 'form-control' . ($errors->has('status_id') ? ' is-invalid' : ''), 'placeholder' => 'All statuses']) }}
+
+    @error('status_id')
+    <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
 </div>
 <div class="form-group col-md-6">
     {{ Form::label('label_id', __('task.label')) }}

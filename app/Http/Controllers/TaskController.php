@@ -77,7 +77,7 @@ class TaskController extends Controller
             'name' => 'required|max:50',
             'description' => 'max:500',
             'status_id' => 'required|exists:statuses,id',
-            'assigned_to_id' => 'required|exists:users,id',
+            'assigned_to_id' => 'nullable',
             'label_id' => 'array',
             'label_id.*' => 'exists:labels,id',
         ]);
@@ -127,7 +127,7 @@ class TaskController extends Controller
             'name' => 'required|max:50',
             'description' => 'max:500',
             'status_id' => 'required|exists:statuses,id',
-            'assigned_to_id' => 'required|exists:users,id',
+            'assigned_to_id' => 'nullable',
             'label_id' => 'array',
             'label_id.*' => 'exists:labels,id',
         ]);
