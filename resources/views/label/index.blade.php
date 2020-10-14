@@ -24,14 +24,10 @@
                 <td>{{ $label->name }}</td>
                 <td>{{ $label->created_at }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ route('label.edit', $label->id) }}">{{ __('label.edit') }}</a>
+                    <a class="btn btn-primary" href="{{ route('label.edit', $label) }}">{{ __('label.edit') }}</a>
                 </td>
                 <td>
-                    {{ Form::open(['url' => route('label.destroy', $label), 'method' => 'delete', 'data-confirm' => __('label.rightDeleting')]) }}
-
-                    {{ Form::submit(__('label.delete'), ['class' => 'btn btn-danger']) }}
-
-                    {{ Form::close() }}
+                    <a class="btn btn-danger" href="{{ route('label.destroy', $label) }}" data-confirm="{{__('label.confirm')}}" data-method="delete" rel="nofollow">{{__('label.delete')}}</a>
                 </td>
             </tr>
             @endforeach

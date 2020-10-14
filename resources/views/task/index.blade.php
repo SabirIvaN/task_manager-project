@@ -72,11 +72,7 @@
                     <a class="btn btn-primary" href="{{ route('task.edit', $task) }}">{{ __('task.edit') }}</a>
                 </td>
                 <td>
-                    {{ Form::open(['url' => route('task.destroy', $task), 'method' => 'delete', 'class' => 'delete', 'data-confirm' => __('task.rightDeleting')]) }}
-
-                    {{ Form::submit(__('task.delete'), ['class' => 'btn btn-danger']) }}
-
-                    {{ Form::close() }}
+                    <a class="btn btn-danger" href="{{ route('task.destroy', $task) }}" data-confirm="{{__('task.confirm')}}" data-method="delete" rel="nofollow">{{__('task.delete')}}</a>
                 </td>
             </tr>
             @endforeach

@@ -47,12 +47,12 @@ class TaskTest extends TestCase
             'status_id' => $task->status_id,
             'assigned_to_id' => $user->id,
         ];
-        $check = array_merge($data, ['created_by_id' => $user->id]);
+        $testData = array_merge($data, ['created_by_id' => $user->id]);
         $this->actingAs($user)
             ->post(route('task.store'), $data)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
-        $this->assertDatabaseHas('tasks', $check);
+        $this->assertDatabaseHas('tasks', $testData);
     }
 
     /**
@@ -85,12 +85,12 @@ class TaskTest extends TestCase
             'status_id' => $newTask->status_id,
             'assigned_to_id' => $newTask->assigned_to_id,
         ];
-        $check = array_merge($data, ['created_by_id' => $oldTask->created_by_id]);
+        $testData = array_merge($data, ['created_by_id' => $oldTask->created_by_id]);
         $this->actingAs($user)
             ->patch(route('task.update', $oldTask), $data)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
-        $this->assertDatabaseHas('tasks', $check);
+        $this->assertDatabaseHas('tasks', $testData);
     }
 
     /**

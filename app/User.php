@@ -38,18 +38,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function creator()
+    public function createdTasks()
     {
         return $this->hasMany(Task::class, 'created_by_id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function assigner()
+    public function assignedTasks()
     {
         return $this->hasMany(Task::class, 'assigned_to_id');
     }
