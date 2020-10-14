@@ -27,7 +27,7 @@
                     <a class="btn btn-primary" href="{{ route('label.edit', $label->id) }}">{{ __('label.edit') }}</a>
                 </td>
                 <td>
-                    {{ Form::open(['url' => route('label.destroy', $label->id), 'method' => 'delete', 'class' => 'delete']) }}
+                    {{ Form::open(['url' => route('label.destroy', $label->id), 'method' => 'delete', 'data-confirm' => __('label.rightDeleting')]) }}
 
                     {{ Form::submit(__('label.delete'), ['class' => 'btn btn-danger']) }}
 

@@ -23,4 +23,5 @@ return [
     'store' => 'The label created.',
     'update' => 'The label updated.',
     'destroy' => 'The label deleted.',
+    'rightDeleting' => 'You don\'t have permission to delete this label',
 ];

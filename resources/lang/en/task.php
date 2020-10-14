@@ -32,4 +32,5 @@ return [
     'update' => 'The task updated.',
     'destroy' => 'The task deleted.',
     'confirm' => 'Are you sure you want to delete task',
+    'rightDeleting' => 'You don\'t have permission to delete this task',
 ];

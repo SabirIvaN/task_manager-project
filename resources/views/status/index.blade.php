@@ -27,7 +27,7 @@
                     <a class="btn btn-primary" href="{{ route('status.edit', $status->id) }}">{{ __('status.edit') }}</a>
                 </td>
                 <td>
-                    {{ Form::open(['url' => route('status.destroy', $status->id), 'method' => 'delete', 'class' => 'delete']) }}
+                    {{ Form::open(['url' => route('status.destroy', $status->id), 'method' => 'delete', 'data-confirm' => __('status.rightDeleting')]) }}
 
                     {{ Form::submit(__('status.delete'), ['class' => 'btn btn-danger']) }}
 

@@ -23,4 +23,5 @@ return [
     'store' => 'The status created.',
     'update' => 'The status updated.',
     'destroy' => 'The status deleted.',
+    'rightDeleting' => 'You don\'t have permission to delete this status',
 ];
