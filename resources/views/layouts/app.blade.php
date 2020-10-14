@@ -35,21 +35,27 @@
                 <a class="navbar-brand" href="{{ route('welcome') }}">
                     {{ config('app.name', 'Task manager') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                {{ Form::button('<span class="navbar-toggler-icon"></span>', [
+                        'class' => 'navbar-toggler',
+                        'data-toggle' => 'collapse',
+                        'data-target' => '#navbarSupportedContent',
+                        'aria-controls' => 'navbarSupportedContent',
+                        'aria-expanded' => 'false',
+                        'aria-label' => __('Toggle navigation'),
+                    ])
+                }}
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('task.index') }}">{{ __('task.mainTitle') }}</a>
+                            <a class="nav-link {{ (request()->is('task') || request()->is('task/*')) ? 'active' : '' }}" href="{{ route('task.index') }}">{{ __('task.mainTitle') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('status.index') }}">{{ __('status.mainTitle') }}</a>
+                            <a class="nav-link {{ (request()->is('status') || request()->is('status/*')) ? 'active' : '' }}" href="{{ route('status.index') }}">{{ __('status.mainTitle') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('label.index') }}">{{ __('label.mainTitle') }}</a>
+                            <a class="nav-link {{ (request()->is('label') || request()->is('label/*')) ? 'active' : '' }}" href="{{ route('label.index') }}">{{ __('label.mainTitle') }}</a>
                         </li>
                     </ul>
 

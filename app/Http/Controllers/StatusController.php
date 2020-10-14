@@ -48,7 +48,10 @@ class StatusController extends Controller
         ]);
         $status = new Status();
         $status->fill($data);
-        $status->save();
+        if (!$status->save()) {
+            flash(__('status.savingFailed'))->success()->important();
+            return redirect()->route('status.index');
+        }
         flash(__('status.store'))->success()->important();
         return redirect()->route('status.index');
     }
@@ -77,7 +80,10 @@ class StatusController extends Controller
             'name' => 'required|max:50',
         ]);
         $status->fill($request->all());
-        $status->save();
+        if (!$status->save()) {
+            flash(__('status.updatingFailed'))->error()->important();
+            return redirect()->route('status.index');
+        }
         flash(__('status.update'))->important();
         return redirect()->route('status.index');
     }
@@ -90,7 +96,8 @@ class StatusController extends Controller
      */
     public function destroy(Status $status)
     {
-        if (count($status->tasks) != 0) {
+        if ($status->tasks()->exists()) {
+            flash(__('status.rejected'))->error()->important();
             return redirect()->route('status.index');
         }
         $tasks = $status->tasks;
@@ -98,7 +105,10 @@ class StatusController extends Controller
             $task->status()->dissociate();
             $task->save();
         }
-        $status->delete();
+        if (!$status->delete()) {
+            flash(__('status.deletingFailed'))->error()->important();
+            return redirect()->route('status.index');
+        }
         flash(__('status.destroy'))->error()->important();
         return redirect()->route('status.index');
     }

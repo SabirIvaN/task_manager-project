@@ -10,7 +10,7 @@
 <div class="form-group col-md-6">
     {{ Form::label('description', __('task.description')) }}
 
-    {{ Form::text('description', $task->description, ['class' => 'form-control' . ($errors->has('description') ? ' is-invalid' : '')]) }}
+    {{ Form::text('description', $task->name, ['class' => 'form-control' . ($errors->has('description') ? ' is-invalid' : '')]) }}
 
     @error('description')
     <div class="invalid-feedback">{{ $message }}</div>
@@ -19,27 +19,17 @@
 <div class="form-group col-md-6">
     {{ Form::label('assigned_to_id', __('task.assignee')) }}
 
-    {{ Form::select('assigned_to_id', $users->mapWithKeys(function ($user) {
-        return [$user->id => $user->name];
-    }), $task->assigned_to_id ?? null, ['class' => 'form-control', 'placeholder' => 'All assigners']) }}
+    {{ Form::select('assigned_to_id', $assignersArray, $task->assigned_to_id ?? null, ['class' => 'form-control', 'placeholder' => 'All assigners']) }}
 </div>
 <div class="form-group col-md-6">
     {{ Form::label('status_id', __('task.status')) }}
 
-    {{ Form::select('status_id', $statuses->mapWithKeys(function ($status) {
-        return [$status->id => $status->name];
-    }), $task->status_id ?? null, ['class' => 'form-control' . ($errors->has('status_id') ? ' is-invalid' : ''), 'placeholder' => 'All statuses']) }}
-
-    @error('status_id')
-    <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
+    {{ Form::select('status_id', $statusesArray, $task->status_id ?? null, ['class' => 'form-control', 'placeholder' => 'All statuses']) }}
 </div>
 <div class="form-group col-md-6">
     {{ Form::label('label_id', __('task.label')) }}
 
-    {{ Form::select('label_id[]', $labels->mapWithKeys(function ($label) {
-        return [$label->id => $label->name];
-    }), $task->labels, ['class' => 'chosen-select', 'multiple' => true]) }}
+    {{ Form::select('label_id[]', $labelsArray, $task->labels, ['class' => 'chosen-select', 'multiple' => true]) }}
 </div>
 <div class="form-group col-md-12">
     {{ Form::submit(__('task.save'), ['class' => 'btn btn-primary']) }}

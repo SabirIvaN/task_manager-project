@@ -47,7 +47,10 @@ class LabelController extends Controller
         ]);
         $label = new Label();
         $label->fill($data);
-        $label->save();
+        if(!$label->save()) {
+            flash(__('label.savingFailed'))->error()->important();
+            return redirect()->route('label.index');
+        }
         flash(__('label.store'))->success()->important();
         return redirect()->route('label.index');
     }
@@ -77,6 +80,10 @@ class LabelController extends Controller
         ]);
         $label->fill($data);
         $label->save();
+        if (!$label->save()) {
+            flash(__('label.updatingFailed'))->error()->important();
+            return redirect()->route('label.index');
+        }
         flash(__('label.update'))->important();
         return redirect()->route('label.index');
     }
@@ -89,11 +96,15 @@ class LabelController extends Controller
      */
     public function destroy(Label $label)
     {
-        if (count($label->tasks) != 0) {
+        if ($label->tasks()->exists()) {
+            flash(__('label.rejected'))->error()->important();
             return redirect()->route('label.index');
         }
         $label->tasks()->detach();
-        $label->delete();
+        if (!$label->delete()) {
+            flash(__('label.deletingFailed'))->error()->important();
+            return redirect()->route('label.index');
+        }
         flash(__('label.destroy'))->error()->important();
         return redirect()->route('label.index');
     }

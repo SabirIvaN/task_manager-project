@@ -13,21 +13,15 @@
     {{ Form::open(['url' => route('task.index'), 'method' => 'GET', 'class' => 'form-row']) }}
 
     <div class="form-group col-md-2">
-        {{ Form::select('filter[status_id]', $statuses->mapWithKeys(function ($status) {
-            return [$status->id => $status->name];
-        }), $filter['status_id'] ?? null, ['class' => 'form-control', 'placeholder' => 'All statuses'])  }}
+        {{ Form::select('filter[status_id]', $statusesArray, request()->input('filter.status_id'), ['class' => 'form-control', 'placeholder' => 'All statuses'])  }}
     </div>
 
     <div class="form-group col-md-2">
-        {{ Form::select('filter[created_by_id]', $users->mapWithKeys(function ($creator) {
-            return [$creator->id => $creator->name];
-        }), $filter['created_by_id'] ?? null, ['class' => 'form-control', 'placeholder' => 'All creators'])  }}
+        {{ Form::select('filter[created_by_id]', $creatorsArray, request()->input('filter.created_by_id'), ['class' => 'form-control', 'placeholder' => 'All creators'])  }}
     </div>
 
     <div class="form-group col-md-2">
-        {{ Form::select('filter[assigned_to_id]', $users->mapWithKeys(function ($assigner) {
-            return [$assigner->id => $assigner->name];
-        }), $filter['assigned_to_id'] ?? null, ['class' => 'form-control', 'placeholder' => ' All assigners'])  }}
+        {{ Form::select('filter[assigned_to_id]', $assignersArray, request()->input('filter.assigned_to_id'), ['class' => 'form-control', 'placeholder' => ' All assigners'])  }}
     </div>
 
     <div class="form-group col-md-1">
@@ -55,7 +49,11 @@
                 <th scope="row">{{ $task->id }}</th>
                 <td>{{ $task->name }}</td>
                 <td>{{ $task->description }}</td>
-                <td>{{ $task->status->name }}</td>
+                <td>
+                    @if($task->status()->exists())
+                    {{ $task->status->name }}
+                    @endif
+                </td>
                 <td>
                     @foreach($task->labels as $label)
                     {{ $label->name .  " "}}
@@ -63,7 +61,7 @@
                 </td>
                 <td>{{ $task->createdBy->name }}</td>
                 <td>
-                    @if($task->assignedTo != null)
+                    @if($task->assignedTo()->exists())
                     {{ $task->assignedTo->name }}
                     @endif
                 </td>

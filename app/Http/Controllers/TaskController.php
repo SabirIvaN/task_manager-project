@@ -12,6 +12,9 @@ use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
+use function App\Helpers\ArrayGetters\getStatus;
+use function App\Helpers\ArrayGetters\getUsers;
+use function App\Helpers\ArrayGetters\getLabels;
 
 class TaskController extends Controller
 {
@@ -34,14 +37,18 @@ class TaskController extends Controller
                 AllowedFilter::exact('assigned_to_id'),
             ])
             ->get();
-        $filter = $request->get('filter');
         $users = User::all();
         $statuses = Status::all();
+        $statusesArray = getStatus($statuses);
+        $creatorsArray = getUsers($users);
+        $assignersArray = getUsers($users);
         return view('task.index', [
             'tasks' => $tasks,
             'users' => $users,
             'statuses' => $statuses,
-            'filter' => $filter,
+            'statusesArray' => $statusesArray,
+            'creatorsArray' => $creatorsArray,
+            'assignersArray' => $assignersArray,
         ]);
     }
 
@@ -54,13 +61,19 @@ class TaskController extends Controller
     {
         $task = new Task();
         $users = User::all();
-        $statuses = Status::all();
         $labels = Label::all();
+        $statuses = Status::all();
+        $statusesArray = getStatus($statuses);
+        $assignersArray = getUsers($users);
+        $labelsArray = getLabels($labels);
         return view('task.create', [
-            'statuses' => $statuses,
+            'task' => $task,
             'users' => $users,
             'labels' => $labels,
-            'task' => $task,
+            'statuses' => $statuses,
+            'labelsArray' => $labelsArray,
+            'statusesArray' => $statusesArray,
+            'assignersArray' => $assignersArray,
         ]);
     }
 
@@ -75,15 +88,18 @@ class TaskController extends Controller
         $task = new Task();
         $data = $request->validate([
             'name' => 'required|max:50',
-            'description' => 'max:500',
-            'status_id' => 'required|exists:statuses,id',
+            'description' => 'required|max:500',
+            'status_id' => 'nullable',
             'assigned_to_id' => 'nullable',
             'label_id' => 'array',
             'label_id.*' => 'exists:labels,id',
         ]);
         $task->fill($data);
         $task->createdBy()->associate(Auth::user());
-        $task->save();
+        if (!$task->save()) {
+            flash(__('task.savingFailed'))->success()->important();
+            return redirect()->route('task.index');
+        }
         $task->labels()->sync(Arr::get($data, 'label_id', []));
         flash(__('task.store'))->success()->important();
         return redirect()->route('task.index');
@@ -97,17 +113,24 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        if (Auth::user()->id != $task->createdBy->id) {
+        if (Auth::user()->id !== $task->createdBy->id) {
+            flash(__('task.preventEdited'))->error()->important();
             return redirect()->route('task.index');
         }
         $users = User::all();
         $labels = Label::all();
         $statuses = Status::all();
+        $statusesArray = getStatus($statuses);
+        $assignersArray = getUsers($users);
+        $labelsArray = getLabels($labels);
         return view('task.edit', [
             'statuses' => $statuses,
             'users' => $users,
             'labels' => $labels,
             'task' => $task,
+            'labelsArray' => $labelsArray,
+            'statusesArray' => $statusesArray,
+            'assignersArray' => $assignersArray,
         ]);
     }
 
@@ -120,19 +143,23 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        if (Auth::user()->id != $task->createdBy->id) {
+        if (Auth::user()->id !== $task->createdBy->id) {
+            flash(__('task.preventEdited'))->error()->important();
             return redirect()->route('task.index');
         }
         $data = $request->validate([
             'name' => 'required|max:50',
-            'description' => 'max:500',
-            'status_id' => 'required|exists:statuses,id',
+            'description' => 'required|max:500',
+            'status_id' => 'nullable',
             'assigned_to_id' => 'nullable',
             'label_id' => 'array',
             'label_id.*' => 'exists:labels,id',
         ]);
         $task->fill($data);
-        $task->save();
+        if (!$task->save()) {
+            flash(__('task.editingFailed'))->error()->important();
+            return redirect()->route('task.index');
+        }
         $task->labels()->sync(Arr::get($data, 'label_id', []));
         flash(__('task.update'))->important();
         return redirect()->route('task.index');
@@ -146,11 +173,15 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        if (Auth::user()->id != $task->createdBy->id) {
+        if (Auth::user()->id !== $task->createdBy->id) {
+            flash(__('task.preventDeleted'))->error()->important();
             return redirect()->route('task.index');
         }
         $task->labels()->detach();
-        $task->delete();
+        if (!$task->delete()) {
+            flash(__('task.deletingFailed'))->error()->important();
+            return redirect()->route('task.index');
+        }
         flash(__('task.destroy'))->error()->important();
         return redirect()->route('task.index');
     }
