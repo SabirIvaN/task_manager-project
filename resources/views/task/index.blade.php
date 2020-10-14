@@ -68,7 +68,7 @@
                     <a class="btn btn-primary" href="{{ route('task.edit', $task->id) }}">{{ __('task.edit') }}</a>
                 </td>
                 <td>
-                    {{ Form::open(['url' => route('task.destroy', $task->id), 'method' => 'delete']) }}
+                    {{ Form::open(['url' => route('task.destroy', $task->id), 'method' => 'delete', 'class' => 'delete']) }}
 
                     {{ Form::submit(__('task.delete'), ['class' => 'btn btn-danger']) }}
 

@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
 
-Route::get('/', 'WelcomeController@show');
+Route::get('/', 'WelcomeController@show')->name('welcome');
 
 Route::resource('/task', 'TaskController');
 
