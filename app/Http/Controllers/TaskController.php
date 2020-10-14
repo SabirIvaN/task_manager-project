@@ -95,9 +95,8 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
      */
-    public function edit($id)
+    public function edit(Task $task)
     {
-        $task = Task::find($id);
         if (Auth::user()->id != $task->createdBy->id) {
             return redirect()->route('task.index');
         }

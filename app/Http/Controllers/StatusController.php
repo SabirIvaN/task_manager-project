@@ -59,9 +59,8 @@ class StatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Status $status)
     {
-        $status = Status::find($id);
         return view('status.edit', ['status' => $status]);
     }
 
