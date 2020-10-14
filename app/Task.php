@@ -18,33 +18,21 @@ class Task extends Model
         'name', 'description', 'status_id', 'created_by_id', 'assigned_to_id',
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function status()
     {
         return $this->belongsTo(Status::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function createdBy()
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function assignedTo()
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function labels()
     {
         return $this->belongsToMany(Label::class);

@@ -16,9 +16,6 @@ class Status extends Model
         'name',
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function tasks()
     {
         return $this->hasMany(Task::class);
