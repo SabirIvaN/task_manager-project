@@ -4,7 +4,7 @@
 
 Service for orginizing tasks.  
 
-Link to the: https://php-project-master-8kpyhisdvzh.herokuapp.com.
+Link to the: http://php-project-master-8kpyhisdvzh.herokuapp.com.
 
 ## Development setup
 
