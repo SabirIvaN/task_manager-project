@@ -4,7 +4,6 @@ install:
 	php -r "file_exists('.env') || copy('.env.example', '.env');"
 	php artisan key:generate
 	chmod -R 777 storage bootstrap/cache
-	php artisan migrate
 db:
 	touch database/database.sqlite
 	php artisan migrate

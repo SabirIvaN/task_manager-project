@@ -12,6 +12,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
+
 use function App\Helpers\ArrayGetters\getStatus;
 use function App\Helpers\ArrayGetters\getUsers;
 use function App\Helpers\ArrayGetters\getLabels;
@@ -108,7 +109,7 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Task  $task
      * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
      */
     public function edit(Task $task)

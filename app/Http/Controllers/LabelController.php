@@ -47,7 +47,7 @@ class LabelController extends Controller
         ]);
         $label = new Label();
         $label->fill($data);
-        if(!$label->save()) {
+        if (!$label->save()) {
             flash(__('label.savingFailed'))->error()->important();
             return redirect()->route('label.index');
         }
@@ -58,7 +58,7 @@ class LabelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Label $label
      * @return \Illuminate\View\View
      */
     public function edit(Label $label)
