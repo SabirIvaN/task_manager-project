@@ -13,8 +13,6 @@ use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 
-use function App\Helpers\getArray;
-
 class TaskController extends Controller
 {
     public function __construct()
@@ -38,9 +36,9 @@ class TaskController extends Controller
             ->get();
         $users = User::all();
         $statuses = Status::all();
-        $statusesArray = getArray($statuses);
-        $creatorsArray = getArray($users);
-        $assignersArray = getArray($users);
+        $statusesArray = $statuses->pluck('name', 'id');
+        $creatorsArray = $users->pluck('name', 'id');
+        $assignersArray = $users->pluck('name', 'id');
         return view('task.index', [
             'tasks' => $tasks,
             'users' => $users,
@@ -62,9 +60,9 @@ class TaskController extends Controller
         $users = User::all();
         $labels = Label::all();
         $statuses = Status::all();
-        $statusesArray = getArray($statuses);
-        $assignersArray = getArray($users);
-        $labelsArray = getArray($labels);
+        $statusesArray = $statuses->pluck('name', 'id');
+        $assignersArray = $users->pluck('name', 'id');
+        $labelsArray = $labels->pluck('name', 'id');
         return view('task.create', [
             'task' => $task,
             'users' => $users,
@@ -119,9 +117,9 @@ class TaskController extends Controller
         $users = User::all();
         $labels = Label::all();
         $statuses = Status::all();
-        $statusesArray = getArray($statuses);
-        $assignersArray = getArray($users);
-        $labelsArray = getArray($labels);
+        $statusesArray = $statuses->pluck('name', 'id');
+        $assignersArray = $users->pluck('name', 'id');
+        $labelsArray = $labels->pluck('name', 'id');
         return view('task.edit', [
             'statuses' => $statuses,
             'users' => $users,

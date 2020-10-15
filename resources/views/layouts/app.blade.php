@@ -41,7 +41,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link {{ (request()->is('task')) ? 'active' : '' }}" href="{{ route('task.index') }}">{{ __('task.mainTitle') }}</a>
+                            <a class="nav-link {{ Helper::checkRoute('task') }}" href="{{ route('task.index') }}">{{ __('task.mainTitle') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ (request()->is('status')) ? 'active' : '' }}" href="{{ route('status.index') }}">{{ __('status.mainTitle') }}</a>
