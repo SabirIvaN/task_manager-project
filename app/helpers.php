@@ -5,8 +5,8 @@ namespace App\Helpers;
 /**
  * Gets an associated array from the Status object.
  *
- * @param  object  $statuses
- * @return array $statusesArray
+ * @param  object  $collection
+ * @return array $objectsArray
  */
 function getArray($collection)
 {
