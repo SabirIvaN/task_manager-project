@@ -41,13 +41,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link {{ Helper::checkRoute('task') }}" href="{{ route('task.index') }}">{{ __('task.mainTitle') }}</a>
+                            <a class="nav-link {{ Helper::getActiveClass('task') }}" href="{{ route('task.index') }}">{{ __('task.mainTitle') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ (request()->is('status')) ? 'active' : '' }}" href="{{ route('status.index') }}">{{ __('status.mainTitle') }}</a>
+                            <a class="nav-link {{ Helper::getActiveClass('status') }}" href="{{ route('status.index') }}">{{ __('status.mainTitle') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ (request()->is('label')) ? 'active' : '' }}" href="{{ route('label.index') }}">{{ __('label.mainTitle') }}</a>
+                            <a class="nav-link {{ Helper::getActiveClass('label') }}" href="{{ route('label.index') }}">{{ __('label.mainTitle') }}</a>
                         </li>
                     </ul>
 
@@ -56,10 +56,10 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link {{ (request()->is('login')) ? 'active' : '' }}" href="{{ route('login') }}">{{ __('auth.login') }}</a>
+                                <a class="nav-link {{ Helper::getActiveClass('login') }}" href="{{ route('login') }}">{{ __('auth.login') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ (request()->is('register')) ? 'active' : '' }}" href="{{ route('register') }}">{{ __('auth.register') }}</a>
+                                <a class="nav-link {{ Helper::getActiveClass('register') }}" href="{{ route('register') }}">{{ __('auth.register') }}</a>
                             </li>
                         @else
                             <li class="nav-item dropdown">

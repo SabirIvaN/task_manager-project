@@ -9,10 +9,10 @@ class Helper
      *
      * @return string
      */
-    public static function checkRoute(string $route): string
+    public static function getActiveClass(string $route): string
     {
         if (request()->is($route) || request()->is($route . '/*')) {
-            return $route;
+            return 'active';
         }
         return '';
     }
