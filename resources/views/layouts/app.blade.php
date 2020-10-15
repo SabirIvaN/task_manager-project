@@ -11,22 +11,14 @@
     <title>{{ config('app.name', 'Task manager') }}</title>
 
     <!-- Scripts -->
-    @if(Request::secure())
-    <script src="{{ secure_asset('js/app.js') }}" defer></script>
-    @else
     <script src="{{ asset('js/app.js') }}" defer></script>
-    @endif
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    @if(Request::secure())
-    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
-    @else
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    @endif
 </head>
 <body>
     <div id="app">
@@ -49,13 +41,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link {{ (request()->is('task') || request()->is('task/*')) ? 'active' : '' }}" href="{{ route('task.index') }}">{{ __('task.mainTitle') }}</a>
+                            <a class="nav-link {{ (request()->is('task')) ? 'active' : '' }}" href="{{ route('task.index') }}">{{ __('task.mainTitle') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ (request()->is('status') || request()->is('status/*')) ? 'active' : '' }}" href="{{ route('status.index') }}">{{ __('status.mainTitle') }}</a>
+                            <a class="nav-link {{ (request()->is('status')) ? 'active' : '' }}" href="{{ route('status.index') }}">{{ __('status.mainTitle') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ (request()->is('label') || request()->is('label/*')) ? 'active' : '' }}" href="{{ route('label.index') }}">{{ __('label.mainTitle') }}</a>
+                            <a class="nav-link {{ (request()->is('label')) ? 'active' : '' }}" href="{{ route('label.index') }}">{{ __('label.mainTitle') }}</a>
                         </li>
                     </ul>
 

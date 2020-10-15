@@ -13,9 +13,7 @@ use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 
-use function App\Helpers\ArrayGetters\getStatus;
-use function App\Helpers\ArrayGetters\getUsers;
-use function App\Helpers\ArrayGetters\getLabels;
+use function App\Helpers\getArray;
 
 class TaskController extends Controller
 {
@@ -40,9 +38,9 @@ class TaskController extends Controller
             ->get();
         $users = User::all();
         $statuses = Status::all();
-        $statusesArray = getStatus($statuses);
-        $creatorsArray = getUsers($users);
-        $assignersArray = getUsers($users);
+        $statusesArray = getArray($statuses);
+        $creatorsArray = getArray($users);
+        $assignersArray = getArray($users);
         return view('task.index', [
             'tasks' => $tasks,
             'users' => $users,
@@ -64,9 +62,9 @@ class TaskController extends Controller
         $users = User::all();
         $labels = Label::all();
         $statuses = Status::all();
-        $statusesArray = getStatus($statuses);
-        $assignersArray = getUsers($users);
-        $labelsArray = getLabels($labels);
+        $statusesArray = getArray($statuses);
+        $assignersArray = getArray($users);
+        $labelsArray = getArray($labels);
         return view('task.create', [
             'task' => $task,
             'users' => $users,
@@ -121,9 +119,9 @@ class TaskController extends Controller
         $users = User::all();
         $labels = Label::all();
         $statuses = Status::all();
-        $statusesArray = getStatus($statuses);
-        $assignersArray = getUsers($users);
-        $labelsArray = getLabels($labels);
+        $statusesArray = getArray($statuses);
+        $assignersArray = getArray($users);
+        $labelsArray = getArray($labels);
         return view('task.edit', [
             'statuses' => $statuses,
             'users' => $users,

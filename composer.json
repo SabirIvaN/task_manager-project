@@ -47,7 +47,7 @@
     },
     "autoload": {
         "files": [
-            "app/Helpers/ArrayGetters.php"
+            "app/helpers.php"
         ],
         "psr-4": {
             "App\\": "app/"
