@@ -8,7 +8,8 @@ Link to the: https://php-project-master-8kpyhisdvzh.herokuapp.com.
 
 ## Development setup
 
-1. Run `make install` to install dependencies, generate .env file and app key, create SQLite database and sets the highest resolution.
-2. Run `make seed` if you want to seed the database.
-3. Run `make run` to launch default web server — http://localhost:8000.
-4. Run `make lint` to run linter and tests.
+1. Run `make install` to install dependencies, generate .env file and app key.
+2. Run `make db` to install to create SQLite database and perform migrations.
+3. Run `make seed` if you want to seed the database.
+4. Run `make run` to launch default web server — http://localhost:8000.
+5. Run `make lint` to run linter and tests.
