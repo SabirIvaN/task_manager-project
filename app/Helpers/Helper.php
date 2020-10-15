@@ -11,7 +11,7 @@ class Helper
      */
     public static function getActiveClass(string $route): string
     {
-        if (request()->is($route) || request()->is($route . '/*')) {
+        if (request()->is($route) || request()->is("{$route}/*")) {
             return 'active';
         }
         return '';
