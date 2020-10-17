@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class TaskTest extends TestCase
 {
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -18,20 +18,20 @@ class TaskTest extends TestCase
         $this->testData = array_merge($this->factoryData, ['created_by_id' => $this->user->id]);
     }
 
-    public function testIndex() : void
+    public function testIndex(): void
     {
         $this->get(route('task.index'))
             ->assertOk();
     }
 
-    public function testCreate() : void
+    public function testCreate(): void
     {
         $this->actingAs($this->user)
             ->get(route('task.create'))
             ->assertOk();
     }
 
-    public function testStore() : void
+    public function testStore(): void
     {
         $this->actingAs($this->user)
             ->post(route('task.store'), $this->factoryData)
@@ -41,14 +41,14 @@ class TaskTest extends TestCase
         $this->assertDatabaseHas('tasks', $this->testData);
     }
 
-    public function testEdit() : void
+    public function testEdit(): void
     {
         $this->actingAs($this->task->createdBy)
             ->get(route('task.edit', $this->task))
             ->assertOk();
     }
 
-    public function testUpdate() : void
+    public function testUpdate(): void
     {
         $this->actingAs($this->task->createdBy)
             ->patch(route('task.update', $this->task), $this->factoryData)
@@ -58,7 +58,7 @@ class TaskTest extends TestCase
         $this->assertDatabaseHas('tasks', $this->testData);
     }
 
-    public function testDelete() : void
+    public function testDelete(): void
     {
         $this->actingAs($this->task->createdBy)
             ->delete(route('task.destroy', $this->task))

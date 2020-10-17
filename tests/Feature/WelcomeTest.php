@@ -6,7 +6,7 @@ use Tests\TestCase;
 
 class WelcomeTest extends TestCase
 {
-    public function testindex() : void
+    public function testIndex(): void
     {
         $this->get('/')->assertOk();
     }

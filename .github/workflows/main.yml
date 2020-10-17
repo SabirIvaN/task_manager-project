@@ -15,8 +15,6 @@ jobs:
     - uses: actions/checkout@v2
     - name: Installation
       run: make install
-    - name: Database creation
-      run: make db
     - name: Linting
       run: make lint
     - name: Analysing
