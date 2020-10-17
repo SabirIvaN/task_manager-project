@@ -8,64 +8,62 @@ use Tests\TestCase;
 
 class LabelTest extends TestCase
 {
-    public function testIndex()
+    protected function setUp() : void
+    {
+        parent::setUp();
+
+        $this->user = factory(User::class)->create();
+        $this->label = factory(Label::class)->create();
+        $this->arrayLabel = factory(Label::class)->make()->only('name');
+    }
+
+    public function testIndex() : void
     {
         $this->get(route('label.index'))
             ->assertOk();
     }
 
-    public function testCreate()
+    public function testCreate() : void
     {
-        $user = factory(User::class)->create();
-        $this->actingAs($user)
+        $this->actingAs($this->user)
             ->get(route('label.create'))
             ->assertOk();
     }
 
-    public function testStore()
+    public function testStore() : void
     {
-        $user = factory(User::class)->create();
-        $label = factory(Label::class)->make();
-        $data = ['name' => $label->name];
-        $this->actingAs($user)
-            ->post(route('label.store'), $data)
+        $this->actingAs($this->user)
+            ->post(route('label.store'), $this->arrayLabel)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
-        $this->assertDatabaseHas('labels', $data);
+
+        $this->assertDatabaseHas('labels', $this->arrayLabel);
     }
 
-    public function testEdit()
+    public function testEdit() : void
     {
-        $user = factory(User::class)->create();
-        $label = factory(Label::class)->create();
-        $this->actingAs($user)
-            ->get(route('label.edit', $label))
+        $this->actingAs($this->user)
+            ->get(route('label.edit', $this->label))
             ->assertOk();
     }
 
-    public function testUpdate()
+    public function testUpdate() : void
     {
-        $user = factory(User::class)->create();
-        $label = factory(Label::class)->create();
-        $factoryData = factory(Label::class)->make();
-        $data = ['name' => $label->name];
-        $this->actingAs($user)
-            ->put(route('label.update', $label), $data)
+        $this->actingAs($this->user)
+            ->put(route('label.update', $this->label), $this->arrayLabel)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
-        $this->assertDatabaseHas('labels', $data);
+
+        $this->assertDatabaseHas('labels', $this->arrayLabel);
     }
 
-    public function testDelete()
+    public function testDelete() : void
     {
-        $user = factory(User::class)->create();
-        $label = factory(Label::class)->create();
-        $factoryData = factory(Label::class)->make();
-        $data = ['name' => $factoryData->name];
-        $this->actingAs($user)
-            ->delete(route('label.destroy', $label))
+        $this->actingAs($this->user)
+            ->delete(route('label.destroy', $this->label))
             ->assertSessionHasNoErrors()
             ->assertRedirect();
-        $this->assertDeleted('labels', $data);
+
+        $this->assertDeleted('labels', $this->arrayLabel);
     }
 }

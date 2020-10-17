@@ -29,9 +29,11 @@ class TaskController extends Controller
                 AllowedFilter::exact('assigned_to_id'),
             ])
             ->get();
-        $creators = User::all()->pluck('name', 'id');
-        $assigners = User::all()->pluck('name', 'id');
-        $statuses = Status::all()->pluck('name', 'id');
+
+        $creators = User::pluck('name', 'id');
+        $assigners = User::pluck('name', 'id');
+        $statuses = Status::pluck('name', 'id');
+
         return view('task.index', [
             'tasks' => $tasks,
             'creators' => $creators,
@@ -43,9 +45,11 @@ class TaskController extends Controller
     public function create()
     {
         $task = new Task();
-        $assigners = User::all()->pluck('name', 'id');
-        $labels = Label::all()->pluck('name', 'id');
-        $statuses = Status::all()->pluck('name', 'id');
+
+        $assigners = User::pluck('name', 'id');
+        $labels = Label::pluck('name', 'id');
+        $statuses = Status::pluck('name', 'id');
+
         return view('task.create', [
             'task' => $task,
             'labels' => $labels,
@@ -57,6 +61,7 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $task = new Task();
+
         $data = $request->validate([
             'name' => 'required|max:50',
             'description' => 'required|max:500',
@@ -65,14 +70,19 @@ class TaskController extends Controller
             'label_id' => 'array',
             'label_id.*' => 'exists:labels,id',
         ]);
+
         $task->fill($data);
+
         $task->createdBy()->associate(Auth::user());
+
         if (!$task->save()) {
             flash(__('task.savingFailed'))->success()->important();
-            return redirect()->route('task.index');
+        } else {
+            flash(__('task.store'))->success()->important();
         }
+
         $task->labels()->sync(Arr::get($data, 'label_id', []));
-        flash(__('task.store'))->success()->important();
+
         return redirect()->route('task.index');
     }
 
@@ -80,11 +90,14 @@ class TaskController extends Controller
     {
         if (Auth::user()->id !== $task->createdBy->id) {
             flash(__('task.preventEdited'))->error()->important();
+
             return redirect()->route('task.index');
         }
-        $assigners = User::all()->pluck('name', 'id');
-        $labels = Label::all()->pluck('name', 'id');
-        $statuses = Status::all()->pluck('name', 'id');
+
+        $assigners = User::pluck('name', 'id');
+        $labels = Label::pluck('name', 'id');
+        $statuses = Status::pluck('name', 'id');
+
         return view('task.edit', [
             'task' => $task,
             'labels' => $labels,
@@ -97,8 +110,10 @@ class TaskController extends Controller
     {
         if (Auth::user()->id !== $task->createdBy->id) {
             flash(__('task.preventEdited'))->error()->important();
+
             return redirect()->route('task.index');
         }
+
         $data = $request->validate([
             'name' => 'required|max:50',
             'description' => 'required|max:500',
@@ -107,13 +122,17 @@ class TaskController extends Controller
             'label_id' => 'array',
             'label_id.*' => 'exists:labels,id',
         ]);
+
         $task->fill($data);
+
         if (!$task->save()) {
             flash(__('task.editingFailed'))->error()->important();
-            return redirect()->route('task.index');
+        } else {
+            flash(__('task.update'))->important();
         }
+
         $task->labels()->sync(Arr::get($data, 'label_id', []));
-        flash(__('task.update'))->important();
+
         return redirect()->route('task.index');
     }
 
@@ -121,14 +140,18 @@ class TaskController extends Controller
     {
         if (Auth::user()->id !== $task->createdBy->id) {
             flash(__('task.preventDeleted'))->error()->important();
+
             return redirect()->route('task.index');
         }
+
         $task->labels()->detach();
+
         if (!$task->delete()) {
             flash(__('task.deletingFailed'))->error()->important();
-            return redirect()->route('task.index');
+        } else {
+            flash(__('task.destroy'))->error()->important();
         }
-        flash(__('task.destroy'))->error()->important();
+
         return redirect()->route('task.index');
     }
 }

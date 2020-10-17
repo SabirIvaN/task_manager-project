@@ -15,7 +15,7 @@ analyse:
 lint:
 	composer run-script phpcs -- --standard=PSR12 app config tests
 test:
-	composer run-script phpunit tests
+	php artisan test
 test-coverage:
 	composer phpunit tests -- --coverage-clover build/logs/clover.xml
 run:

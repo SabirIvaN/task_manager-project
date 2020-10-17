@@ -43,6 +43,7 @@ class VerificationController extends Controller
     protected function redirectTo()
     {
         flash(__('welcome.verification'))->success()->important();
+
         return route('welcome');
     }
 }

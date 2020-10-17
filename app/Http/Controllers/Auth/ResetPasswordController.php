@@ -31,6 +31,7 @@ class ResetPasswordController extends Controller
     protected function redirectTo()
     {
         flash(__('welcome.reset'))->success()->important();
+
         return route('welcome');
     }
 }

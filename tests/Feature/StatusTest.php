@@ -8,64 +8,62 @@ use Tests\TestCase;
 
 class StatusTest extends TestCase
 {
-    public function testIndex()
+    protected function setUp() : void
+    {
+        parent::setUp();
+
+        $this->user = factory(User::class)->create();
+        $this->status = factory(Status::class)->create();
+        $this->arrayStatus = factory(Status::class)->make()->only('name');
+    }
+
+    public function testIndex() : void
     {
         $this->get(route('status.index'))
             ->assertOk();
     }
 
-    public function testCreate()
+    public function testCreate() : void
     {
-        $user = factory(User::class)->create();
-        $this->actingAs($user)
+        $this->actingAs($this->user)
             ->get(route('status.create'))
             ->assertOk();
     }
 
-    public function testStore()
+    public function testStore() : void
     {
-        $user = factory(User::class)->create();
-        $status = factory(Status::class)->make();
-        $data = ['name' => $status->name];
-        $this->actingAs($user)
-            ->post(route('status.store'), $data)
+        $this->actingAs($this->user)
+            ->post(route('status.store'), $this->arrayStatus)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
-        $this->assertDatabaseHas('statuses', $data);
+
+        $this->assertDatabaseHas('statuses', $this->arrayStatus);
     }
 
-    public function testEdit()
+    public function testEdit() : void
     {
-        $user = factory(User::class)->create();
-        $status = factory(Status::class)->create();
-        $this->actingAs($user)
-            ->get(route('status.edit', $status))
+        $this->actingAs($this->user)
+            ->get(route('status.edit', $this->status))
             ->assertOk();
     }
 
-    public function testUpdate()
+    public function testUpdate() : void
     {
-        $user = factory(User::class)->create();
-        $status = factory(Status::class)->create();
-        $factoryData = factory(Status::class)->make();
-        $data = ['name' => $factoryData->name];
-        $this->actingAs($user)
-            ->put(route('status.update', $status), $data)
+        $this->actingAs($this->user)
+            ->put(route('status.update', $this->status), $this->arrayStatus)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
-        $this->assertDatabaseHas('statuses', $data);
+
+        $this->assertDatabaseHas('statuses', $this->arrayStatus);
     }
 
-    public function testDelete()
+    public function testDelete() : void
     {
-        $user = factory(User::class)->create();
-        $status = factory(Status::class)->create();
-        $factoryData = factory(Status::class)->make();
-        $data = ['name' => $factoryData->name];
-        $this->actingAs($user)
-            ->delete(route('status.destroy', $status))
+        $this->actingAs($this->user)
+            ->delete(route('status.destroy', $this->status))
             ->assertSessionHasNoErrors()
             ->assertRedirect();
-        $this->assertDeleted('statuses', $data);
+
+        $this->assertDeleted('statuses', $this->arrayStatus);
     }
 }

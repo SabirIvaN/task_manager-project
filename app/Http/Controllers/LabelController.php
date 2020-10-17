@@ -15,12 +15,14 @@ class LabelController extends Controller
     public function index()
     {
         $labels = Label::all();
+
         return view('label.index', ['labels' => $labels]);
     }
 
     public function create()
     {
         $label = new Label();
+
         return view('label.create', ['label' => $label]);
     }
 
@@ -29,13 +31,16 @@ class LabelController extends Controller
         $data = $request->validate([
             'name' => 'required|unique:labels|max:50',
         ]);
+
         $label = new Label();
         $label->fill($data);
+
         if (!$label->save()) {
             flash(__('label.savingFailed'))->error()->important();
-            return redirect()->route('label.index');
+        } else {
+            flash(__('label.store'))->success()->important();
         }
-        flash(__('label.store'))->success()->important();
+
         return redirect()->route('label.index');
     }
 
@@ -49,13 +54,16 @@ class LabelController extends Controller
         $data = $request->validate([
             'name' => 'required|unique:labels|max:50',
         ]);
+
         $label->fill($data);
         $label->save();
+
         if (!$label->save()) {
             flash(__('label.updatingFailed'))->error()->important();
-            return redirect()->route('label.index');
+        } else {
+            flash(__('label.update'))->important();
         }
-        flash(__('label.update'))->important();
+
         return redirect()->route('label.index');
     }
 
@@ -68,9 +76,9 @@ class LabelController extends Controller
         $label->tasks()->detach();
         if (!$label->delete()) {
             flash(__('label.deletingFailed'))->error()->important();
-            return redirect()->route('label.index');
+        } else {
+            flash(__('label.destroy'))->error()->important();
         }
-        flash(__('label.destroy'))->error()->important();
         return redirect()->route('label.index');
     }
 }

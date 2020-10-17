@@ -12,6 +12,25 @@ class StatusSeeder extends Seeder
      */
     public function run()
     {
-        factory(Status::class, 5)->create();
+        DB::table('statuses')->insert([
+            'name' => 'New',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('statuses')->insert([
+            'name' => 'In work',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('statuses')->insert([
+            'name' => 'Testings',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('statuses')->insert([
+            'name' => 'Completed',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

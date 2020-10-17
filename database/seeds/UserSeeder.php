@@ -19,6 +19,8 @@ class UserSeeder extends Seeder
             'email' => 'sabirivan@hexlet.io',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         DB::table('users')->insert([
             'id' => 2,
@@ -26,6 +28,8 @@ class UserSeeder extends Seeder
             'email' => 'sabirozan@hexlet.io',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         DB::table('users')->insert([
             'id' => 3,
@@ -33,6 +37,8 @@ class UserSeeder extends Seeder
             'email' => 'feycot@hexlet.io',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }

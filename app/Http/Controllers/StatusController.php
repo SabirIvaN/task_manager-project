@@ -16,12 +16,14 @@ class StatusController extends Controller
     public function index()
     {
         $statuses = Status::all();
+
         return view('status.index', ['statuses' => $statuses]);
     }
 
     public function create()
     {
         $status = new Status();
+
         return view('status.create', ['status' => $status]);
     }
 
@@ -30,13 +32,16 @@ class StatusController extends Controller
         $data = $request->validate([
             'name' => 'required|unique:statuses|max:50',
         ]);
+
         $status = new Status();
         $status->fill($data);
+
         if (!$status->save()) {
             flash(__('status.savingFailed'))->success()->important();
-            return redirect()->route('status.index');
+        } else {
+            flash(__('status.store'))->success()->important();
         }
-        flash(__('status.store'))->success()->important();
+
         return redirect()->route('status.index');
     }
 
@@ -50,12 +55,14 @@ class StatusController extends Controller
         $data = $request->validate([
             'name' => 'required|unique:statuses|max:50',
         ]);
+
         $status->fill($request->all());
+
         if (!$status->save()) {
             flash(__('status.updatingFailed'))->error()->important();
-            return redirect()->route('status.index');
+        } else {
+            flash(__('status.update'))->important();
         }
-        flash(__('status.update'))->important();
         return redirect()->route('status.index');
     }
 
@@ -63,18 +70,16 @@ class StatusController extends Controller
     {
         if ($status->tasks()->exists()) {
             flash(__('status.rejected'))->error()->important();
+
             return redirect()->route('status.index');
         }
-        $tasks = $status->tasks;
-        foreach ($tasks as $task) {
-            $task->status()->dissociate();
-            $task->save();
-        }
+
         if (!$status->delete()) {
             flash(__('status.deletingFailed'))->error()->important();
-            return redirect()->route('status.index');
+        } else {
+            flash(__('status.destroy'))->error()->important();
         }
-        flash(__('status.destroy'))->error()->important();
+
         return redirect()->route('status.index');
     }
 }
