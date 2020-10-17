@@ -13,15 +13,15 @@
     {{ Form::open(['url' => route('task.index'), 'method' => 'GET', 'class' => 'form-row']) }}
 
     <div class="form-group col-md-2">
-        {{ Form::select('filter[status_id]', $statusesArray, request()->input('filter.status_id'), ['class' => 'form-control', 'placeholder' => 'All statuses'])  }}
+        {{ Form::select('filter[status_id]', $statuses, request()->input('filter.status_id'), ['class' => 'form-control', 'placeholder' => 'All statuses'])  }}
     </div>
 
     <div class="form-group col-md-2">
-        {{ Form::select('filter[created_by_id]', $creatorsArray, request()->input('filter.created_by_id'), ['class' => 'form-control', 'placeholder' => 'All creators'])  }}
+        {{ Form::select('filter[created_by_id]', $creators, request()->input('filter.created_by_id'), ['class' => 'form-control', 'placeholder' => 'All creators'])  }}
     </div>
 
     <div class="form-group col-md-2">
-        {{ Form::select('filter[assigned_to_id]', $assignersArray, request()->input('filter.assigned_to_id'), ['class' => 'form-control', 'placeholder' => ' All assigners'])  }}
+        {{ Form::select('filter[assigned_to_id]', $assigners, request()->input('filter.assigned_to_id'), ['class' => 'form-control', 'placeholder' => ' All assigners'])  }}
     </div>
 
     <div class="form-group col-md-1">
@@ -67,10 +67,18 @@
                 </td>
                 <td>{{ $task->created_at }}</td>
                 <td>
+                    @if(Auth::user())
+                    @if(Auth::user()->id === $task->createdBy->id)
                     <a class="btn btn-primary" href="{{ route('task.edit', $task) }}">{{ __('task.edit') }}</a>
+                    @endif
+                    @endif
                 </td>
                 <td>
+                    @if(Auth::user())
+                    @if(Auth::user()->id === $task->createdBy->id)
                     <a class="btn btn-danger" href="{{ route('task.destroy', $task) }}" data-confirm="{{__('task.confirm')}}" data-method="delete" rel="nofollow">{{__('task.delete')}}</a>
+                    @endif
+                    @endif
                 </td>
             </tr>
             @endforeach

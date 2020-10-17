@@ -24,10 +24,16 @@
                 <td>{{ $status->name }}</td>
                 <td>{{ $status->created_at }}</td>
                 <td>
+                    @if(Auth::user())
                     <a class="btn btn-primary" href="{{ route('status.edit', $status) }}">{{ __('status.edit') }}</a>
+                    @endif
                 </td>
                 <td>
+                    @if(Auth::user())
+                    @if(!$status->tasks()->exists())
                     <a class="btn btn-danger" href="{{ route('status.destroy', $status) }}" data-confirm="{{__('status.confirm')}}" data-method="delete" rel="nofollow">{{__('status.delete')}}</a>
+                    @endif
+                    @endif
                 </td>
             </tr>
             @endforeach

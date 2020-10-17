@@ -24,10 +24,16 @@
                 <td>{{ $label->name }}</td>
                 <td>{{ $label->created_at }}</td>
                 <td>
+                    @if(Auth::user())
                     <a class="btn btn-primary" href="{{ route('label.edit', $label) }}">{{ __('label.edit') }}</a>
+                    @endif
                 </td>
                 <td>
+                    @if(Auth::user())
+                    @if(!$label->tasks()->exists())
                     <a class="btn btn-danger" href="{{ route('label.destroy', $label) }}" data-confirm="{{__('label.confirm')}}" data-method="delete" rel="nofollow">{{__('label.delete')}}</a>
+                    @endif
+                    @endif
                 </td>
             </tr>
             @endforeach

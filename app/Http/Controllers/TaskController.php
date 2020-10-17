@@ -20,11 +20,6 @@ class TaskController extends Controller
         $this->middleware('auth')->except('index');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\View\View
-     */
     public function index(Request $request)
     {
         $tasks = QueryBuilder::for(Task::class)
@@ -34,52 +29,31 @@ class TaskController extends Controller
                 AllowedFilter::exact('assigned_to_id'),
             ])
             ->get();
-        $users = User::all();
-        $statuses = Status::all();
-        $statusesArray = $statuses->pluck('name', 'id');
-        $creatorsArray = $users->pluck('name', 'id');
-        $assignersArray = $users->pluck('name', 'id');
+        $creators = User::all()->pluck('name', 'id');
+        $assigners = User::all()->pluck('name', 'id');
+        $statuses = Status::all()->pluck('name', 'id');
         return view('task.index', [
             'tasks' => $tasks,
-            'users' => $users,
+            'creators' => $creators,
+            'assigners' => $assigners,
             'statuses' => $statuses,
-            'statusesArray' => $statusesArray,
-            'creatorsArray' => $creatorsArray,
-            'assignersArray' => $assignersArray,
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\View\View
-     */
     public function create()
     {
         $task = new Task();
-        $users = User::all();
-        $labels = Label::all();
-        $statuses = Status::all();
-        $statusesArray = $statuses->pluck('name', 'id');
-        $assignersArray = $users->pluck('name', 'id');
-        $labelsArray = $labels->pluck('name', 'id');
+        $assigners = User::all()->pluck('name', 'id');
+        $labels = Label::all()->pluck('name', 'id');
+        $statuses = Status::all()->pluck('name', 'id');
         return view('task.create', [
             'task' => $task,
-            'users' => $users,
             'labels' => $labels,
             'statuses' => $statuses,
-            'labelsArray' => $labelsArray,
-            'statusesArray' => $statusesArray,
-            'assignersArray' => $assignersArray,
+            'assigners' => $assigners,
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function store(Request $request)
     {
         $task = new Task();
@@ -102,42 +76,23 @@ class TaskController extends Controller
         return redirect()->route('task.index');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Task  $task
-     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
-     */
     public function edit(Task $task)
     {
         if (Auth::user()->id !== $task->createdBy->id) {
             flash(__('task.preventEdited'))->error()->important();
             return redirect()->route('task.index');
         }
-        $users = User::all();
-        $labels = Label::all();
-        $statuses = Status::all();
-        $statusesArray = $statuses->pluck('name', 'id');
-        $assignersArray = $users->pluck('name', 'id');
-        $labelsArray = $labels->pluck('name', 'id');
+        $assigners = User::all()->pluck('name', 'id');
+        $labels = Label::all()->pluck('name', 'id');
+        $statuses = Status::all()->pluck('name', 'id');
         return view('task.edit', [
-            'statuses' => $statuses,
-            'users' => $users,
-            'labels' => $labels,
             'task' => $task,
-            'labelsArray' => $labelsArray,
-            'statusesArray' => $statusesArray,
-            'assignersArray' => $assignersArray,
+            'labels' => $labels,
+            'statuses' => $statuses,
+            'assigners' => $assigners,
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Task  $task
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function update(Request $request, Task $task)
     {
         if (Auth::user()->id !== $task->createdBy->id) {
@@ -162,12 +117,6 @@ class TaskController extends Controller
         return redirect()->route('task.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Task  $task
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function destroy(Task $task)
     {
         if (Auth::user()->id !== $task->createdBy->id) {

@@ -13,38 +13,22 @@ class StatusController extends Controller
         $this->middleware('auth')->except('index');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\View\View
-     */
     public function index()
     {
         $statuses = Status::all();
         return view('status.index', ['statuses' => $statuses]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\View\View
-     */
     public function create()
     {
         $status = new Status();
         return view('status.create', ['status' => $status]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|max:50',
+            'name' => 'required|unique:statuses|max:50',
         ]);
         $status = new Status();
         $status->fill($data);
@@ -56,28 +40,15 @@ class StatusController extends Controller
         return redirect()->route('status.index');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Status  $status
-     * @return \Illuminate\View\View
-     */
     public function edit(Status $status)
     {
         return view('status.edit', ['status' => $status]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Status  $status
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function update(Request $request, Status $status)
     {
         $data = $request->validate([
-            'name' => 'required|max:50',
+            'name' => 'required|unique:statuses|max:50',
         ]);
         $status->fill($request->all());
         if (!$status->save()) {
@@ -88,12 +59,6 @@ class StatusController extends Controller
         return redirect()->route('status.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Status  $status
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function destroy(Status $status)
     {
         if ($status->tasks()->exists()) {

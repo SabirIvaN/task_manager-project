@@ -8,22 +8,12 @@ use Tests\TestCase;
 
 class LabelTest extends TestCase
 {
-    /**
-     * A basic unit test index.
-     *
-     * @return void
-     */
     public function testIndex()
     {
         $this->get(route('label.index'))
             ->assertOk();
     }
 
-    /**
-     * A basic unit test create.
-     *
-     * @return void
-     */
     public function testCreate()
     {
         $user = factory(User::class)->create();
@@ -32,11 +22,6 @@ class LabelTest extends TestCase
             ->assertOk();
     }
 
-    /**
-     * A basic unit test store.
-     *
-     * @return void
-     */
     public function testStore()
     {
         $user = factory(User::class)->create();
@@ -49,11 +34,6 @@ class LabelTest extends TestCase
         $this->assertDatabaseHas('labels', $data);
     }
 
-    /**
-     * A basic unit test edit.
-     *
-     * @return void
-     */
     public function testEdit()
     {
         $user = factory(User::class)->create();
@@ -63,11 +43,6 @@ class LabelTest extends TestCase
             ->assertOk();
     }
 
-    /**
-     * A basic unit test update.
-     *
-     * @return void
-     */
     public function testUpdate()
     {
         $user = factory(User::class)->create();
@@ -81,11 +56,6 @@ class LabelTest extends TestCase
         $this->assertDatabaseHas('labels', $data);
     }
 
-    /**
-     * A basic unit test delete.
-     *
-     * @return void
-     */
     public function testDelete()
     {
         $user = factory(User::class)->create();

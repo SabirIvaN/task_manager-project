@@ -7,4 +7,3 @@ require('chosen-js');
 require('./chosen');
 
 require('jquery-ujs');
-

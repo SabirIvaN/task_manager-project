@@ -19,6 +19,6 @@ test:
 test-coverage:
 	composer phpunit tests -- --coverage-clover build/logs/clover.xml
 run:
-	php -S localhost:8000 -t public
+	npm run watch
 logs:
 	tail -f storage/logs/*.log
