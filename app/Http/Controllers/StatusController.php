@@ -68,11 +68,7 @@ class StatusController extends Controller
 
     public function destroy(Status $status)
     {
-        if ($status->tasks()->exists()) {
-            flash(__('status.rejected'))->error()->important();
-
-            return redirect()->route('status.index');
-        }
+        $this->authorize('delete', $status);
 
         if (!$status->delete()) {
             flash(__('status.deletingFailed'))->error()->important();

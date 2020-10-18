@@ -39,6 +39,9 @@ class TaskController extends Controller
             'creators' => $creators,
             'assigners' => $assigners,
             'statuses' => $statuses,
+            'currentStatus' => request()->input('filter.status_id'),
+            'currentCreator' => request()->input('filter.created_by_id'),
+            'currentAssigner' => request()->input('filter.assigned_to_id'),
         ]);
     }
 
@@ -88,11 +91,7 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        if (Auth::user()->id !== $task->createdBy->id) {
-            flash(__('task.preventEdited'))->error()->important();
-
-            return redirect()->route('task.index');
-        }
+        $this->authorize('update', $task);
 
         $assigners = User::pluck('name', 'id');
         $labels = Label::pluck('name', 'id');
@@ -108,11 +107,7 @@ class TaskController extends Controller
 
     public function update(Request $request, Task $task)
     {
-        if (Auth::user()->id !== $task->createdBy->id) {
-            flash(__('task.preventEdited'))->error()->important();
-
-            return redirect()->route('task.index');
-        }
+        $this->authorize('update', $task);
 
         $data = $request->validate([
             'name' => 'required|max:50',
@@ -138,11 +133,7 @@ class TaskController extends Controller
 
     public function destroy(Task $task)
     {
-        if (Auth::user()->id !== $task->createdBy->id) {
-            flash(__('task.preventDeleted'))->error()->important();
-
-            return redirect()->route('task.index');
-        }
+        $this->authorize('delete', $task);
 
         $task->labels()->detach();
 

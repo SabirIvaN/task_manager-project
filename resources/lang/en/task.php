@@ -33,8 +33,6 @@ return [
     'destroy' => 'The task deleted.',
     'confirm' => 'Are you sure you want to delete task',
     'rightDeleting' => 'You don\'t have permission to delete this task',
-    'preventEdited' => 'You can\'t edit someone else\'s task',
-    'preventDeleted' => 'You can\'t delete someone else\'s task',
     'savingFailed' => 'Saving failed!',
     'editingFailed' => 'Editing failed!',
     'deletingFailed' => 'Deleting failed!',

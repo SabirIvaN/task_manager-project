@@ -21,6 +21,7 @@ class LabelController extends Controller
 
     public function create()
     {
+
         $label = new Label();
 
         return view('label.create', ['label' => $label]);
@@ -28,6 +29,7 @@ class LabelController extends Controller
 
     public function store(Request $request)
     {
+
         $data = $request->validate([
             'name' => 'required|unique:labels|max:50',
         ]);
@@ -69,10 +71,8 @@ class LabelController extends Controller
 
     public function destroy(Label $label)
     {
-        if ($label->tasks()->exists()) {
-            flash(__('label.rejected'))->error()->important();
-            return redirect()->route('label.index');
-        }
+        $this->authorize('delete', $label);
+
         $label->tasks()->detach();
         if (!$label->delete()) {
             flash(__('label.deletingFailed'))->error()->important();
