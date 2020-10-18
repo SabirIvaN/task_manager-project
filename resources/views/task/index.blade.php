@@ -51,22 +51,14 @@
                 <th scope="row">{{ $task->id }}</th>
                 <td>{{ $task->name }}</td>
                 <td>{{ $task->description }}</td>
-                <td>
-                    @if($task->status()->exists())
-                    {{ $task->status->name }}
-                    @endif
-                </td>
+                <td>{{ $task->status->name }}</td>
                 <td>
                     @foreach($task->labels as $label)
-                    {{ $label->name .  " "}}
+                    {{ $label->name }}
                     @endforeach
                 </td>
                 <td>{{ $task->createdBy->name }}</td>
-                <td>
-                    @if($task->assignedTo()->exists())
-                    {{ $task->assignedTo->name }}
-                    @endif
-                </td>
+                <td>{{ optional($task->assignedTo)->name }}</td>
                 <td>{{ $task->created_at }}</td>
                 <td>
                     <a class="btn btn-primary" href="{{ route('task.show', $task) }}">{{ __('task.show') }}</a>
