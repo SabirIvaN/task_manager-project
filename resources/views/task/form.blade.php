@@ -24,7 +24,7 @@
 <div class="form-group col-md-6">
     {{ Form::label('status_id', __('task.status')) }}
 
-    {{ Form::select('status_id', $statuses, $task->status_id ?? null, ['class' => 'form-control', 'placeholder' => '———————————— choose ————————————']) }}
+    {{ Form::select('status_id', $statuses, $task->status_id ?? null, ['class' => 'form-control' . ($errors->has('status_id') ? ' is-invalid' : ''), 'placeholder' => '———————————— choose ————————————']) }}
 
     @error('status_id')
     <div class="invalid-feedback">{{ $message }}</div>
