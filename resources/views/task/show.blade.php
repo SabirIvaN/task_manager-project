@@ -28,11 +28,11 @@
         </tr>
         <tr>
             <th scope="row">{{ __('task.creator') }}</th>
-            <td>{{ $task->creator }}</td>
+            <td>{{ $task->createdBy->name }}</td>
         </tr>
         <tr>
             <th scope="row">{{ __('task.assignee') }}</th>
-            <td>{{ $task->assignee }}</td>
+            <td>{{ optional($task->assignedTo)->name }}</td>
         </tr>
     </table>
 </div>
