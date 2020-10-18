@@ -5,11 +5,11 @@
     <div class="d-flex justify-content-between align-items-center flex-wrap mt-1 mb-3">
         <h2>{{ __('status.mainTitle') }}</h2>
 
-        @if(Auth::user())
+        @auth
         <div class="btn-toolbar">
             <a class="btn btn-success" href="{{ route('status.create') }}">{{ __('status.add') }}</a>
         </div>
-        @endif
+        @endauth
     </div>
     <table class="table">
         <thead>
@@ -25,18 +25,16 @@
                 <th scope="row">{{ $status->id }}</th>
                 <td>{{ $status->name }}</td>
                 <td>{{ $status->created_at }}</td>
-                @if(Auth::user())
+                @auth
                 <td>
                     <a class="btn btn-primary" href="{{ route('status.edit', $status) }}">{{ __('status.edit') }}</a>
                 </td>
-                @endif
-                @if(Auth::user())
-                @if(Auth::user()->can('delete', $status))
+                @can('delete', $status)
                 <td>
                     <a class="btn btn-danger" href="{{ route('status.destroy', $status) }}" data-confirm="{{__('status.confirm')}}" data-method="delete" rel="nofollow">{{__('status.delete')}}</a>
                 </td>
-                @endif
-                @endif
+                @endcan
+                @endauth
             </tr>
             @endforeach
         </tbody>

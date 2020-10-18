@@ -67,8 +67,8 @@ class TaskController extends Controller
 
         $data = $request->validate([
             'name' => 'required|max:50',
-            'description' => 'required|max:500',
-            'status_id' => 'nullable',
+            'description' => 'nullable|max:500',
+            'status_id' => 'required',
             'assigned_to_id' => 'nullable',
             'label_id' => 'array',
             'label_id.*' => 'exists:labels,id',

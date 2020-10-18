@@ -25,6 +25,10 @@
     {{ Form::label('status_id', __('task.status')) }}
 
     {{ Form::select('status_id', $statuses, $task->status_id ?? null, ['class' => 'form-control', 'placeholder' => '———————————— choose ————————————']) }}
+
+    @error('status_id')
+    <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
 </div>
 <div class="form-group col-md-6">
     {{ Form::label('label_id', __('task.label')) }}

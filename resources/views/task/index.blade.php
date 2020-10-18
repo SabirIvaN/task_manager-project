@@ -5,11 +5,11 @@
     <div class="d-flex justify-content-between align-items-center flex-wrap mt-1 mb-1">
         <h2>{{ __('task.mainTitle') }}</h2>
 
-        @if(Auth::user())
+        @auth
         <div class="btn-toolbar">
             <a class="btn btn-success" href="{{ route('task.create') }}">{{ __('task.add') }}</a>
         </div>
-        @endif
+        @endauth
     </div>
 
     {{ Form::open(['url' => route('task.index'), 'method' => 'GET', 'class' => 'form-row']) }}
@@ -68,16 +68,18 @@
                     @endif
                 </td>
                 <td>{{ $task->created_at }}</td>
-                @if(Auth::user())
-                @if(Auth::user()->can('update', $task))
+                @auth
+                @can('update', $task))
                 <td>
                     <a class="btn btn-primary" href="{{ route('task.edit', $task) }}">{{ __('task.edit') }}</a>
                 </td>
+                @endcan
+                @can('delete', $task)
                 <td>
                     <a class="btn btn-danger" href="{{ route('task.destroy', $task) }}" data-confirm="{{__('task.confirm')}}" data-method="delete" rel="nofollow">{{__('task.delete')}}</a>
                 </td>
-                @endif
-                @endif
+                @endcan
+                @endauth
             </tr>
             @endforeach
         </tbody>
