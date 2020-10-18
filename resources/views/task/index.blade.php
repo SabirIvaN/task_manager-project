@@ -51,13 +51,13 @@
                 <th scope="row">{{ $task->id }}</th>
                 <td>{{ $task->name }}</td>
                 <td>{{ $task->description }}</td>
-                <td>{{ $task->status->name }}</td>
+                <td>{{ optional($task->status)->name }}</td>
                 <td>
                     @foreach($task->labels as $label)
                     {{ $label->name }}
                     @endforeach
                 </td>
-                <td>{{ $task->createdBy->name }}</td>
+                <td>{{ optional($task->createdBy)->name }}</td>
                 <td>{{ optional($task->assignedTo)->name }}</td>
                 <td>{{ $task->created_at }}</td>
                 <td>
