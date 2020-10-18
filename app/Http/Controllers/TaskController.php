@@ -17,7 +17,7 @@ class TaskController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('index');
+        $this->middleware('auth')->except('index', 'show');
     }
 
     public function index(Request $request)
@@ -87,6 +87,11 @@ class TaskController extends Controller
         $task->labels()->sync(Arr::get($data, 'label_id', []));
 
         return redirect()->route('task.index');
+    }
+
+    public function show(Task $task)
+    {
+        return view('task.show', ['task' => $task]);
     }
 
     public function edit(Task $task)

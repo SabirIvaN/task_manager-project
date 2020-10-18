@@ -41,6 +41,12 @@ class TaskTest extends TestCase
         $this->assertDatabaseHas('tasks', $this->testData);
     }
 
+    public function testShow(): void
+    {
+        $this->get(route('task.show', $this->task))
+            ->assertOk();
+    }
+
     public function testEdit(): void
     {
         $this->actingAs($this->task->createdBy)

@@ -24,6 +24,7 @@ return [
     'status' => 'Status',
     'label' => 'Labels',
     'add' => 'Add',
+    'show' => 'Show',
     'edit' => 'Edit',
     'delete' => 'Delete',
     'save' => 'Save',

@@ -42,7 +42,7 @@
                 <th scope="col">{{ __('task.label') }}</th>
                 <th scope="col">{{ __('task.creator') }}</th>
                 <th scope="col">{{ __('task.assignee') }}</th>
-                <th scope="col" colspan="3">{{ __('task.date') }}</th>
+                <th scope="col" colspan="4">{{ __('task.date') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -68,6 +68,9 @@
                     @endif
                 </td>
                 <td>{{ $task->created_at }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ route('task.show', $task) }}">{{ __('task.show') }}</a>
+                </td>
                 @auth
                 @can('update', $task))
                 <td>
