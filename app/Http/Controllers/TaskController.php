@@ -84,7 +84,8 @@ class TaskController extends Controller
             flash(__('task.store'))->success()->important();
         }
 
-        $task->labels()->sync(Arr::get($data, 'label_id', []));
+        $labelId = Arr::get($data, 'label_id', []);
+        $task->labels()->sync($labelId);
 
         return redirect()->route('task.index');
     }
@@ -131,7 +132,8 @@ class TaskController extends Controller
             flash(__('task.update'))->important();
         }
 
-        $task->labels()->sync(Arr::get($data, 'label_id', []));
+        $labelId = Arr::get($data, 'label_id', []);
+        $task->labels()->sync($labelId);
 
         return redirect()->route('task.index');
     }

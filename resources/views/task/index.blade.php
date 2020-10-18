@@ -64,7 +64,7 @@
                     <a class="btn btn-primary" href="{{ route('task.show', $task) }}">{{ __('task.show') }}</a>
                 </td>
                 @auth
-                @can('update', $task))
+                @can('update', $task)
                 <td>
                     <a class="btn btn-primary" href="{{ route('task.edit', $task) }}">{{ __('task.edit') }}</a>
                 </td>
