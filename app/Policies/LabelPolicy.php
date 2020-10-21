@@ -11,7 +11,7 @@ class LabelPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(?User $user)
+    public function viewAny(User $user)
     {
         return true;
     }
@@ -26,22 +26,19 @@ class LabelPolicy
         return true;
     }
 
-    public function update(User $user, Label $label)
+    public function update(?User $user)
     {
         return true;
     }
 
     public function delete(User $user, Label $label)
     {
-        if (!$label->tasks()->exists()) {
-            return true;
-        }
-        return false;
+        return true;
     }
 
     public function restore(User $user, Label $label)
     {
-        return false;
+        return true;
     }
 
     public function forceDelete(User $user, Label $label)

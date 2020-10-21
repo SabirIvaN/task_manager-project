@@ -9,7 +9,7 @@ class LabelController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Label::class, 'Label');
+        $this->middleware('auth')->except('index');
     }
 
     public function index()
