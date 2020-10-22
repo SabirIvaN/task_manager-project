@@ -71,14 +71,14 @@ class LabelController extends Controller
 
     public function destroy(Label $label)
     {
-        $this->authorize('delete', $label);
-
         $label->tasks()->detach();
+
         if (!$label->delete()) {
             flash(__('label.deletingFailed'))->error()->important();
         } else {
             flash(__('label.destroy'))->error()->important();
         }
+
         return redirect()->route('label.index');
     }
 }

@@ -6,10 +6,17 @@ Service for orginizing tasks.
 
 Link to the: https://php-project-master-8kpyhisdvzh.herokuapp.com.
 
-## Development setup
+## Local installation
 
-1. Run `make install` to install dependencies, generate .env file and app key.
-2. Run `make db` to install to create SQLite database and perform migrations.
-3. Run `make seed` if you want to seed the database.
-4. Run `make run` to launch default web server — http://localhost:8000.
-5. Run `make lint` to run linter and tests.
+1. If you are installing the project locally run `make install` to install dependencies, generate .env file and app key.
+2. Run `make seed` if you want to seed the database.
+3. Run `make run` to launch default web server — http://localhost:8000.
+4. Run `make lint` to run linter and tests.
+
+## Global installation on Heroku
+
+1. Make a fork of the project.
+2. Create an app.
+3. Create a database.
+4. Create environment variables.
+5. To reset the database, use `make seed` in your Heroku CLI.
