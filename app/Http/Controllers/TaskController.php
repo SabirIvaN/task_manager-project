@@ -87,7 +87,7 @@ class TaskController extends Controller
         $labelId = Arr::get($data, 'label_id', []);
         $task->labels()->sync($labelId);
 
-        return redirect()->route('task.index');
+        return redirect()->route('tasks.index');
     }
 
     public function show(Task $task)
@@ -135,7 +135,7 @@ class TaskController extends Controller
         $labelId = Arr::get($data, 'label_id', []);
         $task->labels()->sync($labelId);
 
-        return redirect()->route('task.index');
+        return redirect()->route('tasks.index');
     }
 
     public function destroy(Task $task)
@@ -150,6 +150,6 @@ class TaskController extends Controller
             flash(__('task.destroy'))->error()->important();
         }
 
-        return redirect()->route('task.index');
+        return redirect()->route('tasks.index');
     }
 }

@@ -7,7 +7,7 @@
 
         @auth
         <div class="btn-toolbar">
-            <a class="btn btn-success" href="{{ route('label.create') }}">{{ __('label.add') }}</a>
+            <a class="btn btn-success" href="{{ route('labels.create') }}">{{ __('label.add') }}</a>
         </div>
         @endauth
     </div>
@@ -27,13 +27,13 @@
                 <td>{{ $label->created_at }}</td>
                 @auth
                 <td>
-                    <a class="btn btn-primary" href="{{ route('label.edit', $label) }}">{{ __('label.edit') }}</a>
+                    <a class="btn btn-primary" href="{{ route('labels.edit', $label) }}">{{ __('label.edit') }}</a>
                 </td>
-                @can('delete', $label)
                 <td>
-                    <a class="btn btn-danger" href="{{ route('label.destroy', $label) }}" data-confirm="{{__('label.confirm')}}" data-method="delete" rel="nofollow">{{__('label.delete')}}</a>
+                    @can('delete', $label)
+                    <a class="btn btn-danger" href="{{ route('labels.destroy', $label) }}" data-confirm="{{__('label.confirm')}}" data-method="delete" rel="nofollow">{{__('label.delete')}}</a>
+                    @endcan
                 </td>
-                @endcan
                 @endauth
             </tr>
             @endforeach

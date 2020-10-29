@@ -43,7 +43,7 @@ class LabelController extends Controller
             flash(__('label.store'))->success()->important();
         }
 
-        return redirect()->route('label.index');
+        return redirect()->route('labels.index');
     }
 
     public function edit(Label $label)
@@ -66,7 +66,7 @@ class LabelController extends Controller
             flash(__('label.update'))->important();
         }
 
-        return redirect()->route('label.index');
+        return redirect()->route('labels.index');
     }
 
     public function destroy(Label $label)
@@ -79,6 +79,6 @@ class LabelController extends Controller
             flash(__('label.destroy'))->error()->important();
         }
 
-        return redirect()->route('label.index');
+        return redirect()->route('labels.index');
     }
 }

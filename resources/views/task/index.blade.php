@@ -7,12 +7,12 @@
 
         @auth
         <div class="btn-toolbar">
-            <a class="btn btn-success" href="{{ route('task.create') }}">{{ __('task.add') }}</a>
+            <a class="btn btn-success" href="{{ route('tasks.create') }}">{{ __('task.add') }}</a>
         </div>
         @endauth
     </div>
 
-    {{ Form::open(['url' => route('task.index'), 'method' => 'GET', 'class' => 'form-row']) }}
+    {{ Form::open(['url' => route('tasks.index'), 'method' => 'GET', 'class' => 'form-row']) }}
 
     <div class="form-group col-md-2">
         {{ Form::select('filter[status_id]', $statuses, $currentStatus, ['class' => 'form-control', 'placeholder' => __('task.statuses')])  }}
@@ -61,19 +61,19 @@
                 <td>{{ optional($task->assignedTo)->name }}</td>
                 <td>{{ $task->created_at }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ route('task.show', $task) }}">{{ __('task.show') }}</a>
+                    <a class="btn btn-primary" href="{{ route('tasks.show', $task) }}">{{ __('task.show') }}</a>
                 </td>
                 @auth
-                @can('update', $task)
                 <td>
-                    <a class="btn btn-primary" href="{{ route('task.edit', $task) }}">{{ __('task.edit') }}</a>
+                    @can('update', $task)
+                    <a class="btn btn-primary" href="{{ route('tasks.edit', $task) }}">{{ __('task.edit') }}</a>
+                    @endcan
                 </td>
-                @endcan
-                @can('delete', $task)
                 <td>
-                    <a class="btn btn-danger" href="{{ route('task.destroy', $task) }}" data-confirm="{{__('task.confirm')}}" data-method="delete" rel="nofollow">{{__('task.delete')}}</a>
+                    @can('delete', $task)
+                    <a class="btn btn-danger" href="{{ route('tasks.destroy', $task) }}" data-confirm="{{__('task.confirm')}}" data-method="delete" rel="nofollow">{{__('task.delete')}}</a>
+                    @endcan
                 </td>
-                @endcan
                 @endauth
             </tr>
             @endforeach

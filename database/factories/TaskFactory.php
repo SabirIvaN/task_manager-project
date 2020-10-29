@@ -12,13 +12,13 @@ $factory->define(Task::class, function (Faker $faker) {
         'name' => $faker->words(2, true),
         'description' => $faker->text(300),
         'status_id' => function () {
-            return factory(App\Status::class)->create()->id;
+            return factory(Status::class)->create()->id;
         },
         'created_by_id' => function () {
-            return factory(App\User::class)->create()->id;
+            return factory(User::class)->create()->id;
         },
         'assigned_to_id' => function () {
-            return factory(App\User::class)->create()->id;
+            return factory(User::class)->create()->id;
         },
     ];
 });

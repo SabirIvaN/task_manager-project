@@ -42,7 +42,7 @@ class StatusController extends Controller
             flash(__('status.store'))->success()->important();
         }
 
-        return redirect()->route('status.index');
+        return redirect()->route('statuses.index');
     }
 
     public function edit(Status $status)
@@ -63,7 +63,7 @@ class StatusController extends Controller
         } else {
             flash(__('status.update'))->important();
         }
-        return redirect()->route('status.index');
+        return redirect()->route('statuses.index');
     }
 
     public function destroy(Status $status)
@@ -76,6 +76,6 @@ class StatusController extends Controller
             flash(__('status.destroy'))->error()->important();
         }
 
-        return redirect()->route('status.index');
+        return redirect()->route('statuses.index');
     }
 }

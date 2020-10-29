@@ -17,8 +17,8 @@ Auth::routes(['verify' => true]);
 
 Route::get('/', 'WelcomeController@show')->name('welcome');
 
-Route::resource('/task', 'TaskController');
+Route::resource('/tasks', 'TaskController');
 
-Route::resource('/label', 'LabelController');
+Route::resource('/labels', 'LabelController');
 
-Route::resource('/status', 'StatusController');
+Route::resource('/statuses', 'StatusController');

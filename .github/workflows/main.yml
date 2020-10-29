@@ -14,11 +14,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Installation
-      run: make install
+      run: make setup
     - name: Linting
       run: make lint
-    - name: Analysing
-      run: make analyse
     - name: Testing
       run: make test
     - name: Code climate coverage Action

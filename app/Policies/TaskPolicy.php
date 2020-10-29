@@ -28,7 +28,7 @@ class TaskPolicy
 
     public function update(User $user, Task $task)
     {
-        if (Auth::user()->id === $task->createdBy->id) {
+        if ((Auth::user()->id === $task->createdBy->id) || (Auth::user()->id === $task->assignedTo->id)) {
             return true;
         }
         return false;

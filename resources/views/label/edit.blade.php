@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h2 class="mt-1 mb-3">{{ __('label.editorTitle') }}</h2>
-    {{ Form::open(['url' => route('label.update', $label), 'method' => 'PUT', 'class' => 'form-row']) }}
+    {{ Form::open(['url' => route('labels.update', $label), 'method' => 'PUT', 'class' => 'form-row']) }}
 
     @include('label.form')
 
