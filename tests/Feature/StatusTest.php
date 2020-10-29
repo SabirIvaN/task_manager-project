@@ -19,21 +19,21 @@ class StatusTest extends TestCase
 
     public function testIndex(): void
     {
-        $this->get(route('status.index'))
+        $this->get(route('statuses.index'))
             ->assertOk();
     }
 
     public function testCreate(): void
     {
         $this->actingAs($this->user)
-            ->get(route('status.create'))
+            ->get(route('statuses.create'))
             ->assertOk();
     }
 
     public function testStore(): void
     {
         $this->actingAs($this->user)
-            ->post(route('status.store'), $this->arrayStatus)
+            ->post(route('statuses.store'), $this->arrayStatus)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
 
@@ -43,14 +43,14 @@ class StatusTest extends TestCase
     public function testEdit(): void
     {
         $this->actingAs($this->user)
-            ->get(route('status.edit', $this->status))
+            ->get(route('statuses.edit', $this->status))
             ->assertOk();
     }
 
     public function testUpdate(): void
     {
         $this->actingAs($this->user)
-            ->put(route('status.update', $this->status), $this->arrayStatus)
+            ->put(route('statuses.update', $this->status), $this->arrayStatus)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
 
@@ -60,7 +60,7 @@ class StatusTest extends TestCase
     public function testDelete(): void
     {
         $this->actingAs($this->user)
-            ->delete(route('status.destroy', $this->status))
+            ->delete(route('statuses.destroy', $this->status))
             ->assertSessionHasNoErrors()
             ->assertRedirect();
 

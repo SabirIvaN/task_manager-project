@@ -20,21 +20,21 @@ class TaskTest extends TestCase
 
     public function testIndex(): void
     {
-        $this->get(route('task.index'))
+        $this->get(route('tasks.index'))
             ->assertOk();
     }
 
     public function testCreate(): void
     {
         $this->actingAs($this->user)
-            ->get(route('task.create'))
+            ->get(route('tasks.create'))
             ->assertOk();
     }
 
     public function testStore(): void
     {
         $this->actingAs($this->user)
-            ->post(route('task.store'), $this->factoryData)
+            ->post(route('tasks.store'), $this->factoryData)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
 
@@ -43,21 +43,21 @@ class TaskTest extends TestCase
 
     public function testShow(): void
     {
-        $this->get(route('task.show', $this->task))
+        $this->get(route('tasks.show', $this->task))
             ->assertOk();
     }
 
     public function testEdit(): void
     {
         $this->actingAs($this->task->createdBy)
-            ->get(route('task.edit', $this->task))
+            ->get(route('tasks.edit', $this->task))
             ->assertOk();
     }
 
     public function testUpdate(): void
     {
         $this->actingAs($this->task->createdBy)
-            ->patch(route('task.update', $this->task), $this->factoryData)
+            ->patch(route('tasks.update', $this->task), $this->factoryData)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
 
@@ -67,7 +67,7 @@ class TaskTest extends TestCase
     public function testDelete(): void
     {
         $this->actingAs($this->task->createdBy)
-            ->delete(route('task.destroy', $this->task))
+            ->delete(route('tasks.destroy', $this->task))
             ->assertSessionHasNoErrors()
             ->assertRedirect();
 

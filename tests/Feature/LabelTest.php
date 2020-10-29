@@ -19,21 +19,21 @@ class LabelTest extends TestCase
 
     public function testIndex(): void
     {
-        $this->get(route('label.index'))
+        $this->get(route('labels.index'))
             ->assertOk();
     }
 
     public function testCreate(): void
     {
         $this->actingAs($this->user)
-            ->get(route('label.create'))
+            ->get(route('labels.create'))
             ->assertOk();
     }
 
     public function testStore(): void
     {
         $this->actingAs($this->user)
-            ->post(route('label.store'), $this->arrayLabel)
+            ->post(route('labels.store'), $this->arrayLabel)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
 
@@ -43,14 +43,14 @@ class LabelTest extends TestCase
     public function testEdit(): void
     {
         $this->actingAs($this->user)
-            ->get(route('label.edit', $this->label))
+            ->get(route('labels.edit', $this->label))
             ->assertOk();
     }
 
     public function testUpdate(): void
     {
         $this->actingAs($this->user)
-            ->put(route('label.update', $this->label), $this->arrayLabel)
+            ->put(route('labels.update', $this->label), $this->arrayLabel)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
 
@@ -60,7 +60,7 @@ class LabelTest extends TestCase
     public function testDelete(): void
     {
         $this->actingAs($this->user)
-            ->delete(route('label.destroy', $this->label))
+            ->delete(route('labels.destroy', $this->label))
             ->assertSessionHasNoErrors()
             ->assertRedirect();
 
