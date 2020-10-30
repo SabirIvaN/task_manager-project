@@ -64,6 +64,6 @@ class LabelTest extends TestCase
             ->assertSessionHasNoErrors()
             ->assertRedirect();
 
-        $this->assertDeleted('labels', $this->arrayLabel);
+        $this->assertDatabaseMissing('labels', $this->arrayLabel);
     }
 }

@@ -64,6 +64,6 @@ class StatusTest extends TestCase
             ->assertSessionHasNoErrors()
             ->assertRedirect();
 
-        $this->assertDeleted('statuses', $this->arrayStatus);
+        $this->assertDatabaseMissing('statuses', $this->arrayStatus);
     }
 }

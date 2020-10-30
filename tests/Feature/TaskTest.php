@@ -71,6 +71,6 @@ class TaskTest extends TestCase
             ->assertSessionHasNoErrors()
             ->assertRedirect();
 
-        $this->assertDeleted('tasks', $this->factoryData);
+        $this->assertDatabaseMissing('tasks', $this->factoryData);
     }
 }
