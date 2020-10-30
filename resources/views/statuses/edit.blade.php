@@ -5,7 +5,7 @@
     <h2 class="mt-1 mb-3">{{ __('status.editorTitle') }}</h2>
     {{ Form::open(['url' => route('statuses.update', $status), 'method' => 'PUT', 'class' => 'form-row']) }}
 
-    @include('status.form')
+    @include('statuses.form')
 
     {{ Form::close() }}
 </div>

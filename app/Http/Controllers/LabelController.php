@@ -16,7 +16,7 @@ class LabelController extends Controller
     {
         $labels = Label::all();
 
-        return view('label.index', ['labels' => $labels]);
+        return view('labels.index', ['labels' => $labels]);
     }
 
     public function create()
@@ -24,7 +24,7 @@ class LabelController extends Controller
 
         $label = new Label();
 
-        return view('label.create', ['label' => $label]);
+        return view('labels.create', ['label' => $label]);
     }
 
     public function store(Request $request)
@@ -48,7 +48,7 @@ class LabelController extends Controller
 
     public function edit(Label $label)
     {
-        return view('label.edit', ['label' => $label]);
+        return view('labels.edit', ['label' => $label]);
     }
 
     public function update(Request $request, Label $label)

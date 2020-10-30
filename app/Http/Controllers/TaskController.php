@@ -34,7 +34,7 @@ class TaskController extends Controller
         $assigners = User::pluck('name', 'id');
         $statuses = Status::pluck('name', 'id');
 
-        return view('task.index', [
+        return view('tasks.index', [
             'tasks' => $tasks,
             'creators' => $creators,
             'assigners' => $assigners,
@@ -53,7 +53,7 @@ class TaskController extends Controller
         $labels = Label::pluck('name', 'id');
         $statuses = Status::pluck('name', 'id');
 
-        return view('task.create', [
+        return view('tasks.create', [
             'task' => $task,
             'labels' => $labels,
             'statuses' => $statuses,
@@ -92,7 +92,7 @@ class TaskController extends Controller
 
     public function show(Task $task)
     {
-        return view('task.show', ['task' => $task]);
+        return view('tasks.show', ['task' => $task]);
     }
 
     public function edit(Task $task)
@@ -103,7 +103,7 @@ class TaskController extends Controller
         $labels = Label::pluck('name', 'id');
         $statuses = Status::pluck('name', 'id');
 
-        return view('task.edit', [
+        return view('tasks.edit', [
             'task' => $task,
             'labels' => $labels,
             'statuses' => $statuses,

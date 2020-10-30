@@ -17,14 +17,14 @@ class StatusController extends Controller
     {
         $statuses = Status::all();
 
-        return view('status.index', ['statuses' => $statuses]);
+        return view('statuses.index', ['statuses' => $statuses]);
     }
 
     public function create()
     {
         $status = new Status();
 
-        return view('status.create', ['status' => $status]);
+        return view('statuses.create', ['status' => $status]);
     }
 
     public function store(Request $request)
@@ -47,7 +47,7 @@ class StatusController extends Controller
 
     public function edit(Status $status)
     {
-        return view('status.edit', ['status' => $status]);
+        return view('statuses.edit', ['status' => $status]);
     }
 
     public function update(Request $request, Status $status)
