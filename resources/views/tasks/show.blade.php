@@ -7,19 +7,19 @@
     </div>
     <table class="table">
         <tr>
-            <th scope="row">{{ __('task.id') }}</th>
+            <th scope="row">{{ __('tasks.id') }}</th>
             <td>{{ $task->id }}</td>
         </tr>
         <tr>
-            <th scope="row">{{ __('task.name') }}</th>
+            <th scope="row">{{ __('tasks.name') }}</th>
             <td>{{ $task->name }}</td>
         </tr>
         <tr>
-            <th scope="row">{{ __('task.description') }}</th>
+            <th scope="row">{{ __('tasks.description') }}</th>
             <td>{{ $task->description }}</td>
         </tr>
         <tr>
-            <th scope="row">{{ __('task.label') }}</th>
+            <th scope="row">{{ __('tasks.label') }}</th>
             <td>
                 @foreach($task->labels as $label)
                 {{ $label->name }} <br>
@@ -27,11 +27,11 @@
             </td>
         </tr>
         <tr>
-            <th scope="row">{{ __('task.creator') }}</th>
+            <th scope="row">{{ __('tasks.creator') }}</th>
             <td>{{ $task->createdBy->name }}</td>
         </tr>
         <tr>
-            <th scope="row">{{ __('task.assignee') }}</th>
+            <th scope="row">{{ __('tasks.assignee') }}</th>
             <td>{{ optional($task->assignedTo)->name }}</td>
         </tr>
     </table>

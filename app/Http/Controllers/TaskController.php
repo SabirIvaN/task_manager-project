@@ -79,9 +79,9 @@ class TaskController extends Controller
         $task->createdBy()->associate(Auth::user());
 
         if (!$task->save()) {
-            flash(__('task.savingFailed'))->success()->important();
+            flash(__('tasks.savingFailed'))->success()->important();
         } else {
-            flash(__('task.store'))->success()->important();
+            flash(__('tasks.store'))->success()->important();
         }
 
         $labelId = Arr::get($data, 'label_id', []);
@@ -127,9 +127,9 @@ class TaskController extends Controller
         $task->fill($data);
 
         if (!$task->save()) {
-            flash(__('task.editingFailed'))->error()->important();
+            flash(__('tasks.editingFailed'))->error()->important();
         } else {
-            flash(__('task.update'))->important();
+            flash(__('tasks.update'))->important();
         }
 
         $labelId = Arr::get($data, 'label_id', []);
@@ -145,9 +145,9 @@ class TaskController extends Controller
         $task->labels()->detach();
 
         if (!$task->delete()) {
-            flash(__('task.deletingFailed'))->error()->important();
+            flash(__('tasks.deletingFailed'))->error()->important();
         } else {
-            flash(__('task.destroy'))->error()->important();
+            flash(__('tasks.destroy'))->error()->important();
         }
 
         return redirect()->route('tasks.index');

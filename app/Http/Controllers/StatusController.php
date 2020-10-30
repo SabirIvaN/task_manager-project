@@ -37,9 +37,9 @@ class StatusController extends Controller
         $status->fill($data);
 
         if (!$status->save()) {
-            flash(__('status.savingFailed'))->success()->important();
+            flash(__('statuses.savingFailed'))->success()->important();
         } else {
-            flash(__('status.store'))->success()->important();
+            flash(__('statuses.store'))->success()->important();
         }
 
         return redirect()->route('statuses.index');
@@ -59,9 +59,9 @@ class StatusController extends Controller
         $status->fill($request->all());
 
         if (!$status->save()) {
-            flash(__('status.updatingFailed'))->error()->important();
+            flash(__('statuses.updatingFailed'))->error()->important();
         } else {
-            flash(__('status.update'))->important();
+            flash(__('statuses.update'))->important();
         }
         return redirect()->route('statuses.index');
     }
@@ -71,9 +71,9 @@ class StatusController extends Controller
         $this->authorize('delete', $status);
 
         if (!$status->delete()) {
-            flash(__('status.deletingFailed'))->error()->important();
+            flash(__('statuses.deletingFailed'))->error()->important();
         } else {
-            flash(__('status.destroy'))->error()->important();
+            flash(__('statuses.destroy'))->error()->important();
         }
 
         return redirect()->route('statuses.index');

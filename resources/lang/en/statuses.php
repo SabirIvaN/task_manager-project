@@ -3,16 +3,16 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Label Language Lines
+    | Status Language Lines
     |--------------------------------------------------------------------------
     |
-    | The following language strings are used for the label interface.
+    | The following language strings are used for the status interface.
     |
     */
 
-    'mainTitle' => 'Labels',
-    'adderTitle' => 'Add label',
-    'editorTitle' => 'Edit label',
+    'mainTitle' => 'Statuses',
+    'adderTitle' => 'Add status',
+    'editorTitle' => 'Edit status',
     'id' => 'Id',
     'name' => 'Name',
     'date' => 'Created at',
@@ -20,11 +20,11 @@ return [
     'edit' => 'Edit',
     'delete' => 'Delete',
     'save' => 'Save',
-    'store' => 'The label created.',
-    'update' => 'The label updated.',
-    'destroy' => 'The label deleted.',
-    'confirm' => 'Are you sure you want to delete task',
-    'rightDeleting' => 'You don\'t have permission to delete this label',
+    'store' => 'The status created.',
+    'update' => 'The status updated.',
+    'destroy' => 'The status deleted.',
+    'confirm' => 'Are you sure you want to delete status',
+    'rightDeleting' => 'You don\'t have permission to delete this status',
     'savingFailed' => 'Saving failed!',
     'editingFailed' => 'Editing failed!',
     'deletingFailed' => 'Deleting failed!',

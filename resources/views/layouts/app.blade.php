@@ -41,13 +41,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link {{ Helper::getActiveClass('tasks') }}" href="{{ route('tasks.index') }}">{{ __('task.mainTitle') }}</a>
+                            <a class="nav-link {{ Helper::getActiveClass('tasks') }}" href="{{ route('tasks.index') }}">{{ __('tasks.mainTitle') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Helper::getActiveClass('statuses') }}" href="{{ route('statuses.index') }}">{{ __('status.mainTitle') }}</a>
+                            <a class="nav-link {{ Helper::getActiveClass('statuses') }}" href="{{ route('statuses.index') }}">{{ __('statuses.mainTitle') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Helper::getActiveClass('labels') }}" href="{{ route('labels.index') }}">{{ __('label.mainTitle') }}</a>
+                            <a class="nav-link {{ Helper::getActiveClass('labels') }}" href="{{ route('labels.index') }}">{{ __('labels.mainTitle') }}</a>
                         </li>
                     </ul>
 
