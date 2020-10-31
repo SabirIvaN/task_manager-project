@@ -8,7 +8,7 @@ Link to the: https://php-project-master-8kpyhisdvzh.herokuapp.com.
 
 ## Local installation
 
-1. If you are installing the project locally run `make install` to install dependencies, generate .env file and app key.
+1. If you are installing the project locally run `make setup` to install dependencies, generate .env file and app key.
 2. Run `make seed` if you want to seed the database.
 3. Run `make run` to launch default web server — http://localhost:8000.
 4. Run `make lint` to run linter and tests.
