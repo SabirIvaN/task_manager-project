@@ -800,16 +800,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v7.29.1",
+            "version": "v7.29.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "c7309f1a94c10d86bab2358a1e37f9410749d5c3"
+                "reference": "0fb15ae253c3a043f2c5cbf9641427a7646ea77a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/c7309f1a94c10d86bab2358a1e37f9410749d5c3",
-                "reference": "c7309f1a94c10d86bab2358a1e37f9410749d5c3",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/0fb15ae253c3a043f2c5cbf9641427a7646ea77a",
+                "reference": "0fb15ae253c3a043f2c5cbf9641427a7646ea77a",
                 "shasum": ""
             },
             "require": {
@@ -954,7 +954,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2020-10-29T15:24:13+00:00"
+            "time": "2020-10-29T18:57:35+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -5699,23 +5699,23 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "9.2.2",
+            "version": "9.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "229099d7d69fe5044f6e464f669b1fd34f252e8d"
+                "reference": "6b20e2055f7c29b56cb3870b3de7cc463d7add41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/229099d7d69fe5044f6e464f669b1fd34f252e8d",
-                "reference": "229099d7d69fe5044f6e464f669b1fd34f252e8d",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/6b20e2055f7c29b56cb3870b3de7cc463d7add41",
+                "reference": "6b20e2055f7c29b56cb3870b3de7cc463d7add41",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-libxml": "*",
                 "ext-xmlwriter": "*",
-                "nikic/php-parser": "^4.8",
+                "nikic/php-parser": "^4.10.2",
                 "php": ">=7.3",
                 "phpunit/php-file-iterator": "^3.0.3",
                 "phpunit/php-text-template": "^2.0.2",
@@ -5768,7 +5768,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-28T06:24:13+00:00"
+            "time": "2020-10-30T10:46:41+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
