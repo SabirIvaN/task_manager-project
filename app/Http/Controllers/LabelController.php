@@ -54,7 +54,7 @@ class LabelController extends Controller
     public function update(Request $request, Label $label)
     {
         $data = $request->validate([
-            'name' => 'required|unique:labels|max:50',
+            'name' => 'required|max:50',
         ]);
 
         $label->fill($data);

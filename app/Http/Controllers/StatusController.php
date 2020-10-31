@@ -53,7 +53,7 @@ class StatusController extends Controller
     public function update(Request $request, Status $status)
     {
         $data = $request->validate([
-            'name' => 'required|unique:statuses|max:50',
+            'name' => 'required|max:50',
         ]);
 
         $status->fill($request->all());

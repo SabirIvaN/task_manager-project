@@ -14,7 +14,7 @@ class LabelTest extends TestCase
 
         $this->user = factory(User::class)->create();
         $this->label = factory(Label::class)->create();
-        $this->arrayLabel = factory(Label::class)->make()->only('name');
+        $this->labelName = factory(Label::class)->make()->only('name');
     }
 
     public function testIndex(): void
@@ -33,11 +33,11 @@ class LabelTest extends TestCase
     public function testStore(): void
     {
         $this->actingAs($this->user)
-            ->post(route('labels.store'), $this->arrayLabel)
+            ->post(route('labels.store'), $this->labelName)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
 
-        $this->assertDatabaseHas('labels', $this->arrayLabel);
+        $this->assertDatabaseHas('labels', $this->labelName);
     }
 
     public function testEdit(): void
@@ -50,11 +50,11 @@ class LabelTest extends TestCase
     public function testUpdate(): void
     {
         $this->actingAs($this->user)
-            ->put(route('labels.update', $this->label), $this->arrayLabel)
+            ->put(route('labels.update', $this->label), $this->labelName)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
 
-        $this->assertDatabaseHas('labels', $this->arrayLabel);
+        $this->assertDatabaseHas('labels', $this->labelName);
     }
 
     public function testDelete(): void
@@ -64,6 +64,6 @@ class LabelTest extends TestCase
             ->assertSessionHasNoErrors()
             ->assertRedirect();
 
-        $this->assertDatabaseMissing('labels', $this->arrayLabel);
+        $this->assertDatabaseMissing('labels', $this->labelName);
     }
 }

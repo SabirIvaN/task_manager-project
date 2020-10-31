@@ -39,9 +39,9 @@ class TaskController extends Controller
             'creators' => $creators,
             'assigners' => $assigners,
             'statuses' => $statuses,
-            'currentStatus' => request()->input('filter.status_id'),
-            'currentCreator' => request()->input('filter.created_by_id'),
-            'currentAssigner' => request()->input('filter.assigned_to_id'),
+            'filteredStatus' => request()->input('filter.status_id'),
+            'filteredCreator' => request()->input('filter.created_by_id'),
+            'filteredAssigner' => request()->input('filter.assigned_to_id'),
         ]);
     }
 

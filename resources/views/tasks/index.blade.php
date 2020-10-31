@@ -15,15 +15,15 @@
     {{ Form::open(['url' => route('tasks.index'), 'method' => 'GET', 'class' => 'form-row']) }}
 
     <div class="form-group col-md-2">
-        {{ Form::select('filter[status_id]', $statuses, $currentStatus, ['class' => 'form-control', 'placeholder' => __('tasks.statuses')])  }}
+        {{ Form::select('filter[status_id]', $statuses, $filteredStatus, ['class' => 'form-control', 'placeholder' => __('tasks.statuses')])  }}
     </div>
 
     <div class="form-group col-md-2">
-        {{ Form::select('filter[created_by_id]', $creators, $currentCreator, ['class' => 'form-control', 'placeholder' => __('tasks.creators')])  }}
+        {{ Form::select('filter[created_by_id]', $creators, $filteredCreator, ['class' => 'form-control', 'placeholder' => __('tasks.creators')])  }}
     </div>
 
     <div class="form-group col-md-2">
-        {{ Form::select('filter[assigned_to_id]', $assigners, $currentAssigner, ['class' => 'form-control', 'placeholder' => __('tasks.assigners')])  }}
+        {{ Form::select('filter[assigned_to_id]', $assigners, $filteredAssigner, ['class' => 'form-control', 'placeholder' => __('tasks.assigners')])  }}
     </div>
 
     <div class="form-group col-md-1">

@@ -14,7 +14,7 @@ class StatusTest extends TestCase
 
         $this->user = factory(User::class)->create();
         $this->status = factory(Status::class)->create();
-        $this->arrayStatus = factory(Status::class)->make()->only('name');
+        $this->statusName = factory(Status::class)->make()->only('name');
     }
 
     public function testIndex(): void
@@ -33,11 +33,11 @@ class StatusTest extends TestCase
     public function testStore(): void
     {
         $this->actingAs($this->user)
-            ->post(route('statuses.store'), $this->arrayStatus)
+            ->post(route('statuses.store'), $this->statusName)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
 
-        $this->assertDatabaseHas('statuses', $this->arrayStatus);
+        $this->assertDatabaseHas('statuses', $this->statusName);
     }
 
     public function testEdit(): void
@@ -50,11 +50,11 @@ class StatusTest extends TestCase
     public function testUpdate(): void
     {
         $this->actingAs($this->user)
-            ->put(route('statuses.update', $this->status), $this->arrayStatus)
+            ->put(route('statuses.update', $this->status), $this->statusName)
             ->assertSessionHasNoErrors()
             ->assertRedirect();
 
-        $this->assertDatabaseHas('statuses', $this->arrayStatus);
+        $this->assertDatabaseHas('statuses', $this->statusName);
     }
 
     public function testDelete(): void
@@ -64,6 +64,6 @@ class StatusTest extends TestCase
             ->assertSessionHasNoErrors()
             ->assertRedirect();
 
-        $this->assertDatabaseMissing('statuses', $this->arrayStatus);
+        $this->assertDatabaseMissing('statuses', $this->statusName);
     }
 }
