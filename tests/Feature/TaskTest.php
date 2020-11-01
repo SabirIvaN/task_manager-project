@@ -8,6 +8,11 @@ use Tests\TestCase;
 
 class TaskTest extends TestCase
 {
+    private Task $task;
+    private User $user;
+    private array $factoryData;
+    private array $testData;
+
     public function setUp(): void
     {
         parent::setUp();

@@ -28,7 +28,7 @@ class TaskPolicy
 
     public function update(User $user, Task $task)
     {
-        if ((Auth::user()->id === $task->createdBy->id) || (Auth::user()->id === $task->assignedTo->id)) {
+        if ((Auth::user()->is($task->createdBy)) || (Auth::user()->is($task->assignedTo))) {
             return true;
         }
         return false;
@@ -36,7 +36,7 @@ class TaskPolicy
 
     public function delete(User $user, Task $task)
     {
-        if (Auth::user()->id === $task->createdBy->id) {
+        if (Auth::user()->is($task->createdBy)) {
             return true;
         }
         return false;

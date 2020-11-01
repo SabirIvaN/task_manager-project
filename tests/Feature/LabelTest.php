@@ -8,6 +8,10 @@ use Tests\TestCase;
 
 class LabelTest extends TestCase
 {
+    private User $user;
+    private Label $label;
+    private array $labelName;
+
     protected function setUp(): void
     {
         parent::setUp();

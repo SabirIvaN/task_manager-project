@@ -8,6 +8,10 @@ use Tests\TestCase;
 
 class StatusTest extends TestCase
 {
+    private User $user;
+    private Status $status;
+    private array $statusName;
+
     protected function setUp(): void
     {
         parent::setUp();

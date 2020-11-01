@@ -7,7 +7,6 @@ use App\User;
 use App\Task;
 use App\Label;
 use App\Status;
-use App\Http\Request\TaskRequest;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -78,11 +77,7 @@ class TaskController extends Controller
 
         $task->createdBy()->associate(Auth::user());
 
-        if (!$task->save()) {
-            flash(__('tasks.savingFailed'))->success()->important();
-        } else {
-            flash(__('tasks.store'))->success()->important();
-        }
+        flash(__('tasks.store'))->success()->important();
 
         $labelId = Arr::get($data, 'label_id', []);
         $task->labels()->sync($labelId);
@@ -126,11 +121,7 @@ class TaskController extends Controller
 
         $task->fill($data);
 
-        if (!$task->save()) {
-            flash(__('tasks.editingFailed'))->error()->important();
-        } else {
-            flash(__('tasks.update'))->important();
-        }
+        flash(__('tasks.update'))->important();
 
         $labelId = Arr::get($data, 'label_id', []);
         $task->labels()->sync($labelId);
@@ -144,11 +135,7 @@ class TaskController extends Controller
 
         $task->labels()->detach();
 
-        if (!$task->delete()) {
-            flash(__('tasks.deletingFailed'))->error()->important();
-        } else {
-            flash(__('tasks.destroy'))->error()->important();
-        }
+        flash(__('tasks.destroy'))->error()->important();
 
         return redirect()->route('tasks.index');
     }
