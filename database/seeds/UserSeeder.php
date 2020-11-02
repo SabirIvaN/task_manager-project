@@ -40,5 +40,14 @@ class UserSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        DB::table('users')->insert([
+            'id' => 4,
+            'name' => 'Vladimir Moiseenkov',
+            'email' => 'moisey@hexlet.io',
+            'email_verified_at' => now(),
+            'password' => Hash::make('12345678'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }
