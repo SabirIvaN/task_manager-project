@@ -11,22 +11,22 @@ class LabelPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user)
+    public function viewAny(?User $user)
     {
         return true;
     }
 
-    public function view(User $user, Label $label)
+    public function view(?User $user, Label $label)
     {
         return true;
     }
 
-    public function create(User $user)
+    public function create(?User $user)
     {
         return true;
     }
 
-    public function update(?User $user)
+    public function update(User $user)
     {
         return true;
     }

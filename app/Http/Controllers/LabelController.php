@@ -10,6 +10,7 @@ class LabelController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except('index');
+        $this->authorizeResource(Label::class, 'label');
     }
 
     public function index()
@@ -29,13 +30,13 @@ class LabelController extends Controller
 
     public function store(Request $request)
     {
-
         $data = $request->validate([
             'name' => 'required|unique:labels|max:50',
         ]);
 
         $label = new Label();
         $label->fill($data);
+        $label->save();
 
         flash(__('labels.store'))->success()->important();
 
@@ -64,6 +65,7 @@ class LabelController extends Controller
     public function destroy(Label $label)
     {
         $label->tasks()->detach();
+        $label->delete();
 
         flash(__('labels.destroy'))->error()->important();
 

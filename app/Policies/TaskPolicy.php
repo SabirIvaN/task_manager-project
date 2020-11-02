@@ -11,17 +11,17 @@ class TaskPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user)
+    public function viewAny(?User $user)
     {
         return true;
     }
 
-    public function view(User $user, Task $task)
+    public function view(?User $user, Task $task)
     {
         return true;
     }
 
-    public function create(User $user)
+    public function create(?User $user)
     {
         return true;
     }

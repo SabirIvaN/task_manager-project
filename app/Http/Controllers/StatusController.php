@@ -11,6 +11,7 @@ class StatusController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except('index');
+        $this->authorizeResource(Status::class, 'status');
     }
 
     public function index()
@@ -35,6 +36,7 @@ class StatusController extends Controller
 
         $status = new Status();
         $status->fill($data);
+        $status->save();
 
         flash(__('statuses.store'))->success()->important();
 
@@ -53,6 +55,7 @@ class StatusController extends Controller
         ]);
 
         $status->fill($request->all());
+        $status->save();
 
         flash(__('statuses.update'))->important();
 
@@ -61,7 +64,7 @@ class StatusController extends Controller
 
     public function destroy(Status $status)
     {
-        $this->authorize('delete', $status);
+        $status->delete();
 
         flash(__('statuses.destroy'))->error()->important();
 

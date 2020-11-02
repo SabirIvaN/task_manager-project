@@ -17,6 +17,7 @@ class TaskController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except('index', 'show');
+        $this->authorizeResource(Task::class, 'task');
     }
 
     public function index(Request $request)
@@ -74,8 +75,8 @@ class TaskController extends Controller
         ]);
 
         $task->fill($data);
-
         $task->createdBy()->associate(Auth::user());
+        $task->save();
 
         flash(__('tasks.store'))->success()->important();
 
@@ -92,8 +93,6 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        $this->authorize('update', $task);
-
         $assigners = User::pluck('name', 'id');
         $labels = Label::pluck('name', 'id');
         $statuses = Status::pluck('name', 'id');
@@ -108,8 +107,6 @@ class TaskController extends Controller
 
     public function update(Request $request, Task $task)
     {
-        $this->authorize('update', $task);
-
         $data = $request->validate([
             'name' => 'required|max:50',
             'description' => 'required|max:500',
@@ -120,6 +117,7 @@ class TaskController extends Controller
         ]);
 
         $task->fill($data);
+        $task->save();
 
         flash(__('tasks.update'))->important();
 
@@ -131,9 +129,8 @@ class TaskController extends Controller
 
     public function destroy(Task $task)
     {
-        $this->authorize('delete', $task);
-
         $task->labels()->detach();
+        $task->delete();
 
         flash(__('tasks.destroy'))->error()->important();
 

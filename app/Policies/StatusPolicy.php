@@ -11,17 +11,17 @@ class StatusPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user)
+    public function viewAny(?User $user)
     {
         return true;
     }
 
-    public function view(User $user, Status $status)
+    public function view(?User $user, Status $status)
     {
         return true;
     }
 
-    public function create(User $user)
+    public function create(?User $user)
     {
         return true;
     }
