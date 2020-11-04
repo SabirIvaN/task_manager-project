@@ -14,7 +14,6 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'id' => 1,
             'name' => 'Ivan Sabirov',
             'email' => 'sabirivan@hexlet.io',
             'email_verified_at' => now(),
@@ -23,7 +22,6 @@ class UserSeeder extends Seeder
             'updated_at' => now(),
         ]);
         DB::table('users')->insert([
-            'id' => 2,
             'name' => 'Roza Sabirova',
             'email' => 'sabirozan@hexlet.io',
             'email_verified_at' => now(),
@@ -32,7 +30,6 @@ class UserSeeder extends Seeder
             'updated_at' => now(),
         ]);
         DB::table('users')->insert([
-            'id' => 3,
             'name' => 'Nikolai Gagarinov',
             'email' => 'feycot@hexlet.io',
             'email_verified_at' => now(),
@@ -41,7 +38,6 @@ class UserSeeder extends Seeder
             'updated_at' => now(),
         ]);
         DB::table('users')->insert([
-            'id' => 4,
             'name' => 'Vladimir Moiseenkov',
             'email' => 'moisey@hexlet.io',
             'email_verified_at' => now(),
