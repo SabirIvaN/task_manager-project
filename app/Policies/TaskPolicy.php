@@ -36,10 +36,7 @@ class TaskPolicy
 
     public function delete(User $user, Task $task)
     {
-        if ($task->createdBy->is($user)) {
-            return true;
-        }
-        return false;
+        return $task->createdBy->is($user);
     }
 
     public function restore(User $user, Task $task)
