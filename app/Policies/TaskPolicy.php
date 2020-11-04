@@ -28,10 +28,7 @@ class TaskPolicy
 
     public function update(User $user, Task $task)
     {
-        if ((Auth::user()->is($task->createdBy)) || (Auth::user()->is($task->assignedTo))) {
-            return true;
-        }
-        return false;
+        return (bool) $user;
     }
 
     public function delete(User $user, Task $task)
