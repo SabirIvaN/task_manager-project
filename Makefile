@@ -3,7 +3,6 @@ setup:
 	cp -n .env.example .env|| true
 	php artisan key:gen --ansi
 	touch database/database.sqlite
-	chmod -R 777 storage bootstrap/cache
 	php artisan migrate
 	php artisan db:seed
 	npm install
