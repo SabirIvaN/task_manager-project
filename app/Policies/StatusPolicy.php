@@ -33,10 +33,7 @@ class StatusPolicy
 
     public function delete(User $user, Status $status)
     {
-        if (!$status->tasks()->exists()) {
-            return true;
-        }
-        return false;
+        return !$status->tasks()->exists();
     }
 
     public function restore(User $user, Status $status)
