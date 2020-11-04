@@ -36,7 +36,7 @@ class TaskPolicy
 
     public function delete(User $user, Task $task)
     {
-        if (Auth::user()->is($task->createdBy)) {
+        if ($task->createdBy->is($user)) {
             return true;
         }
         return false;
