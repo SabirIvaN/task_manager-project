@@ -1,6 +1,6 @@
 <?php
 
-use App\Status;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 
 class StatusSeeder extends Seeder

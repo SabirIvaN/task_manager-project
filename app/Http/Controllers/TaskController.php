@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use App\User;
 use App\Task;
 use App\Label;
 use App\Status;
-use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 
@@ -39,9 +39,9 @@ class TaskController extends Controller
             'creators' => $creators,
             'assigners' => $assigners,
             'statuses' => $statuses,
-            'filteredStatus' => request()->input('filter.status_id'),
-            'filteredCreator' => request()->input('filter.created_by_id'),
-            'filteredAssigner' => request()->input('filter.assigned_to_id'),
+            'filteredStatus' => $request->input('filter.status_id'),
+            'filteredCreator' => $request->input('filter.created_by_id'),
+            'filteredAssigner' => $request->input('filter.assigned_to_id'),
         ]);
     }
 
