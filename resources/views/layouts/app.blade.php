@@ -80,13 +80,11 @@
         <main class="py-4">
             <div class="container">
                 @if($errors->any())
-                    <div>
-                        <ul>
-                            @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                    @foreach($errors->all() as $error)
+                        <div class="alert alert-danger" role="alert">
+                            {{ $error }}
+                        </div>
+                    @endforeach
                 @endif
 
                 @include("flash::message")
